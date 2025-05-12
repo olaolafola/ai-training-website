@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AI活用研修ポートフォリオ | Copilot・Genspark活用で業務効率化</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            color: #333;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #f0f7ff;
+            transform: translateY(-2px);
+        }
+        .card {
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+        }
+        .tag {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+        }
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .stats {
+            color: #2563eb;
+            font-weight: 700;
+        }
+        .fixed-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+        }
+        @media print {
+            .fixed-cta {
+                position: static;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- ヘッダー -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-2xl font-bold text-blue-600">AI研修ポートフォリオ</div>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#case-studies" class="text-gray-600 hover:text-blue-600">事例</a>
+                <a href="#training" class="text-gray-600 hover:text-blue-600">研修内容</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-600">FAQ</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600">お問い合わせ</a>
+            </nav>
+            <button class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-gray-600"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ファーストビュー -->
+    <section class="gradient-bg py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+                        たった3時間で、<br>"使えるAI"が<span class="text-blue-600">自分の武器</span>になる
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-600 mb-8">
+                        Copilot・Gensparkを実践形式で学ぶ最新AI活用研修
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#case-studies" class="btn-primary px-8 py-3 rounded-md text-center font-medium shadow-md">
+                            <i class="fas fa-lightbulb mr-2"></i>事例を見る
+                        </a>
+                        <a href="#contact" class="btn-secondary px-8 py-3 rounded-md text-center font-medium shadow-md">
+                            <i class="fas fa-comment-alt mr-2"></i>無料相談する
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="relative rounded-lg overflow-hidden shadow-xl">
+                        <div class="bg-gray-200 aspect-w-16 aspect-h-9 flex items-center justify-center p-24">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-laptop-code text-5xl mb-4"></i>
+                                <p>AI研修の様子 または 資料作成ビフォーアフター</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 活用事例セクション -->
+    <section id="case-studies" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3">実際の業務で、こう変わった</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">導入企業の現場から得られた実績データをご紹介します</p>
+            
+            <!-- タグフィルター -->
+            <div class="flex flex-wrap justify-center mb-8 gap-2">
+                <button class="tag bg-blue-600 text-white">すべて</button>
+                <button class="tag">資料作成</button>
+                <button class="tag">レポート</button>
+                <button class="tag">議事録</button>
+                <button class="tag">データ分析</button>
+            </div>
+            
+            <!-- 事例カード -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 事例1 -->
+                <div class="card bg-white rounded-lg overflow-hidden shadow-lg p-6">
+                    <div class="mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                        <div class="aspect-w-16 aspect-h-9 flex items-center justify-center bg-gray-200 p-12">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-file-powerpoint text-4xl mb-2"></i>
+                                <p>Gensparkによる資料作成動画</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Gensparkで営業資料を5分で作成</h3>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="tag">資料作成</span>
+                        <span class="tag">Genspark</span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium">Before:</span>
+                            <span>パワポで3時間</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">After:</span>
+                            <span class="stats">Gensparkで自動作成</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-blue-800">
+                            <i class="fas fa-trophy mr-1"></i>
+                            <span class="stats text-lg">年間100時間削減</span>を達成
+                        </p>
+                    </div>
+                    <a href="#" class="inline-block text-blue-600 hover:text-blue-800 font-medium">
+                        詳細を見る <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- 事例2 -->
+                <div class="card bg-white rounded-lg overflow-hidden shadow-lg p-6">
+                    <div class="mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                        <div class="aspect-w-16 aspect-h-9 flex items-center justify-center bg-gray-200 p-12">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-chart-bar text-4xl mb-2"></i>
+                                <p>Copilotによる経営報告書作成</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Copilotで経営報告書を自動化</h3>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="tag">レポート</span>
+                        <span class="tag">Copilot</span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium">Before:</span>
+                            <span>月末作業1.5日</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">After:</span>
+                            <span class="stats">0.5日</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-blue-800">
+                            <i class="fas fa-trophy mr-1"></i>
+                            <span class="stats text-lg">工数66%削減</span>に成功
+                        </p>
+                    </div>
+                    <a href="#" class="inline-block text-blue-600 hover:text-blue-800 font-medium">
+                        詳細を見る <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+                
+                <!-- 事例3 -->
+                <div class="card bg-white rounded-lg overflow-hidden shadow-lg p-6">
+                    <div class="mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                        <div class="aspect-w-16 aspect-h-9 flex items-center justify-center bg-gray-200 p-12">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-clipboard-list text-4xl mb-2"></i>
+                                <p>ChatGPTによる議事録自動化</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">ChatGPTで議事録＋TODO自動化</h3>
+                    <div class="flex space-x-2 mb-4">
+                        <span class="tag">議事録</span>
+                        <span class="tag">ChatGPT</span>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium">Before:</span>
+                            <span>手入力30分</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium">After:</span>
+                            <span class="stats">自動記録5分</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p class="text-sm text-blue-800">
+                            <i class="fas fa-trophy mr-1"></i>
+                            <span class="stats text-lg">月間10時間</span>の作業時間削減
+                        </p>
+                    </div>
+                    <a href="#" class="inline-block text-blue-600 hover:text-blue-800 font-medium">
+                        詳細を見る <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研修内容セクション -->
+    <section id="training" class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3">研修内容</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">貴社に合わせた実践的なAI活用スキルを習得</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- eラーニング研修 -->
+                <div class="card bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <div class="bg-blue-100 inline-block p-3 rounded-full mb-6">
+                            <i class="fas fa-laptop text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">eラーニング研修</h3>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>ChatGPT基礎操作</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>プロンプト設計の基本と実践</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>業務活用の基本パターン</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>自己学習ができる教材提供</span>
+                            </li>
+                        </ul>
+                        <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                            <p class="text-sm text-gray-600">
+                                <i class="fas fa-clock mr-1"></i>
+                                所要時間: 約2時間（自己ペース）
+                            </p>
+                        </div>
+                        <a href="#contact" class="block w-full text-center btn-secondary py-3 rounded-md shadow-sm">
+                            詳細を問い合わせる
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 最新AI活用研修 -->
+                <div class="card bg-white rounded-lg shadow-lg overflow-hidden border-2 border-blue-500">
+                    <div class="bg-blue-500 text-white text-center py-2">
+                        <span class="font-medium">おすすめ</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="bg-blue-100 inline-block p-3 rounded-full mb-6">
+                            <i class="fas fa-robot text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">最新AI活用研修（バンドル）</h3>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Copilot活用（Word/Excel/PowerPoint）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Genspark AI Sheets（自動資料作成）</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>演習：その場で自社の資料を作ってみる体験</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>フォローアップ質問対応（1ヶ月）</span>
+                            </li>
+                        </ul>
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <p class="text-sm text-blue-800">
+                                <i class="fas fa-clock mr-1"></i>
+                                所要時間: 約3時間（対面またはオンライン）
+                            </p>
+                        </div>
+                        <a href="#contact" class="block w-full text-center btn-primary py-3 rounded-md shadow-md">
+                            詳細を問い合わせる
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 mb-6">オーダーメイド研修も承ります。貴社の業務に合わせたカリキュラムをご提案します。</p>
+                <a href="#contact" class="inline-block btn-secondary px-8 py-3 rounded-md font-medium">
+                    <i class="fas fa-file-alt mr-2"></i>カスタム研修の相談をする
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQセクション -->
+    <section id="faq" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3">よくある質問</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">お客様からいただく質問とその回答をまとめました</p>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="space-y-6">
+                    <!-- FAQ項目1 -->
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-medium mb-3">PCが苦手でも大丈夫ですか？</h3>
+                        <p class="text-gray-600">
+                            はい、問題ありません。基本的なPC操作（インターネット閲覧、文字入力）ができれば参加可能です。研修ではステップバイステップで操作をご案内し、インストラクターがサポートします。
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ項目2 -->
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-medium mb-3">Macでも参加可能ですか？</h3>
+                        <p class="text-gray-600">
+                            はい、Macでも参加可能です。ただし一部機能はWindowsとMacで異なる場合がありますので、事前にご相談ください。ChatGPTやGensparkなどのブラウザベースのツールは問題なくご利用いただけます。
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ項目3 -->
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-medium mb-3">何人から申込できますか？</h3>
+                        <p class="text-gray-600">
+                            最小5名様から承っております。大人数の場合は複数回に分けての開催も可能です。また、20名以上の場合は割引プランもございますので、お気軽にご相談ください。
+                        </p>
+                    </div>
+                    
+                    <!-- FAQ項目4 -->
+                    <div class="faq-item py-4">
+                        <h3 class="text-xl font-medium mb-3">研修の場所は？オンライン可能？</h3>
+                        <p class="text-gray-600">
+                            対面研修は貴社会議室をお借りして実施いたします。また、オンライン研修も対応可能です。Zoom、Teams、Google Meetなど、ご希望のツールに合わせて対応いたします。ハイブリッド形式（一部対面、一部オンライン）も承ります。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <a href="#contact" class="inline-block text-blue-600 hover:text-blue-800 font-medium">
+                        その他のご質問はこちら <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section id="contact" class="py-16 md:py-24 gradient-bg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3">お問い合わせ</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">研修についてのご質問、日程調整など、お気軽にご連絡ください</p>
+            
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <form>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div>
+                            <label for="company" class="block text-gray-700 font-medium mb-2">会社名</label>
+                            <input type="text" id="company" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">お名前</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">メールアドレス</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">電話番号</label>
+                            <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">興味のある研修内容</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="training1" class="mr-2">
+                                    <label for="training1">eラーニング研修</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="training2" class="mr-2">
+                                    <label for="training2">最新AI活用研修（バンドル）</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="training3" class="mr-2">
+                                    <label for="training3">カスタマイズ研修</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">お問い合わせ内容</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full btn-primary py-3 rounded-md font-medium">
+                                送信する
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="mt-8 text-center">
+                    <p class="mb-4">または、以下の方法でもお問い合わせいただけます</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="btn-secondary px-6 py-3 rounded-md inline-flex items-center justify-center">
+                            <i class="fab fa-line text-green-500 mr-2"></i>LINEで相談する
+                        </a>
+                        <a href="#" class="btn-secondary px-6 py-3 rounded-md inline-flex items-center justify-center">
+                            <i class="fas fa-video mr-2 text-blue-500"></i>Zoom日程を予約する
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- セミナー申込セクション -->
+    <section class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-3">セミナー日程</h2>
+            <p class="text-xl text-gray-600 text-center mb-12">無料オンラインセミナーを定期開催しています</p>
+            
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <div class="mb-8 text-center">
+                    <p class="text-gray-600">以下のカレンダーから、ご希望の日程をお選びください</p>
+                </div>
+                
+                <!-- カレンダー埋め込み部分 -->
+                <div class="bg-gray-100 p-12 rounded-lg mb-8 flex items-center justify-center">
+                    <div class="text-center text-gray-500">
+                        <i class="far fa-calendar-alt text-5xl mb-4"></i>
+                        <p>カレンダー埋め込み</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="#" class="inline-block btn-primary px-8 py-3 rounded-md font-medium">
+                        <i class="fas fa-user-plus mr-2"></i>無料セミナーに申し込む
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AI研修ポートフォリオ</h3>
+                    <p class="text-gray-400">
+                        生成AI活用のための実践的な研修プログラムを提供しています。
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-4">研修プログラム</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">eラーニング</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Copilot活用研修</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Genspark活用研修</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">カスタム研修</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-4">会社情報</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">会社概要</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">講師紹介</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">プライバシーポリシー</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-4">お問い合わせ</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">〒100-0001 東京都千代田区1-1-1</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">03-1234-5678</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@ai-training.example.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-400">&copy; 2023 AI研修ポートフォリオ All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 固定CTAボタン -->
+    <div class="fixed-cta hidden md:block">
+        <a href="#contact" class="btn-primary px-6 py-3 rounded-full font-medium shadow-lg flex items-center">
+            <i class="fas fa-comment-alt mr-2"></i>無料相談する
+        </a>
+    </div>
+</body>
+</html>
