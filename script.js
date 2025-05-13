@@ -17,21 +17,21 @@ document.addEventListener('DOMContentLoaded', function() {
             setupCaseCards(data.cases);
             
             // フィルター機能を初期化
-            initializeFilters();
+            initializeFilters(data.cases);
         })
         .catch(error => {
             console.error('事例データの読み込みに失敗しました:', error);
         });
     
     // 注目事例をセットアップする関数
-    function setupFeaturedCase(caseData) {
+    function setupFeaturedCase(caseData, scrollToView = false) {
         const featuredCaseContainer = document.getElementById('featured-case-container');
         if (!featuredCaseContainer) {
             console.error('featured-case-containerが見つかりません');
             return;
         }
         
-        // HTML生成
+        // HTML生成（動画対応版）
         const featuredHTML = `
             <div class="featured-case">
                 <div class="flex flex-col md:flex-row">
@@ -44,9 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像 -->
+                        <!-- サムネイル画像または動画 -->
                         <div class="thumbnail-area mb-4">
-                            <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
+                            <video controls class="w-full">
+                                <source src="videos/case${caseData.id}.mp4" type="video/mp4">
+                                <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
+                            </video>
                         </div>
                         
                         <div class="mt-4 flex flex-wrap">
@@ -79,13 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.effects.map(effect => `<li class="mb-1">${effect}</li>`).join('')}
                         </ul>
                         
-                        <div class="text-right">
-                            <a href="detail-${caseData.id}.html" class="detail-link">
-                                詳細を見る
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-blue-800">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                背景: ${caseData.background.substring(0, 200)}...
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -94,6 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // HTMLをコンテナに挿入
         featuredCaseContainer.innerHTML = featuredHTML;
+        
+        // スクロールが必要な場合は注目事例までスクロール
+        if (scrollToView) {
+            featuredCaseContainer.scrollIntoView({ behavior: 'smooth' });
+        }
     }
     
     // 事例カードをセットアップする関数
@@ -111,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 各事例のHTMLを生成して追加
         casesData.forEach(caseData => {
             const caseCardHTML = `
-                <div class="case-card" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}">
+                <div class="case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}">
                     <div class="p-4">
                         <div class="text-sm text-blue-700 mb-2">${caseData.category}</div>
                         <h3 class="text-lg font-bold mb-2">${caseData.title}</h3>
@@ -133,13 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 時間削減 ${caseData.reduction}
                             </div>
                         </div>
-                        
-                        <a href="detail-${caseData.id}.html" class="detail-link">
-                            詳細を見る
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
                     </div>
                 </div>
             `;
@@ -149,17 +148,20 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // カードのクリックイベントを設定
         document.querySelectorAll('.case-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                const detailLink = this.querySelector('.detail-link');
-                if (e.target !== detailLink && !detailLink.contains(e.target)) {
-                    detailLink.click();
+            card.addEventListener('click', function() {
+                const caseId = this.getAttribute('data-id');
+                const selectedCase = casesData.find(c => c.id === caseId);
+                
+                if (selectedCase) {
+                    // 選択された事例で注目事例エリアを更新し、そこにスクロール
+                    setupFeaturedCase(selectedCase, true);
                 }
             });
         });
     }
     
     // フィルタリング機能を初期化する関数
-    function initializeFilters() {
+    function initializeFilters(casesData) {
         const categoryTabs = document.querySelectorAll('.category-tab');
         const tagFilters = document.querySelectorAll('.tag-filter');
         
@@ -177,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const activeTag = document.querySelector('.tag-filter.active').getAttribute('data-tag');
                 
                 // カードをフィルタリング
-                filterCards(selectedCategory, activeTag);
+                filterCards(selectedCategory, activeTag, casesData);
             });
         });
         
@@ -195,13 +197,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const activeCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
                 
                 // カードをフィルタリング
-                filterCards(activeCategory, selectedTag);
+                filterCards(activeCategory, selectedTag, casesData);
             });
         });
     }
     
     // カードのフィルタリング関数
-    function filterCards(category, tag) {
+    function filterCards(category, tag, casesData) {
         console.log('フィルター実行:', category, tag);
         const caseCards = document.querySelectorAll('.case-card');
         console.log('事例カード数:', caseCards.length);
@@ -221,5 +223,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.classList.add('hidden-case');
             }
         });
+        
+        // フィルター後、表示されている事例がない場合のメッセージ
+        const caseContainer = document.getElementById('case-container');
+        const visibleCards = document.querySelectorAll('.case-card:not(.hidden-case)');
+        
+        if (visibleCards.length === 0 && caseContainer) {
+            caseContainer.innerHTML = `
+                <div class="col-span-full text-center py-8 text-gray-500">
+                    <p>選択された条件に一致する事例はありません。</p>
+                    <p>別のフィルター条件をお試しください。</p>
+                </div>
+            `;
+        }
     }
 });
