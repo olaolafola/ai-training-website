@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <!-- サムネイル画像または動画 -->
                         <div class="thumbnail-area mb-4">
                             <video controls class="w-full">
-                                <source src="videos/case${caseData.id}.mp4" type="video/mp4">
+                                <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
                         </div>
