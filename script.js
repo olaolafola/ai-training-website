@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             console.log('読み込まれたデータ:', data); // データが正しく読み込まれるか確認
+            
+            // グローバル変数として保存
+            window.allCasesData = data.cases;
+            
             // 注目事例をセットアップ（featuredプロパティがtrueのもの、または最初の事例）
             const featuredCase = data.cases.find(c => c.featured) || data.cases[0];
             setupFeaturedCase(featuredCase);
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setupCaseCards(data.cases);
             
             // フィルター機能を初期化
-            initializeFilters(data.cases);
+            initializeFilters();
         })
         .catch(error => {
             console.error('事例データの読み込みに失敗しました:', error);
@@ -150,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.case-card').forEach(card => {
             card.addEventListener('click', function() {
                 const caseId = this.getAttribute('data-id');
-                const selectedCase = casesData.find(c => c.id === caseId);
+                const selectedCase = window.allCasesData.find(c => c.id === caseId);
                 
                 if (selectedCase) {
                     // 選択された事例で注目事例エリアを更新し、そこにスクロール
@@ -161,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // フィルタリング機能を初期化する関数
-    function initializeFilters(casesData) {
+    function initializeFilters() {
         const categoryTabs = document.querySelectorAll('.category-tab');
         const tagFilters = document.querySelectorAll('.tag-filter');
         
@@ -172,14 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryTabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
-                // 選択されたカテゴリーを取得
-                const selectedCategory = this.getAttribute('data-category');
-                
-                // 現在アクティブなタグを取得
-                const activeTag = document.querySelector('.tag-filter.active').getAttribute('data-tag');
-                
-                // カードをフィルタリング（常に元のデータから）
-                filterCards(selectedCategory, activeTag, casesData);
+                // 選択されたカテゴリーとタグでフィルター適用
+                applyFilters();
             });
         });
         
@@ -190,68 +188,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 tagFilters.forEach(f => f.classList.remove('active'));
                 this.classList.add('active');
                 
-                // 選択されたタグを取得
-                const selectedTag = this.getAttribute('data-tag');
-                
-                // 現在アクティブなカテゴリーを取得
-                const activeCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
-                
-                // カードをフィルタリング（常に元のデータから）
-                filterCards(activeCategory, selectedTag, casesData);
+                // 選択されたカテゴリーとタグでフィルター適用
+                applyFilters();
             });
         });
     }
     
-    // カードのフィルタリング関数
-    function filterCards(category, tag, casesData) {
-        console.log('フィルター実行:', category, tag);
+    // フィルターを適用する関数
+    function applyFilters() {
+        // 現在選択されているカテゴリーとタグを取得
+        const selectedCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
+        const selectedTag = document.querySelector('.tag-filter.active').getAttribute('data-tag');
         
-        // 事例一覧を再構築（常に全データから）
-        setupCaseCards(casesData);
+        console.log('フィルター適用:', selectedCategory, selectedTag);
         
-        const caseCards = document.querySelectorAll('.case-card');
-        console.log('事例カード数:', caseCards.length);
+        // オリジナルデータから該当するデータだけをフィルタリング
+        const filteredData = window.allCasesData.filter(caseData => {
+            const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
+            const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
+            return matchCategory && matchTag;
+        });
         
-        caseCards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
-            const cardTags = card.getAttribute('data-tags');
-            
-            // カテゴリーとタグの条件を確認
-            const matchCategory = category === 'all' || cardCategory === category;
-            const matchTag = tag === 'all' || cardTags.includes(tag);
-            
-            // カードの表示/非表示を切り替え
-            if (matchCategory && matchTag) {
-                card.classList.remove('hidden-case');
-            } else {
-                card.classList.add('hidden-case');
+        console.log('フィルター後のデータ数:', filteredData.length);
+        
+        // フィルター結果を表示
+        if (filteredData.length > 0) {
+            setupCaseCards(filteredData);
+        } else {
+            // 結果がない場合はメッセージを表示
+            const caseContainer = document.getElementById('case-container');
+            if (caseContainer) {
+                caseContainer.innerHTML = `
+                    <div class="col-span-full text-center py-8 text-gray-500">
+                        <p>選択された条件に一致する事例はありません。</p>
+                        <p>別のフィルター条件をお試しください。</p>
+                    </div>
+                `;
             }
-        });
-        
-        // フィルター後、表示されている事例がない場合のメッセージ
-        const caseContainer = document.getElementById('case-container');
-        const visibleCards = document.querySelectorAll('.case-card:not(.hidden-case)');
-        
-        if (visibleCards.length === 0 && caseContainer) {
-            caseContainer.innerHTML = `
-                <div class="col-span-full text-center py-8 text-gray-500">
-                    <p>選択された条件に一致する事例はありません。</p>
-                    <p>別のフィルター条件をお試しください。</p>
-                </div>
-            `;
         }
-        
-        // カードのクリックイベントを再設定
-        document.querySelectorAll('.case-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const caseId = this.getAttribute('data-id');
-                const selectedCase = casesData.find(c => c.id === caseId);
-                
-                if (selectedCase) {
-                    // 選択された事例で注目事例エリアを更新し、そこにスクロール
-                    setupFeaturedCase(selectedCase, true);
-                }
-            });
-        });
     }
 });
