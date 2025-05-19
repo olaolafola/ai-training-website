@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="flex flex-col md:flex-row">
                     <!-- 左側：事例概要 -->
                     <div class="p-6 md:w-1/3 featured-case-left">
-                        <div class="flex justify-between mb-2">
+                        <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const caseCardHTML = `
                 <div class="case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
-                        <div class="flex justify-between mb-2">
+                        <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
