@@ -200,3 +200,74 @@ body {
 .hidden-case {
     display: none !important;
 }
+
+/* モバイル対応のスタイル */
+@media (max-width: 768px) {
+    /* カテゴリータブのスクロール */
+    .category-tab {
+        padding: 0.5rem 1rem;
+        white-space: nowrap;
+    }
+    
+    /* 注目事例カードのレイアウト調整 */
+    .featured-case .flex-col {
+        width: 100%;
+    }
+    
+    .featured-case-left {
+        width: 100% !important;
+    }
+    
+    /* レベルバッジのモバイル調整 */
+    .category-level-container {
+        flex-wrap: wrap;
+    }
+    
+    .level-badge {
+        margin-left: 0;
+        margin-top: 0.25rem;
+    }
+    
+    /* カードグリッドの調整 */
+    #case-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    
+    /* タグフィルターをラップさせる */
+    nav .py-3.flex {
+        flex-wrap: wrap;
+    }
+    
+    .tag-filter, .level-filter {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* スペーサーの表示調整 */
+    .tag-spacer {
+        display: none;
+    }
+    
+    /* レベルフィルターの配置 */
+    .level-filter {
+        margin-top: 0.5rem;
+    }
+}
+
+/* 小さな画面でのさらなる調整 */
+@media (max-width: 480px) {
+    .category-tab {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .tag-filter, .level-filter {
+        padding: 0.25rem 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
