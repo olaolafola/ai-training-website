@@ -94,18 +94,24 @@ body {
 }
 
 /* レベルバッジ */
+.level-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600; /* より太字に */
+}
+
+/* 各レベルの色を設定（背景なし、文字色のみ） */
 .level-badge.level-初級 {
-    background-color: #dcfce7; /* より薄い緑色 */
-    color: #166534;
+    color: #4ade80; /* フィルターと同じ緑色 */
 }
 .level-badge.level-中級 {
-    background-color: #fef9c3; /* より薄い黄色 */
-    color: #854d0e;
+    color: #facc15; /* フィルターと同じ黄色 */
 }
 .level-badge.level-上級 {
-    background-color: #fee2e2; /* より薄い赤色 */
-    color: #991b1b;
+    color: #f87171; /* フィルターと同じ赤色 */
 }
+
 /* タグ */
 .tag {
     display: inline-block;
