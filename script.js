@@ -41,7 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="flex flex-col md:flex-row">
                     <!-- 左側：事例概要 -->
                     <div class="p-6 md:w-1/3 featured-case-left">
-                        <div class="text-sm text-blue-700 mb-2">${caseData.category}</div>
+                        <div class="flex justify-between mb-2">
+                            <div class="text-sm text-blue-700">${caseData.category}</div>
+                            <div class="level-badge level-${caseData.level}">${caseData.level}</div>
+                        </div>
                         <h2 class="text-2xl font-bold mb-4">${caseData.title}</h2>
                         
                         <div class="flex flex-wrap mb-4">
@@ -121,9 +124,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // 各事例のHTMLを生成して追加
         casesData.forEach(caseData => {
             const caseCardHTML = `
-                <div class="case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}">
+                <div class="case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
-                        <div class="text-sm text-blue-700 mb-2">${caseData.category}</div>
+                        <div class="flex justify-between mb-2">
+                            <div class="text-sm text-blue-700">${caseData.category}</div>
+                            <div class="level-badge level-${caseData.level}">${caseData.level}</div>
+                        </div>
                         <h3 class="text-lg font-bold mb-2">${caseData.title}</h3>
                         
                         <div class="flex flex-wrap mb-3">
@@ -168,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializeFilters() {
         const categoryTabs = document.querySelectorAll('.category-tab');
         const tagFilters = document.querySelectorAll('.tag-filter');
+        const levelFilters = document.querySelectorAll('.level-filter');
         
         // カテゴリータブのクリックイベント
         categoryTabs.forEach(tab => {
@@ -176,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryTabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
-                // 選択されたカテゴリーとタグでフィルター適用
+                // フィルター適用
                 applyFilters();
             });
         });
@@ -188,7 +195,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 tagFilters.forEach(f => f.classList.remove('active'));
                 this.classList.add('active');
                 
-                // 選択されたカテゴリーとタグでフィルター適用
+                // フィルター適用
+                applyFilters();
+            });
+        });
+        
+        // レベルフィルターのクリックイベント
+        levelFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                // すでにアクティブなら非アクティブにする（トグル動作）
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                } else {
+                    // それ以外なら他のレベルフィルターを非アクティブにして、これをアクティブに
+                    levelFilters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                }
+                
+                // フィルター適用
                 applyFilters();
             });
         });
@@ -196,17 +220,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // フィルターを適用する関数
     function applyFilters() {
-        // 現在選択されているカテゴリーとタグを取得
+        // 現在選択されているカテゴリー、タグ、レベルを取得
         const selectedCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
         const selectedTag = document.querySelector('.tag-filter.active').getAttribute('data-tag');
+        const activeLevel = document.querySelector('.level-filter.active');
+        const selectedLevel = activeLevel ? activeLevel.getAttribute('data-level') : null;
         
-        console.log('フィルター適用:', selectedCategory, selectedTag);
+        console.log('フィルター適用:', selectedCategory, selectedTag, selectedLevel);
         
         // オリジナルデータから該当するデータだけをフィルタリング
         const filteredData = window.allCasesData.filter(caseData => {
             const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
-            return matchCategory && matchTag;
+            const matchLevel = !selectedLevel || caseData.level === selectedLevel;
+            return matchCategory && matchTag && matchLevel;
         });
         
         console.log('フィルター後のデータ数:', filteredData.length);

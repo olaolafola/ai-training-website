@@ -52,6 +52,68 @@ body {
     background-color: #1d4ed8;
 }
 
+/* スペーサー */
+.tag-spacer {
+    width: 2px;
+    height: 24px;
+    background-color: #e5e7eb;
+    margin: 0 8px;
+    align-self: center;
+    display: inline-block;
+}
+
+/* レベルフィルター */
+.level-filter {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+    background-color: #e5e7eb;
+    color: #4b5563;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+.level-filter:hover {
+    background-color: #d1d5db;
+}
+.level-filter.active {
+    color: white;
+}
+
+/* 初級・中級・上級のレベルフィルター色分け */
+.level-filter[data-level="初級"].active {
+    background-color: #10b981; /* 緑色 */
+}
+.level-filter[data-level="中級"].active {
+    background-color: #3b82f6; /* 青色 */
+}
+.level-filter[data-level="上級"].active {
+    background-color: #f59e0b; /* オレンジ色 */
+}
+
+/* レベルバッジ */
+.level-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.level-badge.level-初級 {
+    background-color: #d1fae5; /* 緑系の薄い色 */
+    color: #065f46;
+}
+.level-badge.level-中級 {
+    background-color: #dbeafe; /* 青系の薄い色 */
+    color: #1e40af;
+}
+.level-badge.level-上級 {
+    background-color: #fef3c7; /* 黄系の薄い色 */
+    color: #92400e;
+}
+
 /* タグ */
 .tag {
     display: inline-block;
