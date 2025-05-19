@@ -93,12 +93,16 @@ body {
     background-color: #f87171; /* マイルドな赤色 */
 }
 
-/* レベルバッジ */
+/* レベルバッジ - フォントサイズを1にする */
 .level-badge {
     display: inline-block;
     padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 600; /* より太字に */
+    font-size: 1rem; /* フォントサイズを1remに設定 */
+    font-weight: 600;
+    position: absolute; /* 位置を固定 */
+    top: 1rem; /* 上からの位置 */
+    right: 1rem; /* 右からの位置 */
+    line-height: 1; /* 行の高さを最小に */
 }
 
 /* 各レベルの色を設定（背景なし、文字色のみ） */
@@ -110,6 +114,11 @@ body {
 }
 .level-badge.level-上級 {
     color: #f87171; /* フィルターと同じ赤色 */
+}
+
+/* 会議・コミュニケーションカードの特別調整 */
+.case-card[data-category="会議・コミュニケーション"] .level-badge {
+    white-space: nowrap; /* 改行しない */
 }
 
 /* タグ */
@@ -126,6 +135,7 @@ body {
 
 /* 事例カード */
 .case-card {
+    position: relative; /* レベルバッジの位置決めのため */
     background-color: white;
     border-radius: 0.5rem;
     overflow: hidden;
@@ -146,6 +156,7 @@ body {
     overflow: hidden;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    position: relative; /* レベルバッジの位置決めのため */
 }
 .featured-case-left {
     background-color: #f0f7ff;
