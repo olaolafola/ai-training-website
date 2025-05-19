@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 現在アクティブなタグを取得
                 const activeTag = document.querySelector('.tag-filter.active').getAttribute('data-tag');
                 
-                // カードをフィルタリング
+                // カードをフィルタリング（常に元のデータから）
                 filterCards(selectedCategory, activeTag, casesData);
             });
         });
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 現在アクティブなカテゴリーを取得
                 const activeCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
                 
-                // カードをフィルタリング
+                // カードをフィルタリング（常に元のデータから）
                 filterCards(activeCategory, selectedTag, casesData);
             });
         });
@@ -205,6 +205,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // カードのフィルタリング関数
     function filterCards(category, tag, casesData) {
         console.log('フィルター実行:', category, tag);
+        
+        // 事例一覧を再構築（常に全データから）
+        setupCaseCards(casesData);
+        
         const caseCards = document.querySelectorAll('.case-card');
         console.log('事例カード数:', caseCards.length);
         
@@ -236,5 +240,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }
+        
+        // カードのクリックイベントを再設定
+        document.querySelectorAll('.case-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const caseId = this.getAttribute('data-id');
+                const selectedCase = casesData.find(c => c.id === caseId);
+                
+                if (selectedCase) {
+                    // 選択された事例で注目事例エリアを更新し、そこにスクロール
+                    setupFeaturedCase(selectedCase, true);
+                }
+            });
+        });
     }
 });
