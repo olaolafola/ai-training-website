@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // HTML生成（動画対応版）- モバイル対応のためのクラスを追加
+        // HTML生成（動画対応版）- 左右比率を2:3（40%:60%）に修正
         const featuredHTML = `
             <div class="featured-case">
                 <div class="flex flex-col md:flex-row">
                     <!-- 左側：事例概要 -->
-                    <div class="p-4 md:p-6 md:w-1/3 w-full featured-case-left">
+                    <div class="p-4 md:p-6 md:w-2/5 w-full featured-case-left">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像または動画 -->
-                        <div class="thumbnail-area mb-4">
+                        <!-- サムネイル画像または動画 - 比率変更で大きく表示 -->
+                        <div class="thumbnail-area featured-thumbnail mb-4">
                             <video controls class="w-full">
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     
-                    <!-- 右側：詳細内容 -->
-                    <div class="p-4 md:p-6 md:w-2/3 w-full">
+                    <!-- 右側：詳細内容 - 比率変更で60%に -->
+                    <div class="p-4 md:p-6 md:w-3/5 w-full">
                         <h3 class="font-bold mb-4">実施内容</h3>
                         <p class="text-gray-700 mb-6">
                             ${caseData.implementation}

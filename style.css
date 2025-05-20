@@ -159,6 +159,17 @@ body {
     background-color: #f0f7ff;
 }
 
+/* 注目事例の動画サイズを最適化（左右比率2:3対応） */
+.featured-thumbnail {
+  max-width: 100%;
+}
+
+.featured-thumbnail video {
+  width: 100%;
+  max-height: 350px;
+  object-fit: contain;
+}
+
 /* サムネイル */
 .thumbnail-area {
     border-radius: 0.375rem;
@@ -254,6 +265,21 @@ body {
     }
 }
 
+/* 横向き表示での左右比率調整（2:3） */
+@media (min-width: 768px) {
+  .featured-case-left {
+      width: 40% !important; /* 元の33.33%から40%に変更 */
+  }
+  
+  .featured-case .md\:w-3\/5 {
+      width: 60% !important; /* 右側は60%に */
+  }
+  
+  .featured-thumbnail video {
+      max-height: 380px; /* 横向きでは少し大きく */
+  }
+}
+
 /* 小さな画面でのさらなる調整 */
 @media (max-width: 480px) {
     .category-tab {
@@ -269,5 +295,9 @@ body {
     .badge {
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
+    }
+    
+    .featured-thumbnail video {
+        max-height: 250px;
     }
 }
