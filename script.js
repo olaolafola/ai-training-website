@@ -136,9 +136,15 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像 -->
-                        <div class="thumbnail-area mb-3">
-                            <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
+                        <!-- サムネイル画像の代わりに時間削減情報を表示 -->
+                        <div class="time-comparison mb-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="mb-2">
+                                <div class="text-sm text-gray-600 mb-1">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
+                                <div class="text-sm text-blue-600 mb-2">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
+                            </div>
+                            <div class="relative h-2 bg-gray-200 rounded">
+                                <div class="absolute top-0 left-0 h-2 bg-blue-500 rounded" style="width: ${caseData.reduction};"></div>
+                            </div>
                         </div>
                         
                         <div class="mb-3">

@@ -301,3 +301,26 @@ body {
         max-height: 250px;
     }
 }
+/* 時間削減情報のスタイル */
+.time-comparison {
+    background-color: #f0f7ff;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+}
+
+.time-comparison .relative {
+    position: relative;
+    height: 0.5rem;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.time-comparison .absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 0.5rem;
+    background-color: #3b82f6;
+    border-radius: 9999px;
+}
