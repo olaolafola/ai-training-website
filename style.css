@@ -212,21 +212,29 @@ body {
     display: none !important;
 }
 
-/* 時間情報の表示スタイル - よりコンパクトに */
+/* 時間情報の表示スタイル - よりコンパクトに、位置も固定 */
 .time-info {
     padding: 0.5rem;
     text-align: center;
     border-radius: 0.375rem;
     margin-bottom: 0.5rem;
-    max-width: 8rem; /* かなり狭く制限 - カードの半分の半分程度 */
+    max-width: 10rem; /* 少し広げる - 長いテキストも対応 */
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 4.5rem; /* 最小高さを設定して統一感を出す */
 }
 
 .time-info .text-gray-600,
 .time-info .text-blue-600 {
     white-space: nowrap;
     font-size: 0.75rem; /* フォントサイズを小さく */
+    width: 100%;
+    text-align: center;
+    display: block;
 }
 
 .time-info .text-center {
@@ -234,6 +242,8 @@ body {
     color: #6b7280;
     line-height: 1;
     margin: 0.125rem 0;
+    width: 100%;
+    text-align: center;
 }
 
 /* モバイル対応のスタイル */
