@@ -212,6 +212,29 @@ body {
     display: none !important;
 }
 
+/* 時間情報の表示スタイル */
+.time-info {
+    padding: 0.75rem;
+    text-align: center;
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+.time-info .text-gray-600 {
+    color: #4b5563;
+    margin-bottom: 0.25rem;
+}
+
+.time-info .text-blue-600 {
+    color: #2563eb;
+}
+
+.time-info .text-center {
+    font-size: 1.25rem;
+    color: #6b7280;
+    line-height: 1;
+}
+
 /* モバイル対応のスタイル */
 @media (max-width: 768px) {
     /* カテゴリータブのスクロール */

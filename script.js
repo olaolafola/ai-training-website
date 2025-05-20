@@ -151,12 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像の代わりに時間削減情報を表示 - シンプルに -->
+                        <!-- サムネイル画像の代わりに時間削減情報を表示 - 上下に並べる -->
                         <div class="time-info mb-3">
-                            <div class="flex justify-between mb-2">
-                                <div class="text-sm text-gray-600">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
-                                <div class="text-sm text-blue-600">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
-                            </div>
+                            <div class="text-sm text-gray-600 mb-1">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
+                            <div class="text-center mb-1">↓</div>
+                            <div class="text-sm text-blue-600">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
                         </div>
                         
                         <div class="mb-3">
