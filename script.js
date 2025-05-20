@@ -51,12 +51,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像または動画 - 比率変更で大きく表示 -->
+                        <!-- 動画と再生状況バー -->
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video controls class="w-full">
+                            <video id="featured-video" controls class="w-full">
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
+                            <!-- 動画再生状況バー -->
+                            <div class="video-progress mt-2 bg-gray-200 rounded-full h-1.5">
+                                <div class="video-progress-bar bg-blue-500 h-1.5 rounded-full w-0"></div>
+                            </div>
                         </div>
                         
                         <div class="mt-4 flex flex-wrap">
@@ -103,6 +107,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // HTMLをコンテナに挿入
         featuredCaseContainer.innerHTML = featuredHTML;
         
+        // 動画の再生状況を追跡
+        const video = document.getElementById('featured-video');
+        const progressBar = document.querySelector('.video-progress-bar');
+        
+        if (video && progressBar) {
+            video.addEventListener('timeupdate', function() {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = percentage + '%';
+            });
+        }
+        
         // スクロールが必要な場合は注目事例までスクロール
         if (scrollToView) {
             featuredCaseContainer.scrollIntoView({ behavior: 'smooth' });
@@ -136,14 +151,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像の代わりに時間削減情報を表示 -->
-                        <div class="time-comparison mb-3 p-3 bg-gray-50 rounded-lg">
-                            <div class="mb-2">
-                                <div class="text-sm text-gray-600 mb-1">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
-                                <div class="text-sm text-blue-600 mb-2">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
-                            </div>
-                            <div class="relative h-2 bg-gray-200 rounded">
-                                <div class="absolute top-0 left-0 h-2 bg-blue-500 rounded" style="width: ${caseData.reduction};"></div>
+                        <!-- サムネイル画像の代わりに時間削減情報を表示 - シンプルに -->
+                        <div class="time-info mb-3">
+                            <div class="flex justify-between mb-2">
+                                <div class="text-sm text-gray-600">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
+                                <div class="text-sm text-blue-600">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
                             </div>
                         </div>
                         

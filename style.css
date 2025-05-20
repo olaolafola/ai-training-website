@@ -301,26 +301,19 @@ body {
         max-height: 250px;
     }
 }
-/* 時間削減情報のスタイル */
-.time-comparison {
-    background-color: #f0f7ff;
-    border-radius: 0.375rem;
-    padding: 0.75rem;
-}
 
-.time-comparison .relative {
-    position: relative;
-    height: 0.5rem;
+/* 動画再生プログレスバー */
+.video-progress {
+    width: 100%;
     background-color: #e5e7eb;
     border-radius: 9999px;
+    height: 0.375rem;
     overflow: hidden;
 }
 
-.time-comparison .absolute {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 0.5rem;
+.video-progress-bar {
     background-color: #3b82f6;
+    height: 100%;
     border-radius: 9999px;
+    transition: width 0.1s ease-in-out;
 }
