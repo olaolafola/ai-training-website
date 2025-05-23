@@ -212,18 +212,18 @@ body {
     display: none !important;
 }
 
-/* 時間情報の表示スタイル - 中央揃えを完全に修正 */
+/* 時間情報の表示スタイル - 下部マージンを調整 */
 .time-info {
     padding: 0.5rem;
     text-align: center;
     border-radius: 0.375rem;
-    margin: 0.5rem auto;
-    max-width: 12rem; /* 少し広げて長いテキストに対応 */
+    margin: 0.5rem auto 0.25rem auto; /* 下部マージンを0.5remから0.25remに削減 */
+    max-width: 12rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 5rem; /* 高さを少し増やして安定させる */
+    min-height: 5rem;
 }
 
 .time-info .text-gray-600,
@@ -231,7 +231,7 @@ body {
     font-size: 1rem;
     font-weight: 600;
     width: 100%;
-    text-align: center !important; /* 強制的に中央揃え */
+    text-align: center !important;
     display: block;
     margin: 0;
     padding: 0;
@@ -253,8 +253,13 @@ body {
     line-height: 1;
     margin: 0.25rem 0;
     width: 100%;
-    text-align: center !important; /* 強制的に中央揃え */
+    text-align: center !important;
     display: block;
+}
+
+/* カード内バッジの上マージンを調整 */
+.case-card .mb-3:last-child {
+    margin-bottom: 0.75rem; /* 最後の要素の下マージンを少し減らす */
 }
 
 /* モバイル対応のスタイル */
@@ -313,6 +318,7 @@ body {
     .time-info {
         max-width: 10rem;
         min-height: 4rem;
+        margin: 0.5rem auto 0.25rem auto;
     }
     
     .time-info .text-gray-600,
