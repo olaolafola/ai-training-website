@@ -304,35 +304,30 @@ body {
     text-align: center;
 }
 
-/* 背景情報の高さ制限 */
+/* 背景情報の高さ制限を解除（動的調整に変更） */
 .background-section {
-    max-height: 120px; /* 最大高さを設定 */
-    overflow: hidden;
+    /* max-height: 120px; ← 解除 */
+    /* overflow: hidden; ← 解除 */
     position: relative;
 }
 
-.background-text {
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* 4行まで表示 */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.5;
-    text-overflow: ellipsis;
+/* 背景展開ボタン */
+.background-expand-btn {
+    border: 1px solid #dbeafe;
+    background: none;
+    cursor: pointer;
 }
 
-/* グラデーションフェード効果（オプション） */
-.background-section::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 20px;
-    background: linear-gradient(transparent, #eff6ff);
-    pointer-events: none;
+.background-expand-btn:hover {
+    background-color: #dbeafe !important;
 }
 
-/* 背景情報のトグルボタン */
+.background-full-content {
+    animation: slideDown 0.3s ease-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 背景情報のトグルボタン（旧コードを残す） */
 .background-toggle-btn {
     background: none;
     border: none;

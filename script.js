@@ -111,10 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </ul>
                         
                         <div class="bg-blue-50 p-4 rounded-lg background-section" id="background-section">
-                            <p class="text-sm text-blue-800 background-text">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                背景: ${caseData.background}
-                            </p>
+                            <!-- ここに動的に背景情報が生成されます -->
                         </div>
                     </div>
                 </div>
@@ -123,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // HTMLをコンテナに挿入
         featuredCaseContainer.innerHTML = featuredHTML;
+        
+        // 背景情報を高さに合わせて設定
+        setupAdaptiveBackground(caseData.background);
         
         // 動画の再生状況を追跡
         const video = document.getElementById('featured-video');
@@ -515,61 +515,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 背景情報をレスポンシブに設定する関数
-    function setupResponsiveBackground(backgroundText) {
+    // 背景情報を左右の高さバランスに合わせて設定する関数
+    function setupAdaptiveBackground(backgroundText) {
         const backgroundSection = document.getElementById('background-section');
         if (!backgroundSection || !backgroundText) return;
         
-        const windowWidth = window.innerWidth;
-        let maxChars;
-        
-        // 画面サイズに応じた文字数制限を設定
-        if (windowWidth >= 1024) {
-            maxChars = 300; // デスクトップ
-        } else if (windowWidth >= 768) {
-            maxChars = 200; // タブレット
-        } else {
-            maxChars = 150; // モバイル
-        }
-        
-        // 文字数が少なすぎる場合はボタン形式に
-        if (maxChars < 180 && backgroundText.length > maxChars) {
-            // ボタン形式
-            backgroundSection.innerHTML = `
-                <button class="background-toggle-btn w-full text-left" onclick="toggleBackground()">
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm font-bold text-blue-800">
-                            <i class="fas fa-info-circle mr-1"></i>
-                            📖 背景を見る
-                        </span>
-                        <span class="text-blue-600 toggle-arrow">▼</span>
+        // 左側と右側の高さを測定
+        setTimeout(() => {
+            const leftSection = document.querySelector('.featured-case-left');
+            const rightContent = backgroundSection.parentElement;
+            
+            if (!leftSection || !rightContent) return;
+            
+            const leftHeight = leftSection.offsetHeight;
+            const rightContentHeight = rightContent.offsetHeight;
+            const backgroundSectionTop = backgroundSection.offsetTop - rightContent.offsetTop;
+            
+            // 背景セクションに使える高さを計算
+            const availableHeight = leftHeight - backgroundSectionTop - 32; // 32pxはマージン
+            
+            // 使用可能な行数を計算（行高を約1.5emと仮定）
+            const lineHeight = 24; // 1.5em × 16px ≈ 24px
+            const availableLines = Math.floor(availableHeight / lineHeight);
+            
+            console.log('利用可能高さ:', availableHeight, '利用可能行数:', availableLines);
+            
+            if (availableLines <= 2 && backgroundText.length > 100) {
+                // スペースが少ない場合はボタン形式
+                backgroundSection.innerHTML = `
+                    <button class="background-expand-btn w-full text-left p-3 rounded-lg transition-colors hover:bg-blue-100" onclick="toggleBackgroundExpand()">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-bold text-blue-800">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                📖 背景を見る
+                            </span>
+                            <span class="text-blue-600 expand-arrow">▼</span>
+                        </div>
+                    </button>
+                    <div class="background-full-content hidden mt-3 p-3 bg-white rounded-lg border border-blue-200">
+                        <p class="text-sm text-blue-800 leading-relaxed">
+                            ${backgroundText}
+                        </p>
+                        <button class="mt-2 text-xs text-blue-600 hover:text-blue-800" onclick="toggleBackgroundExpand()">
+                            閉じる ▲
+                        </button>
                     </div>
-                </button>
-                <div class="background-content hidden mt-3">
-                    <p class="text-sm text-blue-800 leading-relaxed">
-                        ${backgroundText}
-                    </p>
-                </div>
-            `;
-        } else {
-            // 通常表示（文字数制限あり）
-            const displayText = backgroundText.length > maxChars 
-                ? backgroundText.substring(0, maxChars) + '...'
-                : backgroundText;
+                `;
+            } else {
+                // 十分なスペースがある場合は通常表示（必要に応じて省略）
+                const maxChars = availableLines * 50; // 行あたり約50文字と仮定
+                let displayText = backgroundText;
                 
-            backgroundSection.innerHTML = `
-                <p class="text-sm text-blue-800">
-                    <i class="fas fa-info-circle mr-1"></i>
-                    背景: ${displayText}
-                </p>
-            `;
-        }
+                if (backgroundText.length > maxChars) {
+                    // シンプルな省略表示
+                    displayText = backgroundText.substring(0, maxChars) + '...';
+                }
+                
+                backgroundSection.innerHTML = `
+                    <p class="text-sm text-blue-800 leading-relaxed">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        背景: ${displayText}
+                    </p>
+                `;
+            }
+        }, 100); // DOM描画後に実行
     }
     
     // 背景情報の展開/折りたたみ関数（グローバル関数として定義）
-    window.toggleBackground = function() {
-        const content = document.querySelector('.background-content');
-        const arrow = document.querySelector('.toggle-arrow');
+    window.toggleBackgroundExpand = function() {
+        const content = document.querySelector('.background-full-content');
+        const arrow = document.querySelector('.expand-arrow');
         
         if (content && arrow) {
             if (content.classList.contains('hidden')) {
@@ -581,15 +596,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     };
-    
-    // ウィンドウリサイズ時に背景情報を再設定
-    window.addEventListener('resize', function() {
-        const backgroundSection = document.getElementById('background-section');
-        if (backgroundSection && window.currentBackgroundText) {
-            setupResponsiveBackground(window.currentBackgroundText);
-        }
-        updateNavPosition();
-    });
     
     // フィルター選択後のスクロール関数
     function scrollToResults() {
