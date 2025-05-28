@@ -341,12 +341,6 @@ body {
     text-align: center;
 }
 
-/* 背景情報スタイル（シンプル版） */
-.background-section {
-    /* スクロール対応のため、特別なスタイルは不要 */
-}
-
-/* Sticky navigationの調整 */
 nav.sticky {
     transition: top 0.3s ease;
 }
