@@ -6,92 +6,17 @@
     <title>生成AI活用研修 業務効率化事例集</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- 縦伸び問題解決用CSS（強制適用） -->
-    <style>
-        @media (min-width: 768px) {
-            .featured-case {
-                display: flex !important;
-                flex-direction: row !important;
-                align-items: flex-start !important;
-            }
-        
-        /* 背景情報のボタンスタイル */
-        .background-section button {
-            transition: all 0.2s ease;
-            border-radius: 0.375rem;
-            padding: 0.25rem 0.5rem;
-        }
-        
-        .background-section button:hover {
-            background-color: rgba(59, 130, 246, 0.1);
-        }
-        
-        .rotate-180 {
-            transform: rotate(180deg);
-        }
-        
-        /* レスポンシブグリッド調整 */
-        @media (max-width: 480px) {
-            #case-container,
-            #related-cases-container {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 0.75rem !important;
-            }
-            
-            .case-card {
-                min-height: 240px !important;
-            }
-        }
-            .featured-case-left {
-                flex: 0 0 45% !important;
-                width: 45% !important;
-                height: auto !important;
-                max-height: none !important;
-                background-color: #f0f7ff !important; /* 薬い青背景を強制 */
-                align-self: flex-start !important; /* 重要：左側を上揃え固定 */
-                min-height: auto !important;
-            }
-            .featured-case-right {
-                flex: 1 !important;
-                width: 55% !important;
-                align-self: flex-start !important; /* 右側も上揃え */
-            }
-            .featured-thumbnail video {
-                height: auto !important;
-                max-height: none !important;
-                width: 100% !important;
-                object-fit: contain !important;
-            }
-            /* 左側の中身も青背景で統一 */
-            .featured-case-left .p-4,
-            .featured-case-left .md\:p-6 {
-                background-color: #f0f7ff !important;
-            }
-            /* 左側全体を青背景で統一（バッジは例外） */
-            .featured-case-left * {
-                background-color: transparent !important;
-            }
-            .featured-case-left .badge {
-                background-color: #2563eb !important; /* バッジの青色を復活 */
-                color: white !important;
-            }
-            .featured-case-left {
-                background-color: #f0f7ff !important;
-            }
-        }
-    </style>
 </head>
 <body class="bg-gray-50">
     <!-- ヘッダー -->
-    <header class="sticky top-0 z-30 bg-white shadow-sm">
+    <header class="sticky top-0 z-10 bg-white shadow-sm">
         <div class="container mx-auto py-4">
             <a href="#" class="text-xl font-bold text-blue-600">生成AI活用研修 業務効率化事例集</a>
         </div>
     </header>
 
     <!-- カテゴリー・タグナビゲーション -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-20">
+    <nav class="bg-white border-b border-gray-200">
         <div class="container mx-auto">
             <!-- カテゴリータブ -->
             <div class="flex overflow-x-auto border-b">
@@ -105,23 +30,22 @@
             <!-- フィルタータグ -->
             <div class="py-3">
                 <!-- 第1行：メインタグフィルター -->
-                <div class="main-filters flex flex-wrap justify-between items-start mb-2">
-                    <div class="tag-filters-left flex flex-wrap">
-                        <div class="tag-filter active" data-tag="all">すべて</div>
-                        <div class="tag-filter" data-tag="時間削減">時間削減</div>
-                        <div class="tag-filter" data-tag="品質向上">品質向上</div>
-                        <div class="tag-filter" data-tag="自動化">自動化</div>
-                        <div class="tag-filter" data-tag="ChatGPT">ChatGPT</div>
-                        <div class="tag-filter" data-tag="Copilot">Copilot</div>
-                        <div class="tag-filter toggle-others" id="toggle-others">…</div>
-                    </div>
+                <div class="main-filters flex flex-wrap mb-2">
+                    <div class="tag-filter active" data-tag="all">すべて</div>
+                    <div class="tag-filter" data-tag="時間削減">時間削減</div>
+                    <div class="tag-filter" data-tag="品質向上">品質向上</div>
+                    <div class="tag-filter" data-tag="自動化">自動化</div>
+                    <div class="tag-filter" data-tag="ChatGPT">ChatGPT</div>
+                    <div class="tag-filter" data-tag="Copilot">Copilot</div>
+                    <div class="tag-filter toggle-others" id="toggle-others">…</div>
                     
-                    <!-- レベルフィルター（右端固定） -->
-                    <div class="level-filters-right flex flex-wrap">
-                        <div class="level-filter" data-level="初級">初級</div>
-                        <div class="level-filter" data-level="中級">中級</div>
-                        <div class="level-filter" data-level="上級">上級</div>
-                    </div>
+                    <!-- スペーサー -->
+                    <div class="tag-spacer"></div>
+                    
+                    <!-- レベルフィルター -->
+                    <div class="level-filter" data-level="初級">初級</div>
+                    <div class="level-filter" data-level="中級">中級</div>
+                    <div class="level-filter" data-level="上級">上級</div>
                 </div>
                 
                 <!-- 第2行：その他フィルター（展開時のみ表示） -->
@@ -149,7 +73,7 @@
         <!-- 関連事例セクション（事例選択後に表示） -->
         <div id="related-cases-section" class="hidden">
             <h2 class="text-xl font-bold mb-4">関連する事例</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="related-cases-container">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="related-cases-container">
                 <!-- ここに関連事例が動的に表示されます -->
             </div>
         </div>
@@ -157,7 +81,7 @@
         <h2 class="text-xl font-bold mb-6">すべての事例一覧</h2>
         
         <!-- 事例一覧（動的に生成される） -->
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4" id="case-container">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="case-container">
             <!-- ここに事例一覧が動的に表示されます -->
         </div>
     </main>
