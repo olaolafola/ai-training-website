@@ -94,16 +94,6 @@ body {
     display: inline-block;
 }
 
-/* スペーサー */
-.tag-spacer {
-    width: 2px;
-    height: 24px;
-    background-color: #e5e7eb;
-    margin: 0 8px;
-    align-self: center;
-    display: inline-block;
-}
-
 /* レベルフィルター */
 .level-filter {
     display: inline-block;
@@ -406,4 +396,15 @@ body {
     height: 100%;
     border-radius: 9999px;
     transition: width 0.1s ease-in-out;
+}
+
+/* 動画コントロールの音声ボタンを非表示 */
+video::-webkit-media-controls-volume-slider,
+video::-webkit-media-controls-mute-button {
+    display: none !important;
+}
+
+video::-moz-media-controls-volume-slider,
+video::-moz-media-controls-mute-button {
+    display: none !important;
 }

@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <!-- 動画と再生状況バー -->
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video id="featured-video" controls class="w-full">
+                            <video id="featured-video" controls muted class="w-full" style="pointer-events: auto;">
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
@@ -124,17 +124,39 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.querySelector('.video-progress-bar');
         
         if (video && progressBar) {
+            // 音声を強制的に無効化
+            video.muted = true;
+            video.volume = 0;
+            
+            // 音声ボタンのクリックを無効化
+            video.addEventListener('volumechange', function() {
+                if (!video.muted) {
+                    video.muted = true;
+                    video.volume = 0;
+                }
+            });
+            
             video.addEventListener('timeupdate', function() {
                 const percentage = (video.currentTime / video.duration) * 100;
                 progressBar.style.width = percentage + '%';
             });
         }
         
-        // 関連事例を表示
-        showRelatedCases(caseData);
+        // 関連事例を表示（ユーザー選択時のみ）
+        if (isUserSelected) {
+            showRelatedCases(caseData);
+        } else {
+            // 初回表示時は関連事例を非表示
+            const relatedSection = document.getElementById('related-cases-section');
+            if (relatedSection) {
+                relatedSection.classList.add('hidden');
+            }
+        }
         
         // 現在の注目事例を記録（フィルター時に参照するため）
-        window.currentFeaturedCase = caseData;
+        if (isUserSelected) {
+            window.currentFeaturedCase = caseData;
+        }
         
         // スクロールが必要な場合は注目事例までスクロール
         if (scrollToView) {
@@ -302,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (selectedCase) {
                     // 選択された事例で注目事例エリアを更新し、そこにスクロール
-                    setupFeaturedCase(selectedCase, true);
+                    setupFeaturedCase(selectedCase, true, true);
                 }
             });
         });
