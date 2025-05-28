@@ -520,78 +520,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const backgroundSection = document.getElementById('background-section');
         if (!backgroundSection || !backgroundText) return;
         
-        // 左側と右側の高さを測定
-        setTimeout(() => {
-            const leftSection = document.querySelector('.featured-case-left');
-            const rightContent = backgroundSection.parentElement;
-            
-            if (!leftSection || !rightContent) {
-                console.log('要素が見つかりません:', leftSection, rightContent);
-                return;
-            }
-            
-            const leftHeight = leftSection.offsetHeight;
-            const rightContentHeight = rightContent.offsetHeight;
-            const backgroundSectionTop = backgroundSection.offsetTop - rightContent.offsetTop;
-            
-            // 背景セクションに使える高さを計算
-            const availableHeight = leftHeight - backgroundSectionTop - 32; // 32pxはマージン
-            
-            // 使用可能な行数を計算（行高を約1.5emと仮定）
-            const lineHeight = 24; // 1.5em × 16px ≈ 24px
-            const availableLines = Math.floor(availableHeight / lineHeight);
-            
-            console.log('高さ情報:', {
-                leftHeight,
-                rightContentHeight,
-                backgroundSectionTop,
-                availableHeight,
-                availableLines,
-                backgroundTextLength: backgroundText.length
-            });
-            
-            // テスト用：強制的にボタン表示するための条件を緩める
-            if (availableLines <= 3 && backgroundText.length > 50) { // 3行以下かつ文章が50文字以上
-                console.log('ボタン形式で表示します');
-                // スペースが少ない場合はボタン形式
-                backgroundSection.innerHTML = `
-                    <button class="background-expand-btn w-full text-left p-3 rounded-lg transition-colors hover:bg-blue-100" onclick="toggleBackgroundExpand()">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-bold text-blue-800">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                📖 背景を見る
-                            </span>
-                            <span class="text-blue-600 expand-arrow">▼</span>
-                        </div>
-                    </button>
-                    <div class="background-full-content hidden mt-3 p-3 bg-white rounded-lg border border-blue-200">
-                        <p class="text-sm text-blue-800 leading-relaxed">
-                            ${backgroundText}
-                        </p>
-                        <button class="mt-2 text-xs text-blue-600 hover:text-blue-800" onclick="toggleBackgroundExpand()">
-                            閉じる ▲
-                        </button>
-                    </div>
-                `;
-            } else {
-                console.log('通常表示で表示します');
-                // 十分なスペースがある場合は通常表示（必要に応じて省略）
-                const maxChars = availableLines * 50; // 行あたり約50文字と仮定
-                let displayText = backgroundText;
-                
-                if (backgroundText.length > maxChars) {
-                    // シンプルな省略表示
-                    displayText = backgroundText.substring(0, maxChars) + '...';
-                }
-                
-                backgroundSection.innerHTML = `
-                    <p class="text-sm text-blue-800 leading-relaxed">
-                        <i class="fas fa-info-circle mr-1"></i>
-                        背景: ${displayText}
-                    </p>
-                `;
-            }
-        }, 300); // タイミングを300msに延長
+        console.log('テスト：強制的に通常表示（200文字制限）にします');
+        
+        // 一時的に強制的に通常表示
+        const maxChars = 200; // 200文字で区切る
+        let displayText = backgroundText;
+        
+        if (backgroundText.length > maxChars) {
+            displayText = backgroundText.substring(0, maxChars) + '...';
+        }
+        
+        backgroundSection.innerHTML = `
+            <p class="text-sm text-blue-800 leading-relaxed">
+                <i class="fas fa-info-circle mr-1"></i>
+                背景: ${displayText}
+            </p>
+        `;
     }
     
     // 背景情報の展開/折りたたみ関数（グローバル関数として定義）
