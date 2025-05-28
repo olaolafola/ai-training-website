@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             featuredCaseTitle.style.visibility = 'visible';
         }
         
-        // HTML生成（縦伸び問題を解決したバージョン）
+        // HTML生成（縦伸び問題を解決 - 完全版）
         const featuredHTML = `
             <div class="featured-case">
                 <!-- 左側：動画エリア - 自然な高さを維持 -->
@@ -74,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
-                            <!-- 動画再生状況バー -->
                             <div class="video-progress mt-2 bg-gray-200 rounded-full h-1.5">
                                 <div class="video-progress-bar bg-blue-500 h-1.5 rounded-full w-0"></div>
                             </div>
@@ -82,14 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <div class="mt-4 flex flex-wrap">
                             <div class="badge mr-2 mb-2">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 時間削減 ${caseData.reduction}
                             </div>
                             ${caseData.yearlyReduction ? `
                             <div class="badge mb-2">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 ${caseData.yearlyReduction}

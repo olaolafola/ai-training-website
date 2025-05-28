@@ -199,27 +199,64 @@ body {
     z-index: 1;
 }
 
-/* 注目事例カード */
+/* 注目事例カード - 縦伸び問題解決版 */
 .featured-case {
     background-color: white;
     border-radius: 0.5rem;
     overflow: hidden;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
-}
-.featured-case-left {
-    background-color: #f0f7ff;
+    display: flex;
+    flex-direction: column;
 }
 
-/* 注目事例の動画サイズを最適化（左右比率2:3対応） */
+/* 左側：動画エリア */
+.featured-case-left {
+    background-color: #f0f7ff;
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+/* 右側：詳細コンテンツ */
+.featured-case-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* デスクトップレイアウト */
+@media (min-width: 768px) {
+    .featured-case {
+        flex-direction: row;
+        align-items: flex-start; /* 重要：上揃えで高さを独立 */
+    }
+    
+    .featured-case-left {
+        width: 45%;
+        flex: 0 0 45%;
+    }
+    
+    .featured-case-right {
+        width: 55%;
+        flex: 1;
+        /* max-height: 70vh; */
+        /* overflow-y: auto; */
+    }
+}
+
+/* 注目事例の動画サイズを最適化（縦伸び解決版） */
 .featured-thumbnail {
-  max-width: 100%;
+    max-width: 100%;
+    width: 100%;
 }
 
 .featured-thumbnail video {
-  width: 100%;
-  max-height: 350px;
-  object-fit: contain;
+    width: 100%;
+    height: auto; /* 重要：自然なアスペクト比を維持 */
+    max-height: none; /* 高さ制限を解除 */
+    object-fit: contain;
+    display: block;
 }
 
 /* サムネイル */
@@ -387,38 +424,7 @@ nav.sticky {
     }
 }
 
-/* 横向き表示での左右比率調整（45%:55%） - 縦伸び問題解決版 */
-@media (min-width: 768px) {
-    .featured-case {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start; /* 重要：上揃えで高さを独立 */
-    }
-    
-    .featured-case-left {
-        flex: 0 0 45%;
-        max-height: none; /* 高さ制限を解除 */
-    }
-    
-    .featured-case-right {
-        flex: 1;
-        /* max-height: 70vh; ← 削除で自由な高さに */
-        /* overflow-y: auto; ← 削除でスクロール無し */
-        
-        /* スクロールバーを非表示にする（WebKit系ブラウザ） */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE/Edge */
-    }
-    
-    .featured-case-right::-webkit-scrollbar {
-        display: none; /* Chrome/Safari */
-    }
-    
-    .featured-thumbnail video {
-        height: auto; /* 重要：autoで自然な高さに */
-        max-height: none; /* 最大高さ制限を解除 */
-    }
-}
+
 
 /* 小さな画面でのさらなる調整 */
 @media (max-width: 480px) {
