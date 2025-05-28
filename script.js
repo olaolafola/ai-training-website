@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // ユーザーが選択した場合は見出しを非表示
         if (isUserSelected && featuredCaseTitle) {
-            featuredCaseTitle.style.display = 'none';
+            featuredCaseTitle.style.visibility = 'hidden';
         } else if (!isUserSelected && featuredCaseTitle) {
-            featuredCaseTitle.style.display = 'block';
+            featuredCaseTitle.style.visibility = 'visible';
         }
         
         // HTML生成（動画対応版）- 左右比率を2:3（40%:60%）に修正
