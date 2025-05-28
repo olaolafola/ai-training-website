@@ -54,10 +54,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // HTML生成（縦伸び問題を解決 - 完全版）
         const featuredHTML = `
-            <div class="featured-case">
+            <div class="featured-case" style="display: flex; flex-direction: row; align-items: flex-start;">
                 <!-- 左側：動画エリア - 自然な高さを維持 -->
-                <div class="featured-case-left">
-                    <div class="p-4 md:p-6">
+                <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
+                    <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <!-- 動画と再生状況バー -->
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}">
+                            <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}" style="height: auto; max-height: none;">
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
                 
                 <!-- 右側：詳細内容 - 独立してスクロール可能 -->
-                <div class="featured-case-right">
+                <div class="featured-case-right" style="flex: 1; width: 55%;">
                     <div class="p-4 md:p-6">
                         <h3 class="font-bold mb-4">実施内容</h3>
                         <p class="text-gray-700 mb-6">
