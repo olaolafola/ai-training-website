@@ -382,18 +382,18 @@ nav.sticky {
     }
 }
 
-/* 横向き表示での左右比率調整（3:2 = 60%:40%） */
+/* 横向き表示での左右比率調整（2:3） */
 @media (min-width: 768px) {
   .featured-case-left {
-      width: 60% !important; /* 60%に変更 */
+      width: 40% !important; /* 元の40%に戻す */
   }
   
-  .featured-case .md\:w-2\/5 {
-      width: 40% !important; /* 右側は40%に */
+  .featured-case .md\:w-3\/5 {
+      width: 60% !important; /* 右側は60%に戻す */
   }
   
   .featured-thumbnail video {
-      max-height: 400px; /* 動画エリアが幅広くなったので少し大きく */
+      max-height: 380px; /* 元のサイズに戻す */
   }
 }
 
