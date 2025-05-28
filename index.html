@@ -6,6 +6,33 @@
     <title>生成AI活用研修 業務効率化事例集</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- 縦伸び問題解決用CSS（強制適用） -->
+    <style>
+        @media (min-width: 768px) {
+            .featured-case {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+            }
+            .featured-case-left {
+                flex: 0 0 45% !important;
+                width: 45% !important;
+                height: auto !important;
+                max-height: none !important;
+            }
+            .featured-case-right {
+                flex: 1 !important;
+                width: 55% !important;
+            }
+            .featured-thumbnail video {
+                height: auto !important;
+                max-height: none !important;
+                width: 100% !important;
+                object-fit: contain !important;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- ヘッダー -->
