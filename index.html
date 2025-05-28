@@ -16,6 +16,21 @@
                 align-items: flex-start !important;
             }
         
+        /* 背景情報のボタンスタイル */
+        .background-section button {
+            transition: all 0.2s ease;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .background-section button:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+        
         /* レスポンシブグリッド調整 */
         @media (max-width: 480px) {
             #case-container,

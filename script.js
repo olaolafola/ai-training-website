@@ -516,20 +516,73 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 背景情報をシンプルに表示する関数（スクロール対応版）
+    // 背景情報を左側の高さに合わせて表示する関数（スマート版）
     function setupAdaptiveBackground(backgroundText) {
         const backgroundSection = document.getElementById('background-section');
         if (!backgroundSection || !backgroundText) return;
         
-        // 文字数制限なしで全文表示（右側はスクロール可能なので）
-        backgroundSection.innerHTML = `
-            <p class="text-sm text-blue-800 leading-relaxed">
-                <strong>背景:</strong> ${backgroundText}
-            </p>
-        `;
+        // 最初は短縮版で表示（120文字）
+        const maxChars = 120;
+        const isLong = backgroundText.length > maxChars;
+        const shortText = isLong ? backgroundText.substring(0, maxChars) + '...' : backgroundText;
+        
+        if (isLong) {
+            // 長い場合はボタン付きで表示
+            backgroundSection.innerHTML = `
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm text-blue-800 leading-relaxed mb-2" id="background-short">
+                        <strong>背景:</strong> ${shortText}
+                    </p>
+                    <p class="text-sm text-blue-800 leading-relaxed hidden" id="background-full">
+                        <strong>背景:</strong> ${backgroundText}
+                    </p>
+                    <button 
+                        class="text-xs text-blue-600 hover:text-blue-800 font-medium mt-2 flex items-center" 
+                        onclick="toggleBackground()"
+                        id="background-toggle-btn"
+                    >
+                        <span id="toggle-text">もっと読む</span>
+                        <svg class="w-3 h-3 ml-1 transform transition-transform" id="toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                </div>
+            `;
+        } else {
+            // 短い場合はそのまま表示
+            backgroundSection.innerHTML = `
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <p class="text-sm text-blue-800 leading-relaxed">
+                        <strong>背景:</strong> ${backgroundText}
+                    </p>
+                </div>
+            `;
+        }
     }
     
-    // 背景情報の展開関数は不要（スクロール対応のため）
+    // 背景情報の展開/折りたたみ関数（グローバル関数）
+    window.toggleBackground = function() {
+        const shortElement = document.getElementById('background-short');
+        const fullElement = document.getElementById('background-full');
+        const toggleText = document.getElementById('toggle-text');
+        const toggleArrow = document.getElementById('toggle-arrow');
+        
+        if (shortElement && fullElement && toggleText && toggleArrow) {
+            if (shortElement.classList.contains('hidden')) {
+                // 短縮版を表示
+                shortElement.classList.remove('hidden');
+                fullElement.classList.add('hidden');
+                toggleText.textContent = 'もっと読む';
+                toggleArrow.classList.remove('rotate-180');
+            } else {
+                // 全文を表示
+                shortElement.classList.add('hidden');
+                fullElement.classList.remove('hidden');
+                toggleText.textContent = '折りたたむ';
+                toggleArrow.classList.add('rotate-180');
+            }
+        }
+    };
     
     // フィルター選択後のスクロール関数
     function scrollToResults() {
