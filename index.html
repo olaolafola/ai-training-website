@@ -30,22 +30,23 @@
             <!-- フィルタータグ -->
             <div class="py-3">
                 <!-- 第1行：メインタグフィルター -->
-                <div class="main-filters flex flex-wrap mb-2">
-                    <div class="tag-filter active" data-tag="all">すべて</div>
-                    <div class="tag-filter" data-tag="時間削減">時間削減</div>
-                    <div class="tag-filter" data-tag="品質向上">品質向上</div>
-                    <div class="tag-filter" data-tag="自動化">自動化</div>
-                    <div class="tag-filter" data-tag="ChatGPT">ChatGPT</div>
-                    <div class="tag-filter" data-tag="Copilot">Copilot</div>
-                    <div class="tag-filter toggle-others" id="toggle-others">…</div>
+                <div class="main-filters flex flex-wrap justify-between items-start mb-2">
+                    <div class="tag-filters-left flex flex-wrap">
+                        <div class="tag-filter active" data-tag="all">すべて</div>
+                        <div class="tag-filter" data-tag="時間削減">時間削減</div>
+                        <div class="tag-filter" data-tag="品質向上">品質向上</div>
+                        <div class="tag-filter" data-tag="自動化">自動化</div>
+                        <div class="tag-filter" data-tag="ChatGPT">ChatGPT</div>
+                        <div class="tag-filter" data-tag="Copilot">Copilot</div>
+                        <div class="tag-filter toggle-others" id="toggle-others">…</div>
+                    </div>
                     
-                    <!-- スペーサー -->
-                    <div class="tag-spacer"></div>
-                    
-                    <!-- レベルフィルター -->
-                    <div class="level-filter" data-level="初級">初級</div>
-                    <div class="level-filter" data-level="中級">中級</div>
-                    <div class="level-filter" data-level="上級">上級</div>
+                    <!-- レベルフィルター（右端固定） -->
+                    <div class="level-filters-right flex flex-wrap">
+                        <div class="level-filter" data-level="初級">初級</div>
+                        <div class="level-filter" data-level="中級">中級</div>
+                        <div class="level-filter" data-level="上級">上級</div>
+                    </div>
                 </div>
                 
                 <!-- 第2行：その他フィルター（展開時のみ表示） -->

@@ -84,16 +84,6 @@ body {
     display: none !important;
 }
 
-/* スペーサー */
-.tag-spacer {
-    width: 2px;
-    height: 24px;
-    background-color: #e5e7eb;
-    margin: 0 12px;
-    align-self: center;
-    display: inline-block;
-}
-
 /* レベルフィルター */
 .level-filter {
     display: inline-block;
@@ -303,6 +293,17 @@ nav.sticky {
     transition: top 0.3s ease;
 }
 
+/* フィルターレイアウトの調整 */
+.tag-filters-left {
+    flex: 1;
+    min-width: 0; /* flexboxでの縮小を許可 */
+}
+
+.level-filters-right {
+    flex-shrink: 0; /* 縮小させない */
+    margin-left: 1rem;
+}
+
 /* モバイル対応のスタイル */
 @media (max-width: 768px) {
     /* カテゴリータブのスクロール */
@@ -341,6 +342,21 @@ nav.sticky {
         margin-bottom: 0.25rem;
         font-size: 0.8rem;
         padding: 0.25rem 0.6rem;
+    }
+    
+    /* モバイルではフィルターを縦に配置 */
+    .main-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .tag-filters-left {
+        margin-bottom: 0.5rem;
+    }
+    
+    .level-filters-right {
+        margin-left: 0;
+        justify-content: flex-start;
     }
     
     /* その他フィルター展開時のモバイル調整 */
