@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.effects.map(effect => `<li class="mb-1">${effect}</li>`).join('')}
                         </ul>
                         
-                        <div class="bg-blue-50 p-4 rounded-lg background-section" id="background-section">
+                        <div class="background-section" id="background-section">
                             <!-- ここに動的に背景情報が生成されます -->
                         </div>
                     </div>
@@ -529,33 +529,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isLong) {
             // 長い場合はボタン付きで表示
             backgroundSection.innerHTML = `
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <p class="text-sm text-blue-800 leading-relaxed mb-2" id="background-short">
-                        <strong>背景:</strong> ${shortText}
-                    </p>
-                    <p class="text-sm text-blue-800 leading-relaxed hidden" id="background-full">
-                        <strong>背景:</strong> ${backgroundText}
-                    </p>
-                    <button 
-                        class="text-xs text-blue-600 hover:text-blue-800 font-medium mt-2 flex items-center" 
-                        onclick="toggleBackground()"
-                        id="background-toggle-btn"
-                    >
-                        <span id="toggle-text">もっと読む</span>
-                        <svg class="w-3 h-3 ml-1 transform transition-transform" id="toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                </div>
+                <p class="text-sm text-gray-700 leading-relaxed mb-2" id="background-short">
+                    <strong>背景:</strong> ${shortText}
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed hidden" id="background-full">
+                    <strong>背景:</strong> ${backgroundText}
+                </p>
+                <button 
+                    class="text-xs text-blue-600 hover:text-blue-800 font-medium mt-1 flex items-center" 
+                    onclick="toggleBackground()"
+                    id="background-toggle-btn"
+                >
+                    <span id="toggle-text">もっと読む</span>
+                    <svg class="w-3 h-3 ml-1 transform transition-transform" id="toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
             `;
         } else {
             // 短い場合はそのまま表示
             backgroundSection.innerHTML = `
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <p class="text-sm text-blue-800 leading-relaxed">
-                        <strong>背景:</strong> ${backgroundText}
-                    </p>
-                </div>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    <strong>背景:</strong> ${backgroundText}
+                </p>
             `;
         }
     }
