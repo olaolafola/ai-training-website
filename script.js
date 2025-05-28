@@ -110,8 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.effects.map(effect => `<li class="mb-1">${effect}</li>`).join('')}
                         </ul>
                         
-                        <div class="bg-blue-50 p-4 rounded-lg" id="background-section">
-                            <!-- ここに動的に背景情報が生成されます -->
+                        <div class="bg-blue-50 p-4 rounded-lg background-section" id="background-section">
+                            <p class="text-sm text-blue-800 background-text">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                背景: ${caseData.background}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -120,12 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // HTMLをコンテナに挿入
         featuredCaseContainer.innerHTML = featuredHTML;
-        
-        // 背景情報を画面サイズに合わせて設定
-        setupResponsiveBackground(caseData.background);
-        
-        // 背景テキストをグローバルに保存（リサイズ時のため）
-        window.currentBackgroundText = caseData.background;
         
         // 動画の再生状況を追跡
         const video = document.getElementById('featured-video');

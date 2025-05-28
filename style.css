@@ -304,6 +304,34 @@ body {
     text-align: center;
 }
 
+/* 背景情報の高さ制限 */
+.background-section {
+    max-height: 120px; /* 最大高さを設定 */
+    overflow: hidden;
+    position: relative;
+}
+
+.background-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* 4行まで表示 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+}
+
+/* グラデーションフェード効果（オプション） */
+.background-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(transparent, #eff6ff);
+    pointer-events: none;
+}
+
 /* 背景情報のトグルボタン */
 .background-toggle-btn {
     background: none;
