@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
             featuredCaseTitle.style.visibility = 'visible';
         }
         
-        // HTML生成（動画対応版）- 左右比率を2:3（40%:60%）に修正
+        // HTML生成（動画対応版）- 左右比率を3:2（60%:40%）に変更
         const featuredHTML = `
             <div class="featured-case">
                 <div class="flex flex-col md:flex-row">
                     <!-- 左側：事例概要 -->
-                    <div class="p-4 md:p-6 md:w-2/5 w-full featured-case-left">
+                    <div class="p-4 md:p-6 md:w-3/5 w-full featured-case-left">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
@@ -98,10 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     
-                    <!-- 右側：詳細内容 - 比率変更で60%に -->
-                    <div class="p-4 md:p-6 md:w-3/5 w-full">
+                    <!-- 右側：詳細内容 - 比率変更で40%に -->
+                    <div class="p-4 md:p-6 md:w-2/5 w-full">
                         <h3 class="font-bold mb-4">実施内容</h3>
-                        <p class="text-gray-700 mb-6">
+                        <p class="text-gray-700 mb-4">
                             ${caseData.implementation}
                         </p>
                         
@@ -111,9 +111,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         </ul>
                         
                         <div class="bg-blue-50 p-4 rounded-lg">
-                            <p class="text-sm text-blue-800">
+                            <h4 class="text-sm font-bold text-blue-800 mb-2">
                                 <i class="fas fa-info-circle mr-1"></i>
-                                背景: ${caseData.background.substring(0, 200)}...
+                                背景
+                            </h4>
+                            <p class="text-sm text-blue-800 leading-relaxed">
+                                ${caseData.background.length > 250 ? caseData.background.substring(0, 250) + '...' : caseData.background}
                             </p>
                         </div>
                     </div>
