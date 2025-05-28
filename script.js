@@ -517,44 +517,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 背景情報を左右の高さバランスに合わせて設定する関数
+    // 背景情報をシンプルに表示する関数（スクロール対応版）
     function setupAdaptiveBackground(backgroundText) {
         const backgroundSection = document.getElementById('background-section');
         if (!backgroundSection || !backgroundText) return;
         
-        console.log('テスト：強制的に通常表示（120文字制限）にします');
-        
-        // 一時的に強制的に通常表示
-        const maxChars = 120; // 120文字に短縮して左右の高さを合わせる
-        let displayText = backgroundText;
-        
-        if (backgroundText.length > maxChars) {
-            displayText = backgroundText.substring(0, maxChars) + '...';
-        }
-        
+        // 文字数制限なしで全文表示（右側はスクロール可能なので）
         backgroundSection.innerHTML = `
             <p class="text-sm text-blue-800 leading-relaxed">
-                <i class="fas fa-info-circle mr-1"></i>
-                背景: ${displayText}
+                <strong>背景:</strong> ${backgroundText}
             </p>
         `;
     }
     
-    // 背景情報の展開/折りたたみ関数（グローバル関数として定義）
-    window.toggleBackgroundExpand = function() {
-        const content = document.querySelector('.background-full-content');
-        const arrow = document.querySelector('.expand-arrow');
-        
-        if (content && arrow) {
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                arrow.textContent = '▲';
-            } else {
-                content.classList.add('hidden');
-                arrow.textContent = '▼';
-            }
-        }
-    };
+    // 背景情報の展開関数は不要（スクロール対応のため）
     
     // フィルター選択後のスクロール関数
     function scrollToResults() {

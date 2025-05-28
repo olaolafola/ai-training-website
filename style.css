@@ -304,56 +304,9 @@ body {
     text-align: center;
 }
 
-/* 背景情報の高さ制限を解除（動的調整に変更） */
+/* 背景情報スタイル（シンプル版） */
 .background-section {
-    /* max-height: 120px; ← 解除 */
-    /* overflow: hidden; ← 解除 */
-    position: relative;
-}
-
-/* 背景展開ボタン */
-.background-expand-btn {
-    border: 1px solid #dbeafe;
-    background: none;
-    cursor: pointer;
-}
-
-.background-expand-btn:hover {
-    background-color: #dbeafe !important;
-}
-
-.background-full-content {
-    animation: slideDown 0.3s ease-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* 背景情報のトグルボタン（旧コードを残す） */
-.background-toggle-btn {
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-}
-
-.background-toggle-btn:hover {
-    background-color: rgba(59, 130, 246, 0.1);
-}
-
-.background-content {
-    animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        max-height: 0;
-    }
-    to {
-        opacity: 1;
-        max-height: 200px;
-    }
+    /* スクロール対応のため、特別なスタイルは不要 */
 }
 
 /* Sticky navigationの調整 */
@@ -449,8 +402,16 @@ nav.sticky {
     
     .featured-case-right {
         flex: 1;
-        max-height: 70vh; /* 画面の70%を上限に */
-        overflow-y: auto; /* 必要に応じてスクロール */
+        /* max-height: 70vh; ← 削除で自由な高さに */
+        /* overflow-y: auto; ← 削除でスクロール無し */
+        
+        /* スクロールバーを非表示にする（WebKit系ブラウザ） */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+    }
+    
+    .featured-case-right::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
     }
     
     .featured-thumbnail video {

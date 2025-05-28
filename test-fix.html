@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>縦伸び修正テスト - 生成AI活用研修 業務効率化事例集</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Hiragino Sans', Meiryo, sans-serif;
+            color: #333;
+            background-color: #f9fafb;
+        }
+
+        /* 注目事例カード - 縦伸び問題解決版 */
+        .featured-case {
+            background-color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .featured-case {
+                flex-direction: row;
+                align-items: flex-start; /* 重要：上揃えで高さを独立 */
+            }
+        }
+
+        /* 左側：動画エリア - 自然な高さを維持 */
+        .featured-case-left {
+            background-color: #f0f7ff;
+            flex: 0 0 auto;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .featured-case-left {
+                width: 45%;
+                flex: 0 0 45%;
+            }
+        }
+
+        /* 右側：詳細コンテンツ - 独立してスクロール可能 */
+        .featured-case-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .featured-case-right {
+                width: 55%;
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* 動画の自然なアスペクト比を保持 */
+        .featured-thumbnail {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .featured-thumbnail video {
+            width: 100%;
+            height: auto; /* 重要：autoで自然な高さに */
+            max-height: none; /* 最大高さ制限を解除 */
+            object-fit: contain;
+            display: block;
+        }
+
+        /* その他のスタイル */
+        .level-badge {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            line-height: 1;
+        }
+
+        .level-badge.level-初級 {
+            color: #4ade80;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 9999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .video-progress {
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            height: 0.375rem;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .video-progress-bar {
+            background-color: #3b82f6;
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold mb-6">縦伸び修正テスト</h1>
+        
+        <!-- 注目事例 -->
+        <div class="featured-case">
+            <!-- 左側：動画エリア - 自然な高さを維持 -->
+            <div class="featured-case-left">
+                <div class="p-4 md:p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="text-sm text-blue-700">営業・提案</div>
+                        <div class="level-badge level-初級">初級</div>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4">Gensparkで営業資料を5分で作成</h2>
+                    
+                    <div class="flex flex-wrap mb-4">
+                        <span class="tag">Genspark</span>
+                        <span class="tag">PowerPoint</span>
+                        <span class="tag">時間削減</span>
+                    </div>
+                    
+                    <!-- 動画と再生状況バー -->
+                    <div class="featured-thumbnail mb-4">
+                        <video controls muted class="w-full">
+                            <source src="videos/Gensparkで営業資料を5分で作成.mp4" type="video/mp4">
+                            <!-- フォールバック画像 -->
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                <span class="text-gray-500">動画プレースホルダー (16:9 比率)</span>
+                            </div>
+                        </video>
+                        <!-- 動画再生状況バー -->
+                        <div class="video-progress">
+                            <div class="video-progress-bar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap">
+                        <div class="badge mr-2 mb-2">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            時間削減 97%
+                        </div>
+                        <div class="badge mb-2">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            年間100時間削減
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右側：詳細内容 - 独立してスクロール可能 -->
+            <div class="featured-case-right">
+                <div class="p-4 md:p-6">
+                    <h3 class="font-bold mb-4">実施内容</h3>
+                    <p class="text-gray-700 mb-6">
+                        顧客の要望データと自社製品情報をGensparkに入力するだけで、説得力のある営業資料が自動生成されます。プロンプトの最適化により、業界特有のニーズに合わせた資料作成が可能になりました。
+                    </p>
+                    
+                    <h3 class="font-bold mb-2">導入効果</h3>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li class="mb-1">資料作成時間が3時間から5分に短縮</li>
+                        <li class="mb-1">デザインの一貫性と品質が向上</li>
+                        <li class="mb-1">営業担当者の提案準備時間削減</li>
+                        <li class="mb-1">顧客ごとにカスタマイズされた提案が容易に</li>
+                    </ul>
+                    
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <p class="text-sm text-blue-800 leading-relaxed">
+                            <strong>背景:</strong> 営業担当者は顧客ごとに異なる資料を作成する必要があり、多くの時間を資料作成に費やしていました。特に新規案件の提案資料は、顧客企業の情報収集から始まり、自社製品の説明、適合性の説明など、多くの要素を盛り込む必要があります。1つの提案資料作成に平均3時間以上かかっていました。これにより、営業担当者の本来の業務である顧客とのコミュニケーションや商談の時間が圧迫されていました。また、担当者によって資料の品質にバラつきがあり、会社としての一貫性を保つ点でも課題がありました。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-8 p-4 bg-green-50 rounded-lg">
+            <h2 class="text-lg font-bold text-green-800 mb-2">✅ 修正確認ポイント</h2>
+            <ul class="text-sm text-green-700 space-y-1">
+                <li>• 左側の動画エリアが自然な16:9比率を保持している</li>
+                <li>• 右側のテキストが長くても左側に影響しない</li>
+                <li>• 画面幅に応じて左右の比率が適切に調整される</li>
+                <li>• モバイルでは縦積みレイアウトになる</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
