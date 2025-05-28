@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AI活用研修 業務効率化事例集</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- ヘッダー -->
+    <header class="sticky top-0 z-10 bg-white shadow-sm">
+        <div class="container mx-auto py-4">
+            <a href="#" class="text-xl font-bold text-blue-600">生成AI活用研修 業務効率化事例集</a>
+        </div>
+    </header>
+
+    <!-- カテゴリー・タグナビゲーション -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="container mx-auto">
+            <!-- カテゴリータブ -->
+            <div class="flex overflow-x-auto border-b">
+                <div class="category-tab active whitespace-nowrap" data-category="all">すべての事例</div>
+                <div class="category-tab whitespace-nowrap" data-category="営業・提案">営業・提案</div>
+                <div class="category-tab whitespace-nowrap" data-category="経営・データ分析">経営・データ分析</div>
+                <div class="category-tab whitespace-nowrap" data-category="会議・コミュニケーション">会議・コミュニケーション</div>
+                <div class="category-tab whitespace-nowrap" data-category="人事・研修">人事・研修</div>
+            </div>
+            
+            <!-- フィルタータグ -->
+            <div class="py-3">
+                <!-- 第1行：メインタグフィルター -->
+                <div class="main-filters flex flex-wrap mb-2">
+                    <div class="tag-filter active" data-tag="all">すべて</div>
+                    <div class="tag-filter" data-tag="時間削減">時間削減</div>
+                    <div class="tag-filter" data-tag="品質向上">品質向上</div>
+                    <div class="tag-filter" data-tag="自動化">自動化</div>
+                    <div class="tag-filter" data-tag="ChatGPT">ChatGPT</div>
+                    <div class="tag-filter" data-tag="Copilot">Copilot</div>
+                    <div class="tag-filter toggle-others" id="toggle-others">…</div>
+                    
+                    <!-- スペーサー -->
+                    <div class="tag-spacer"></div>
+                    
+                    <!-- レベルフィルター -->
+                    <div class="level-filter" data-level="初級">初級</div>
+                    <div class="level-filter" data-level="中級">中級</div>
+                    <div class="level-filter" data-level="上級">上級</div>
+                </div>
+                
+                <!-- 第2行：その他フィルター（展開時のみ表示） -->
+                <div class="other-filters hidden" id="other-filters">
+                    <div class="tag-filter" data-tag="Genspark">Genspark</div>
+                    <div class="tag-filter" data-tag="PowerPoint">PowerPoint</div>
+                    <div class="tag-filter" data-tag="Excel">Excel</div>
+                    <div class="tag-filter" data-tag="Word">Word</div>
+                    <div class="tag-filter" data-tag="Dify">Dify</div>
+                    <div class="tag-filter" data-tag="Gemini">Gemini</div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="container mx-auto py-8">
+        <h1 class="text-xl font-bold mb-6" id="featured-case-title">注目事例</h1>
+        
+        <!-- 注目事例カード（動的に生成される） -->
+        <div id="featured-case-container">
+            <!-- ここに注目事例が動的に表示されます -->
+        </div>
+        
+        <!-- 関連事例セクション（事例選択後に表示） -->
+        <div id="related-cases-section" class="hidden">
+            <h2 class="text-xl font-bold mb-4">関連する事例</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="related-cases-container">
+                <!-- ここに関連事例が動的に表示されます -->
+            </div>
+        </div>
+        
+        <h2 class="text-xl font-bold mb-6">すべての事例一覧</h2>
+        
+        <!-- 事例一覧（動的に生成される） -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="case-container">
+            <!-- ここに事例一覧が動的に表示されます -->
+        </div>
+    </main>
+    
+    <!-- フッター -->
+    <footer class="bg-white py-6 border-t">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-600">&copy; 2023 生成AI活用研修ポートフォリオ All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
