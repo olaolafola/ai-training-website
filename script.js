@@ -525,7 +525,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const leftSection = document.querySelector('.featured-case-left');
             const rightContent = backgroundSection.parentElement;
             
-            if (!leftSection || !rightContent) return;
+            if (!leftSection || !rightContent) {
+                console.log('要素が見つかりません:', leftSection, rightContent);
+                return;
+            }
             
             const leftHeight = leftSection.offsetHeight;
             const rightContentHeight = rightContent.offsetHeight;
@@ -538,9 +541,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const lineHeight = 24; // 1.5em × 16px ≈ 24px
             const availableLines = Math.floor(availableHeight / lineHeight);
             
-            console.log('利用可能高さ:', availableHeight, '利用可能行数:', availableLines);
+            console.log('高さ情報:', {
+                leftHeight,
+                rightContentHeight,
+                backgroundSectionTop,
+                availableHeight,
+                availableLines,
+                backgroundTextLength: backgroundText.length
+            });
             
-            if (availableLines <= 2 && backgroundText.length > 100) {
+            // テスト用：強制的にボタン表示するための条件を緩める
+            if (availableLines <= 3 && backgroundText.length > 50) { // 3行以下かつ文章が50文字以上
+                console.log('ボタン形式で表示します');
                 // スペースが少ない場合はボタン形式
                 backgroundSection.innerHTML = `
                     <button class="background-expand-btn w-full text-left p-3 rounded-lg transition-colors hover:bg-blue-100" onclick="toggleBackgroundExpand()">
@@ -562,6 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
             } else {
+                console.log('通常表示で表示します');
                 // 十分なスペースがある場合は通常表示（必要に応じて省略）
                 const maxChars = availableLines * 50; // 行あたり約50文字と仮定
                 let displayText = backgroundText;
@@ -578,7 +591,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </p>
                 `;
             }
-        }, 100); // DOM描画後に実行
+        }, 300); // タイミングを300msに延長
     }
     
     // 背景情報の展開/折りたたみ関数（グローバル関数として定義）
