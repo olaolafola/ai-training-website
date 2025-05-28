@@ -164,9 +164,16 @@ document.addEventListener('DOMContentLoaded', function() {
             window.currentFeaturedCase = caseData;
         }
         
-        // スクロールが必要な場合は注目事例までスクロール
+        // スクロールが必要な場合は注目事例までスクロール（位置調整）
         if (scrollToView) {
-            featuredCaseContainer.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                const headerHeight = 80; // ヘッダーの高さを考慮
+                const targetPosition = featuredCaseContainer.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }, 100); // DOM更新後に実行
         }
     }
     
@@ -259,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const selectedCase = window.allCasesData.find(c => c.id === caseId);
                     
                     if (selectedCase) {
-                        // 選択された事例で注目事例エリアを更新し、そこにスクロール
+                        // 選択された事例で注目事例エリアを更新し、適切な位置にスクロール
                         setupFeaturedCase(selectedCase, true, true);
                     }
                 });
@@ -329,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedCase = window.allCasesData.find(c => c.id === caseId);
                 
                 if (selectedCase) {
-                    // 選択された事例で注目事例エリアを更新し、そこにスクロール
+                    // 選択された事例で注目事例エリアを更新し、適切な位置にスクロール
                     setupFeaturedCase(selectedCase, true, true);
                 }
             });
