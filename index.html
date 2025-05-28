@@ -15,6 +15,19 @@
                 flex-direction: row !important;
                 align-items: flex-start !important;
             }
+        
+        /* レスポンシブグリッド調整 */
+        @media (max-width: 480px) {
+            #case-container,
+            #related-cases-container {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+            
+            .case-card {
+                min-height: 240px !important;
+            }
+        }
             .featured-case-left {
                 flex: 0 0 45% !important;
                 width: 45% !important;
@@ -114,7 +127,7 @@
         <!-- 関連事例セクション（事例選択後に表示） -->
         <div id="related-cases-section" class="hidden">
             <h2 class="text-xl font-bold mb-4">関連する事例</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="related-cases-container">
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" id="related-cases-container">
                 <!-- ここに関連事例が動的に表示されます -->
             </div>
         </div>
@@ -122,7 +135,7 @@
         <h2 class="text-xl font-bold mb-6">すべての事例一覧</h2>
         
         <!-- 事例一覧（動的に生成される） -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="case-container">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4" id="case-container">
             <!-- ここに事例一覧が動的に表示されます -->
         </div>
     </main>
