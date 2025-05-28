@@ -110,11 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.effects.map(effect => `<li class="mb-1">${effect}</li>`).join('')}
                         </ul>
                         
-                        <div class="bg-blue-50 p-4 rounded-lg">
-                            <p class="text-sm text-blue-800">
-                                <i class="fas fa-info-circle mr-1"></i>
-                                背景: ${caseData.background.substring(0, 200)}...
-                            </p>
+                        <div class="bg-blue-50 p-4 rounded-lg" id="background-section">
+                            <!-- ここに動的に背景情報が生成されます -->
                         </div>
                     </div>
                 </div>
@@ -123,6 +120,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // HTMLをコンテナに挿入
         featuredCaseContainer.innerHTML = featuredHTML;
+        
+        // 背景情報を画面サイズに合わせて設定
+        setupResponsiveBackground(caseData.background);
+        
+        // 背景テキストをグローバルに保存（リサイズ時のため）
+        window.currentBackgroundText = caseData.background;
         
         // 動画の再生状況を追跡
         const video = document.getElementById('featured-video');
@@ -514,6 +517,82 @@ document.addEventListener('DOMContentLoaded', function() {
             nav.style.top = headerHeight + 'px';
         }
     }
+    
+    // 背景情報をレスポンシブに設定する関数
+    function setupResponsiveBackground(backgroundText) {
+        const backgroundSection = document.getElementById('background-section');
+        if (!backgroundSection || !backgroundText) return;
+        
+        const windowWidth = window.innerWidth;
+        let maxChars;
+        
+        // 画面サイズに応じた文字数制限を設定
+        if (windowWidth >= 1024) {
+            maxChars = 300; // デスクトップ
+        } else if (windowWidth >= 768) {
+            maxChars = 200; // タブレット
+        } else {
+            maxChars = 150; // モバイル
+        }
+        
+        // 文字数が少なすぎる場合はボタン形式に
+        if (maxChars < 180 && backgroundText.length > maxChars) {
+            // ボタン形式
+            backgroundSection.innerHTML = `
+                <button class="background-toggle-btn w-full text-left" onclick="toggleBackground()">
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-bold text-blue-800">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            📖 背景を見る
+                        </span>
+                        <span class="text-blue-600 toggle-arrow">▼</span>
+                    </div>
+                </button>
+                <div class="background-content hidden mt-3">
+                    <p class="text-sm text-blue-800 leading-relaxed">
+                        ${backgroundText}
+                    </p>
+                </div>
+            `;
+        } else {
+            // 通常表示（文字数制限あり）
+            const displayText = backgroundText.length > maxChars 
+                ? backgroundText.substring(0, maxChars) + '...'
+                : backgroundText;
+                
+            backgroundSection.innerHTML = `
+                <p class="text-sm text-blue-800">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    背景: ${displayText}
+                </p>
+            `;
+        }
+    }
+    
+    // 背景情報の展開/折りたたみ関数（グローバル関数として定義）
+    window.toggleBackground = function() {
+        const content = document.querySelector('.background-content');
+        const arrow = document.querySelector('.toggle-arrow');
+        
+        if (content && arrow) {
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.textContent = '▲';
+            } else {
+                content.classList.add('hidden');
+                arrow.textContent = '▼';
+            }
+        }
+    };
+    
+    // ウィンドウリサイズ時に背景情報を再設定
+    window.addEventListener('resize', function() {
+        const backgroundSection = document.getElementById('background-section');
+        if (backgroundSection && window.currentBackgroundText) {
+            setupResponsiveBackground(window.currentBackgroundText);
+        }
+        updateNavPosition();
+    });
     
     // フィルター選択後のスクロール関数
     function scrollToResults() {
