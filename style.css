@@ -434,15 +434,29 @@ nav.sticky {
     }
 }
 
-/* 横向き表示での左右比率調整（45%:55%） */
+/* 横向き表示での左右比率調整（45%:55%） - 縦伸び問題解決版 */
 @media (min-width: 768px) {
-  .featured-case-left {
-      flex: 0 0 45% !important; /* 45%に変更 */
-  }
-  
-  .featured-thumbnail video {
-      max-height: 380px;
-  }
+    .featured-case {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start; /* 重要：上揃えで高さを独立 */
+    }
+    
+    .featured-case-left {
+        flex: 0 0 45%;
+        max-height: none; /* 高さ制限を解除 */
+    }
+    
+    .featured-case-right {
+        flex: 1;
+        max-height: 70vh; /* 画面の70%を上限に */
+        overflow-y: auto; /* 必要に応じてスクロール */
+    }
+    
+    .featured-thumbnail video {
+        height: auto; /* 重要：autoで自然な高さに */
+        max-height: none; /* 最大高さ制限を解除 */
+    }
 }
 
 /* 小さな画面でのさらなる調整 */

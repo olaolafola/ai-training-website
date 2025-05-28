@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
             featuredCaseTitle.style.visibility = 'visible';
         }
         
-        // HTML生成（動画対応版）- 左右比率を2:3（40%:60%）に戻す
+        // HTML生成（縦伸び問題を解決したバージョン）
         const featuredHTML = `
             <div class="featured-case">
-                <div class="flex flex-col md:flex-row">
-                    <!-- 左側：事例概要 - 45%に変更 -->
-                    <div class="p-4 md:p-6 w-full featured-case-left" style="flex: 0 0 45%;">
+                <!-- 左側：動画エリア - 自然な高さを維持 -->
+                <div class="featured-case-left">
+                    <div class="p-4 md:p-6">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <!-- 動画と再生状況バー -->
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}" style="pointer-events: auto;">
+                            <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}">
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
@@ -97,9 +97,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ` : ''}
                         </div>
                     </div>
-                    
-                    <!-- 右側：詳細内容 - 55%に変更 -->
-                    <div class="p-4 md:p-6 w-full" style="flex: 0 0 55%;">
+                </div>
+                
+                <!-- 右側：詳細内容 - 独立してスクロール可能 -->
+                <div class="featured-case-right">
+                    <div class="p-4 md:p-6">
                         <h3 class="font-bold mb-4">実施内容</h3>
                         <p class="text-gray-700 mb-6">
                             ${caseData.implementation}
@@ -520,10 +522,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const backgroundSection = document.getElementById('background-section');
         if (!backgroundSection || !backgroundText) return;
         
-        console.log('テスト：強制的に通常表示（200文字制限）にします');
+        console.log('テスト：強制的に通常表示（120文字制限）にします');
         
         // 一時的に強制的に通常表示
-        const maxChars = 200; // 200文字で区切る
+        const maxChars = 120; // 120文字に短縮して左右の高さを合わせる
         let displayText = backgroundText;
         
         if (backgroundText.length > maxChars) {

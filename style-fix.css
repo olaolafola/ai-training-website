@@ -1,0 +1,90 @@
+/* 注目事例の縦伸び問題を解決するCSS修正 */
+
+/* 注目事例の左右独立レイアウト */
+.featured-case {
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .featured-case {
+        flex-direction: row;
+        align-items: flex-start; /* 重要：上揃えで高さを独立 */
+    }
+}
+
+/* 左側：動画エリア - 自然な高さを維持 */
+.featured-case-left {
+    background-color: #f0f7ff;
+    flex: 0 0 auto; /* 自然なサイズを維持 */
+    width: 100%;
+    max-width: none;
+}
+
+@media (min-width: 768px) {
+    .featured-case-left {
+        width: 45%;
+        max-height: none; /* 高さ制限を解除 */
+    }
+}
+
+/* 右側：詳細コンテンツ - 独立してスクロール可能 */
+.featured-case-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* 必要に応じてスクロール */
+    max-height: 70vh; /* 画面の70%を上限に */
+}
+
+@media (min-width: 768px) {
+    .featured-case-right {
+        width: 55%;
+    }
+}
+
+/* 動画の自然なアスペクト比を保持 */
+.featured-thumbnail {
+    max-width: 100%;
+    width: 100%;
+}
+
+.featured-thumbnail video {
+    width: 100%;
+    height: auto; /* 重要：autoで自然な高さに */
+    max-height: none; /* 最大高さ制限を解除 */
+    object-fit: contain;
+    display: block;
+}
+
+/* 動画プログレスバーの調整 */
+.video-progress {
+    width: 100%;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    height: 0.375rem;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+/* モバイル対応 */
+@media (max-width: 767px) {
+    .featured-case {
+        flex-direction: column;
+    }
+    
+    .featured-case-left,
+    .featured-case-right {
+        width: 100% !important;
+        max-height: none;
+    }
+    
+    .featured-thumbnail video {
+        max-height: 250px;
+    }
+}
