@@ -398,13 +398,13 @@ body {
     transition: width 0.1s ease-in-out;
 }
 
-/* 動画コントロールの音声ボタンを非表示 */
-video::-webkit-media-controls-volume-slider,
-video::-webkit-media-controls-mute-button {
+/* 動画コントロールの音声ボタンを非表示（音声なし動画のみ） */
+video.no-audio::-webkit-media-controls-volume-slider,
+video.no-audio::-webkit-media-controls-mute-button {
     display: none !important;
 }
 
-video::-moz-media-controls-volume-slider,
-video::-moz-media-controls-mute-button {
+video.no-audio::-moz-media-controls-volume-slider,
+video.no-audio::-moz-media-controls-mute-button {
     display: none !important;
 }

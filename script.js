@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         <!-- 動画と再生状況バー -->
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video id="featured-video" controls muted class="w-full" style="pointer-events: auto;">
+                            <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}" style="pointer-events: auto;">
                                 <source src="${caseData.video}" type="video/mp4">
                                 <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
                             </video>
@@ -124,17 +124,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.querySelector('.video-progress-bar');
         
         if (video && progressBar) {
-            // 音声を強制的に無効化
-            video.muted = true;
-            video.volume = 0;
-            
-            // 音声ボタンのクリックを無効化
-            video.addEventListener('volumechange', function() {
-                if (!video.muted) {
-                    video.muted = true;
-                    video.volume = 0;
-                }
-            });
+            // Dify動画以外は音声を強制的に無効化
+            if (caseData.video.includes('dify')) {
+                // Dify動画は音声あり
+                video.muted = false;
+            } else {
+                // その他の動画は音声なし
+                video.muted = true;
+                video.volume = 0;
+                
+                // 音声ボタンのクリックを無効化
+                video.addEventListener('volumechange', function() {
+                    if (!video.muted) {
+                        video.muted = true;
+                        video.volume = 0;
+                    }
+                });
+            }
             
             video.addEventListener('timeupdate', function() {
                 const percentage = (video.currentTime / video.duration) * 100;
