@@ -20,6 +20,7 @@
                 width: 45% !important;
                 height: auto !important;
                 max-height: none !important;
+                background-color: #f0f7ff !important; /* 薬い青背景を強制 */
             }
             .featured-case-right {
                 flex: 1 !important;
@@ -30,6 +31,18 @@
                 max-height: none !important;
                 width: 100% !important;
                 object-fit: contain !important;
+            }
+            /* 左側の中身も青背景で統一 */
+            .featured-case-left .p-4,
+            .featured-case-left .md\:p-6 {
+                background-color: #f0f7ff !important;
+            }
+            /* 左側全体を青背景で統一 */
+            .featured-case-left * {
+                background-color: transparent !important;
+            }
+            .featured-case-left {
+                background-color: #f0f7ff !important;
             }
         }
     </style>
