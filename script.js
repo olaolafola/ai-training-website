@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const featuredHTML = `
             <div class="featured-case">
                 <div class="flex flex-col md:flex-row">
-                    <!-- 左側：事例概要 -->
-                    <div class="p-4 md:p-6 md:w-2/5 w-full featured-case-left">
+                    <!-- 左側：事例概要 - 45%に変更 -->
+                    <div class="p-4 md:p-6 w-full featured-case-left" style="flex: 0 0 45%;">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                     
-                    <!-- 右側：詳細内容 - 元の60%に戻す -->
-                    <div class="p-4 md:p-6 md:w-3/5 w-full">
+                    <!-- 右側：詳細内容 - 55%に変更 -->
+                    <div class="p-4 md:p-6 w-full" style="flex: 0 0 55%;">
                         <h3 class="font-bold mb-4">実施内容</h3>
                         <p class="text-gray-700 mb-6">
                             ${caseData.implementation}
