@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Sticky navigationの位置を設定
+    updateNavPosition();
+    
+    // リサイズ時にも更新
+    window.addEventListener('resize', updateNavPosition);
     // 事例データを読み込む
     fetch('./cases.json')
         .then(response => {
@@ -482,12 +487,58 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
+        // フィルター適用後のスクロール処理
+        // 「すべて」以外のフィルターが選択された場合のみ実行
+        if (isFiltered) {
+            setTimeout(() => {
+                scrollToResults();
+            }, 100); // DOM更新後に実行
+        }
+        
         // 関連事例も現在のフィルターに従って更新（フィルター選択時は非表示）
         const relatedSection = document.getElementById('related-cases-section');
         if (isFiltered) {
             if (relatedSection) relatedSection.classList.add('hidden');
         } else if (relatedSection && window.currentFeaturedCase) {
             showRelatedCases(window.currentFeaturedCase);
+        }
+    }
+    
+    // Sticky navigationの位置を更新する関数
+    function updateNavPosition() {
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        
+        if (header && nav) {
+            const headerHeight = header.offsetHeight;
+            nav.style.top = headerHeight + 'px';
+        }
+    }
+    
+    // フィルター選択後のスクロール関数
+    function scrollToResults() {
+        // ユーザーの現在位置を確認
+        const caseListTitle = document.querySelector('main h2'); // "すべての事例一覧"
+        if (!caseListTitle) return;
+        
+        const currentScrollY = window.scrollY;
+        const titlePosition = caseListTitle.offsetTop;
+        
+        // 事例一覧タイトルより下にいる場合のみスクロール
+        if (currentScrollY > titlePosition - 100) {
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            
+            const headerHeight = header ? header.offsetHeight : 0;
+            const navHeight = nav ? nav.offsetHeight : 0;
+            const totalOffset = headerHeight + navHeight + 20; // 20pxのマージン
+            
+            const targetPosition = titlePosition - totalOffset;
+            
+            window.scrollTo({
+                top: Math.max(0, targetPosition),
+                behavior: 'smooth'
+            });
         }
     }
 });

@@ -298,6 +298,11 @@ body {
     text-align: center;
 }
 
+/* Sticky navigationの調整 */
+nav.sticky {
+    transition: top 0.3s ease;
+}
+
 /* モバイル対応のスタイル */
 @media (max-width: 768px) {
     /* カテゴリータブのスクロール */
