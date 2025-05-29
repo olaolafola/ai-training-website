@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- 時間削減情報を表示 - 元の形式に戻す -->
+                        <!-- 時間削減情報を表示 - 同じスタイルに統一 -->
                         <div class="time-info">
                             <div class="before-time">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
                             <div class="arrow">↓</div>
@@ -321,20 +321,28 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- 時間削減情報を表示 - 元の形式 -->
-                        <div class="time-info mb-3">
-                            <div class="text-sm text-gray-600 mb-1">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
-                            <div class="text-center mb-1">↓</div>
-                            <div class="text-sm text-blue-600">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
+                        <!-- 時間削減情報を表示 - 統一スタイル -->
+                        <div class="time-info">
+                            <div class="before-time">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
+                            <div class="arrow">↓</div>
+                            <div class="after-time">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
                         </div>
                         
-                        <div class="mb-3">
+                        <div class="flex flex-wrap">
                             <div class="badge">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 時間削減 ${caseData.reduction}
                             </div>
+                            ${caseData.yearlyReduction ? `
+                                <div class="badge">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                    ${caseData.yearlyReduction}
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
