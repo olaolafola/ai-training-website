@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="thumbnail-area featured-thumbnail mb-4">
                             <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}" style="height: auto; max-height: none;">
                                 <source src="${caseData.video}" type="video/mp4">
-                                <img src="${caseData.thumbnail}" alt="${caseData.title}" class="w-full">
+                                Your browser does not support the video tag.
                             </video>
                             <div class="video-progress mt-2 bg-gray-200 rounded-full h-1.5">
                                 <div class="video-progress-bar bg-blue-500 h-1.5 rounded-full w-0"></div>
@@ -389,14 +389,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const isFiltered = selectedCategory !== 'all' || selectedTag !== 'all' || selectedLevel !== null;
         
-        if (isFiltered) {
-            if (featuredCaseContainer) featuredCaseContainer.style.display = 'none';
-            if (featuredCaseTitle) featuredCaseTitle.style.display = 'none';
-        } else {
-            if (featuredCaseContainer) featuredCaseContainer.style.display = 'block';
-            if (featuredCaseTitle) featuredCaseTitle.style.display = 'block';
-        }
-        
         const filteredData = window.allCasesData.filter(caseData => {
             const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
@@ -404,8 +396,38 @@ document.addEventListener('DOMContentLoaded', function() {
             return matchCategory && matchTag && matchLevel;
         });
         
-        // フィルタリング後のソート処理
-        const sortedFilteredData = [...filteredData].sort((a, b) => {
+        // フィルタリング後の注目事例チェック
+        const filteredFeaturedCase = filteredData.find(caseData => caseData.featured);
+        
+        if (isFiltered && filteredFeaturedCase) {
+            // フィルタ条件に合致する注目事例がある場合は表示
+            if (featuredCaseContainer) featuredCaseContainer.style.display = 'block';
+            if (featuredCaseTitle) {
+                featuredCaseTitle.style.display = 'block';
+                featuredCaseTitle.textContent = 'フィルタ結果の注目事例';
+            }
+            setupFeaturedCase(filteredFeaturedCase, false, false);
+        } else if (isFiltered) {
+            // フィルタ条件に合致する注目事例がない場合は非表示
+            if (featuredCaseContainer) featuredCaseContainer.style.display = 'none';
+            if (featuredCaseTitle) featuredCaseTitle.style.display = 'none';
+        } else {
+            // フィルターなしの場合は通常表示
+            if (featuredCaseContainer) featuredCaseContainer.style.display = 'block';
+            if (featuredCaseTitle) {
+                featuredCaseTitle.style.display = 'block';
+                featuredCaseTitle.textContent = '注目事例';
+            }
+        }
+        
+        // フィルタリング後のソート処理（注目事例を上部に表示する場合は一覧から除外）
+        let listData = [...filteredData];
+        if (isFiltered && filteredFeaturedCase) {
+            // 上部に表示する注目事例は一覧から除外
+            listData = listData.filter(caseData => !caseData.featured);
+        }
+        
+        const sortedFilteredData = [...listData].sort((a, b) => {
             // 1. 注目事例を最優先
             if (a.featured && !b.featured) return -1;
             if (!a.featured && b.featured) return 1;
