@@ -404,10 +404,10 @@ body {
     display: none !important;
 }
 
-/* 時間情報の表示スタイル */
+/* 時間情報の表示スタイル - 余白減 */
 .time-info {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -423,7 +423,7 @@ body {
     display: block;
     font-weight: 600;
     line-height: 1.5;
-    margin: 0.5rem 0;
+    margin: 0.25rem 0;
 }
 
 .time-info .before-time {
@@ -435,9 +435,9 @@ body {
 }
 
 .time-info .arrow {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     color: #6b7280;
-    margin: 0.75rem 0;
+    margin: 0.25rem 0;
     font-weight: bold;
 }
 
@@ -469,20 +469,20 @@ nav.sticky {
     }
     
     .time-info {
-        margin-bottom: 1.25rem;
-        min-height: 90px;
-        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+        min-height: 70px;
+        padding: 0.5rem;
     }
     
     .time-info .before-time,
     .time-info .after-time {
         font-size: 1.1rem;
-        margin: 0.4rem 0;
+        margin: 0.2rem 0;
     }
     
     .time-info .arrow {
-        font-size: 1.4rem;
-        margin: 0.5rem 0;
+        font-size: 1.2rem;
+        margin: 0.2rem 0;
     }
     
     /* 注目事例の縦レイアウト */
@@ -601,20 +601,20 @@ nav.sticky {
     }
     
     .time-info {
-        margin-bottom: 1rem;
-        min-height: 85px;
-        padding: 0.65rem;
+        margin-bottom: 0.75rem;
+        min-height: 65px;
+        padding: 0.5rem;
     }
     
     .time-info .before-time,
     .time-info .after-time {
         font-size: 1rem;
-        margin: 0.35rem 0;
+        margin: 0.2rem 0;
     }
     
     .time-info .arrow {
-        font-size: 1.2rem;
-        margin: 0.4rem 0;
+        font-size: 1.1rem;
+        margin: 0.2rem 0;
     }
     
     /* 注目事例の縦レイアウト */
@@ -752,22 +752,22 @@ nav.sticky {
     }
     
     .time-info {
-        min-height: 90px;
-        padding: 0.75rem;
-        margin-bottom: 1rem;
+        min-height: 65px;
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
         border-radius: 0.5rem;
     }
     
     .time-info .before-time,
     .time-info .after-time {
         font-size: 0.95rem;
-        margin: 0.3rem 0;
-        padding: 0.25rem;
+        margin: 0.15rem 0;
+        padding: 0.1rem;
     }
     
     .time-info .arrow {
-        font-size: 1.1rem;
-        margin: 0.4rem 0;
+        font-size: 1rem;
+        margin: 0.15rem 0;
     }
     
     /* 注目事例の完全縦レイアウト */
