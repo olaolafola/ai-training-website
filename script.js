@@ -200,9 +200,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">${caseData.title}</h3>
+                        <h3 class="text-lg font-bold">${caseData.title}</h3>
                         
-                        <div class="flex flex-wrap mb-3">
+                        <div class="tag-container flex flex-wrap">
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="after-time">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
                         </div>
                         
-                        <div class="flex flex-wrap">
+                        <div class="badge-container flex flex-wrap">
                             <div class="badge">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -266,9 +266,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="text-sm text-blue-700">${caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
-                        <h3 class="text-lg font-bold mb-2">${caseData.title}</h3>
+                        <h3 class="text-lg font-bold">${caseData.title}</h3>
                         
-                        <div class="flex flex-wrap mb-3">
+                        <div class="tag-container flex flex-wrap">
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="after-time">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
                         </div>
                         
-                        <div class="flex flex-wrap">
+                        <div class="badge-container flex flex-wrap">
                             <div class="badge">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>

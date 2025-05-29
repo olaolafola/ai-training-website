@@ -1,3 +1,43 @@
+/* 事例一覧コンテナ - カード高さ統一 */
+#case-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    grid-auto-rows: 1fr;
+}
+
+@media (min-width: 640px) {
+    #case-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    #case-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 関連事例コンテナも統一 */
+#related-cases-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    grid-auto-rows: 1fr;
+}
+
+@media (min-width: 640px) {
+    #related-cases-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    #related-cases-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 /* タブレット向けの調整 */
 @media (min-width: 769px) and (max-width: 1024px) {
     .case-card {
@@ -103,7 +143,7 @@ body {
     display: none !important;
 }
 
-/* レベルフィルター */
+/* レベルフィルター - 縦線付き */
 .level-filter {
     display: inline-block;
     padding: 0.35rem 0.8rem;
@@ -115,7 +155,20 @@ body {
     color: #4b5563;
     transition: all 0.15s ease;
     cursor: pointer;
+    position: relative;
 }
+
+.level-filter:first-of-type::before {
+    content: '|';
+    position: absolute;
+    left: -0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
 .level-filter:hover {
     background-color: #d1d5db;
 }
@@ -176,7 +229,7 @@ body {
     margin-bottom: 0.25rem;
 }
 
-/* 事例カード */
+/* 事例カード - 高さ統一対応 */
 .case-card {
     background-color: white;
     border-radius: 0.5rem;
@@ -185,11 +238,24 @@ body {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     cursor: pointer;
     border: 1px solid #e5e7eb;
-    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 .case-card:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transform: translateY(-2px);
+}
+
+.case-card .p-4 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+}
+
+.case-card .category-level-container {
+    flex-shrink: 0;
 }
 
 .case-card h3 {
@@ -199,7 +265,28 @@ body {
     overflow: hidden;
     line-height: 1.4;
     min-height: 2.8em;
+    max-height: 2.8em;
     font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    flex-shrink: 0;
+}
+
+.case-card .tag-container {
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+}
+
+.case-card .time-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.case-card .badge-container {
+    flex-shrink: 0;
+    margin-top: auto;
 }
 
 /* 関連事例カード */
@@ -428,10 +515,9 @@ nav.sticky {
         font-size: 0.95rem;
     }
     
-    /* 2カラム表示 */
+    /* 2カラム表示 - Gridで高さ統一維持 */
     #case-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.25rem;
     }
     
@@ -444,6 +530,12 @@ nav.sticky {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+    }
+    
+    /* スマホでの縦線調整 */
+    .level-filter:first-of-type::before {
+        left: -0.6rem;
+        font-size: 0.9rem;
     }
     
     .main-filters {
@@ -564,10 +656,9 @@ nav.sticky {
         font-size: 0.9rem;
     }
     
-    /* 2カラム表示 */
+    /* 2カラム表示 - Gridで高さ統一維持 */
     #case-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 1rem;
     }
     
@@ -580,6 +671,12 @@ nav.sticky {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+    }
+    
+    /* 中間サイズでの縦線調整 */
+    .level-filter:first-of-type::before {
+        left: -0.65rem;
+        font-size: 0.95rem;
     }
     
     .main-filters {
@@ -724,6 +821,12 @@ nav.sticky {
         border-radius: 12px;
     }
     
+    /* 最小スマホでの縦線調整 */
+    .level-filter:first-of-type::before {
+        left: -0.5rem;
+        font-size: 0.85rem;
+    }
+    
     .badge {
         font-size: 0.8rem;
         padding: 0.4rem 0.6rem;
@@ -746,10 +849,10 @@ nav.sticky {
         padding-right: 0.75rem;
     }
     
-    /* 1カラム表示（完全縦並び） */
+    /* 1カラム表示 - Gridで高さ統一維持 */
     #case-container {
+        grid-template-columns: 1fr !important;
         gap: 1rem;
-        grid-template-columns: 1fr;
     }
     
     main {
