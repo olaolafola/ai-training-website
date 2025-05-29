@@ -160,10 +160,10 @@ body {
     border-radius: 0.5rem;
     overflow: hidden;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     cursor: pointer;
     border: 1px solid #e5e7eb;
-    min-height: 280px; /* 最小高さを設定 */
+    min-height: 380px; /* 最小高さを増やす */
 }
 .case-card:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -280,9 +280,11 @@ body {
     background-color: #2563eb;
     color: white;
     border-radius: 9999px;
-    padding: 0.35rem 0.75rem;
+    padding: 0.5rem 0.75rem;
     font-size: 0.875rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 /* 詳細リンク */
@@ -301,44 +303,47 @@ body {
     display: none !important;
 }
 
-/* 時間情報の表示スタイル - 中央揃えで1段表示 */
+/* 時間情報の表示スタイル - 修正版 */
 .time-info {
-    padding: 0.5rem;
+    padding: 1rem;
     text-align: center;
     border-radius: 0.375rem;
-    margin-bottom: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin-bottom: 1rem;
+    background-color: #f8fafc;
+    border: 2px solid #e2e8f0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 4.5rem;
+    min-height: 120px; /* 高さを増やす */
     width: 100%;
 }
 
-.time-info .text-gray-600,
-.time-info .text-blue-600 {
+.time-info .before-time,
+.time-info .after-time {
     font-size: 0.875rem;
     width: 100%;
     text-align: center;
     display: block;
     font-weight: 600;
-    line-height: 1.2;
-    /* テキストが長い場合の省略表示 */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
+    line-height: 1.4;
+    margin: 0.25rem 0;
+    padding: 0.25rem;
 }
 
-.time-info .text-center {
-    font-size: 1rem;
+.time-info .before-time {
     color: #6b7280;
-    line-height: 1;
-    margin: 0.25rem 0;
-    width: 100%;
-    text-align: center;
+}
+
+.time-info .after-time {
+    color: #2563eb;
+}
+
+.time-info .arrow {
+    font-size: 1.25rem;
+    color: #6b7280;
+    margin: 0.5rem 0;
+    font-weight: bold;
 }
 
 nav.sticky {
