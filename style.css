@@ -1,3 +1,28 @@
+/* タブレット向けの調整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* 事例カードの中間サイズ調整 */
+    .case-card {
+        min-height: 350px;
+    }
+    
+    /* 時間情報エリアの中間サイズ調整 */
+    .time-info {
+        min-height: 100px;
+        padding: 0.9rem;
+    }
+    
+    /* コンテナの調整 */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* グリッド間隔の調整 */
+    #case-container {
+        gap: 1.25rem;
+    }
+}
+
 body {
     font-family: 'Segoe UI', 'Hiragino Sans', Meiryo, sans-serif;
     color: #333;
@@ -367,6 +392,31 @@ nav.sticky {
     .category-tab {
         padding: 0.5rem 1rem;
         white-space: nowrap;
+        min-width: fit-content;
+    }
+    
+    /* 事例カードのモバイル調整 */
+    .case-card {
+        min-height: 320px; /* モバイルでは高さを抑える */
+    }
+    
+    /* 時間情報エリアのモバイル調整 */
+    .time-info {
+        min-height: 90px; /* モバイルでは高さを縮小 */
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .time-info .before-time,
+    .time-info .after-time {
+        font-size: 0.8rem;
+        margin: 0.2rem 0;
+        padding: 0.2rem;
+    }
+    
+    .time-info .arrow {
+        font-size: 1rem;
+        margin: 0.3rem 0;
     }
     
     /* 注目事例カードのレイアウト調整 */
@@ -376,35 +426,41 @@ nav.sticky {
     
     .featured-case-left {
         width: 100% !important;
+        margin-bottom: 1rem;
     }
     
     /* レベルバッジのモバイル調整 */
     .category-level-container {
         flex-wrap: wrap;
+        margin-bottom: 0.75rem;
     }
     
     .level-badge {
         margin-left: 0;
         margin-top: 0.25rem;
+        font-size: 0.8rem;
     }
     
     /* カードグリッドの調整 */
     #case-container {
         display: grid;
         grid-template-columns: 1fr;
+        gap: 1rem; /* モバイルでは間隔を狭く */
     }
     
     /* タグフィルターとレベルフィルターの調整 */
     .tag-filter, .level-filter {
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.3rem;
         font-size: 0.8rem;
-        padding: 0.25rem 0.6rem;
+        padding: 0.4rem 0.8rem; /* タップしやすいサイズに */
+        margin-right: 0.3rem;
     }
     
     /* モバイルではフィルターを縦に配置 */
     .main-filters {
         flex-direction: column;
         align-items: stretch;
+        gap: 0.5rem;
     }
     
     .tag-filters-left {
@@ -420,6 +476,28 @@ nav.sticky {
     .other-filters {
         margin-bottom: 0.5rem;
         width: 100%;
+        gap: 0.3rem;
+    }
+    
+    /* バッジのモバイル調整 */
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+        margin-bottom: 0.3rem;
+        margin-right: 0.3rem;
+    }
+    
+    /* カードタイトルのモバイル調整 */
+    .case-card h3 {
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* コンテナの左右マージン調整 */
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
     }
 }
 
@@ -427,23 +505,91 @@ nav.sticky {
 
 /* 小さな画面でのさらなる調整 */
 @media (max-width: 480px) {
+    /* カテゴリータブ */
     .category-tab {
         padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     
+    /* 事例カードの超小型調整 */
+    .case-card {
+        min-height: 280px; /* さらに高さを抑える */
+    }
+    
+    .case-card .p-4 {
+        padding: 0.75rem; /* パディングを小さく */
+    }
+    
+    /* 時間情報エリアの超小型調整 */
+    .time-info {
+        min-height: 80px;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .time-info .before-time,
+    .time-info .after-time {
+        font-size: 0.75rem;
+        margin: 0.15rem 0;
+        padding: 0.15rem;
+    }
+    
+    .time-info .arrow {
+        font-size: 0.9rem;
+        margin: 0.2rem 0;
+    }
+    
+    /* フィルターボタン */
     .tag-filter, .level-filter {
-        padding: 0.25rem 0.6rem;
-        font-size: 0.8rem;
+        padding: 0.35rem 0.7rem;
+        font-size: 0.75rem;
+        margin-bottom: 0.25rem;
+        margin-right: 0.25rem;
     }
     
+    /* バッジ */
     .badge {
         font-size: 0.75rem;
-        padding: 0.25rem 0.5rem;
+        padding: 0.3rem 0.5rem;
+        margin-bottom: 0.25rem;
+        margin-right: 0.25rem;
     }
     
+    /* カードタイトル */
+    .case-card h3 {
+        font-size: 0.9rem;
+        line-height: 1.25;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* コンテナのマージン */
+    .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    /* グリッド間隔 */
+    #case-container {
+        gap: 0.75rem;
+    }
+    
+    /* メインコンテンツのパディング */
+    main {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    /* 注目事例の動画サイズ */
     .featured-thumbnail video {
-        max-height: 250px;
+        max-height: 200px;
+    }
+    
+    /* タグのサイズ */
+    .tag {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
+        margin-right: 0.3rem;
+        margin-bottom: 0.2rem;
     }
 }
 

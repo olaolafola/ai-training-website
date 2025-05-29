@@ -246,11 +246,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- 時間削減情報を大きく表示 -->
+                        <!-- 時間削減情報を表示 - 元の形式に戻す -->
                         <div class="time-info">
-                            <div class="before-time">${caseData.beforeText}: ${caseData.beforeTime}</div>
+                            <div class="before-time">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
                             <div class="arrow">↓</div>
-                            <div class="after-time">${caseData.afterText}: ${caseData.afterTime}</div>
+                            <div class="after-time">${caseData.afterText}: <span class="font-bold">${caseData.afterTime}</span></div>
                         </div>
                         
                         <div class="flex flex-wrap">
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- サムネイル画像の代わりに時間削減情報を表示 - 上下に並べる -->
+                        <!-- 時間削減情報を表示 - 元の形式 -->
                         <div class="time-info mb-3">
                             <div class="text-sm text-gray-600 mb-1">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
                             <div class="text-center mb-1">↓</div>
