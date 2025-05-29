@@ -470,6 +470,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
+        // 事例一覧のタイトルを更新
+        const caseListTitle = document.querySelector('main h2');
+        if (caseListTitle) {
+            if (isFiltered) {
+                let filterTitle = 'フィルタ結果';
+                
+                if (selectedCategory !== 'all') {
+                    filterTitle = selectedCategory + 'の事例';
+                }
+                
+                if (selectedTag !== 'all') {
+                    filterTitle += ' (' + selectedTag + ')';
+                }
+                
+                if (selectedLevel) {
+                    filterTitle += ' [' + selectedLevel + ']';
+                }
+                
+                caseListTitle.textContent = filterTitle;
+            } else {
+                caseListTitle.textContent = 'すべての事例一覧';
+            }
+        }
+        
         if (isFiltered) {
             setTimeout(() => {
                 scrollToResults();
