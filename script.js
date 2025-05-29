@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
                     <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
                         <div class="category-level-container">
-                            <div class="text-sm text-blue-700">${caseData.category}</div>
+                            <div class="text-sm text-blue-700">${Array.isArray(caseData.category) ? caseData.category.join(' / ') : caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
                         <h2 class="text-2xl font-bold mb-4">${caseData.title}</h2>
@@ -169,7 +169,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .map(caseData => {
                 let score = 0;
                 
-                if (currentCase.category === caseData.category) score += 3;
+                // カテゴリーマッチング（配列対応）
+                const currentCategories = Array.isArray(currentCase.category) ? currentCase.category : [currentCase.category];
+                const caseCategories = Array.isArray(caseData.category) ? caseData.category : [caseData.category];
+                const categoryMatches = currentCategories.some(cat => caseCategories.includes(cat));
+                if (categoryMatches) score += 3;
                 
                 const commonTags = currentCase.tags.filter(tag => 
                     caseData.tags.includes(tag)
@@ -184,7 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .sort((a, b) => b.relatedScore - a.relatedScore);
         
         relatedCases = relatedCases.filter(caseData => {
-            const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
+            const caseCategories = Array.isArray(caseData.category) ? caseData.category : [caseData.category];
+            const matchCategory = selectedCategory === 'all' || caseCategories.includes(selectedCategory);
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
             const matchLevel = !selectedLevel || caseData.level === selectedLevel;
             return matchCategory && matchTag && matchLevel;
@@ -194,10 +199,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (relatedCases.length > 0) {
             relatedContainer.innerHTML = relatedCases.map(caseData => `
-                <div class="case-card related-case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
+                <div class="case-card related-case-card" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
                         <div class="category-level-container">
-                            <div class="text-sm text-blue-700">${caseData.category}</div>
+                            <div class="text-sm text-blue-700">${Array.isArray(caseData.category) ? caseData.category.join(' / ') : caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
                         <h3 class="text-lg font-bold">${caseData.title}</h3>
@@ -260,10 +265,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         casesData.forEach(caseData => {
             const caseCardHTML = `
-                <div class="case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
+                <div class="case-card" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
                         <div class="category-level-container">
-                            <div class="text-sm text-blue-700">${caseData.category}</div>
+                            <div class="text-sm text-blue-700">${Array.isArray(caseData.category) ? caseData.category.join(' / ') : caseData.category}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
                         <h3 class="text-lg font-bold">${caseData.title}</h3>
@@ -390,7 +395,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const isFiltered = selectedCategory !== 'all' || selectedTag !== 'all' || selectedLevel !== null;
         
         const filteredData = window.allCasesData.filter(caseData => {
-            const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
+            const caseCategories = Array.isArray(caseData.category) ? caseData.category : [caseData.category];
+            const matchCategory = selectedCategory === 'all' || caseCategories.includes(selectedCategory);
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
             const matchLevel = !selectedLevel || caseData.level === selectedLevel;
             return matchCategory && matchTag && matchLevel;

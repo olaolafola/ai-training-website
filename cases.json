@@ -4,7 +4,7 @@
       "id": "1",
       "featured": true,
       "title": "Gensparkで営業資料を5分で作成",
-      "category": "営業・提案",
+      "category": ["営業・提案", "経営・データ分析"],
       "level": "初級",
       "tags": ["Genspark", "PowerPoint", "時間削減"],
       "thumbnail": "images/thumbnails/case1-thumb.jpg",
@@ -27,7 +27,7 @@
     {
       "id": "11",
       "title": "検索から資料作成自動化ツール",
-      "category": "営業・提案",
+      "category": ["営業・提案", "経営・データ分析"],
       "level": "中級",
       "tags": ["Skywork", "資料作成", "時間削減", "自動化", "検索"],
       "thumbnail": "images/thumbnails/skywork-thumb.jpg",
@@ -51,7 +51,7 @@
     {
       "id": "2",
       "title": "AIによるメール文章作成の効率化",
-      "category": "営業・提案",
+      "category": ["営業・提案", "会議・コミュニケーション"],
       "level": "初級",
       "tags": ["ChatGPT", "メール", "時間削減", "品質向上"],
       "thumbnail": "images/thumbnails/case2-thumb.jpg",
@@ -73,7 +73,7 @@
     {
       "id": "3",
       "title": "ChatGPTによる顧客データ分析",
-      "category": "経営・データ分析",
+      "category": ["経営・データ分析", "営業・提案", "会議・コミュニケーション"],
       "level": "中級",
       "tags": ["ChatGPT", "Excel", "時間削減"],
       "thumbnail": "images/thumbnails/case3-thumb.jpg",
@@ -95,7 +95,7 @@
     {
       "id": "4",
       "title": "Difyを使いチャットボットを作成①",
-      "category": "人事・研修",
+      "category": ["人事・研修", "会議・コミュニケーション"],
       "level": "中級",
       "tags": ["Dify", "自動化", "品質向上"],
       "thumbnail": "images/thumbnails/dify-thumb.jpg",
@@ -117,7 +117,7 @@
     {
       "id": "5",
       "title": "Geminiカレンダー連携",
-      "category": "会議・コミュニケーション",
+      "category": ["会議・コミュニケーション", "人事・研修"],
       "level": "初級",
       "tags": ["Gemini", "カレンダー", "自動化", "時間削減"],
       "thumbnail": "images/thumbnails/gemini-calendar-thumb.jpg",
@@ -139,7 +139,7 @@
     {
       "id": "6",
       "title": "ChatGPT o3で手相診断",
-      "category": "会議・コミュニケーション",
+      "category": ["会議・コミュニケーション", "人事・研修"],
       "level": "初級",
       "tags": ["ChatGPT", "o3", "コミュニケーション"],
       "thumbnail": "images/thumbnails/palm-reading-thumb.jpg",
@@ -161,7 +161,7 @@
     {
       "id": "7",
       "title": "ChatGPTで提案書を作成",
-      "category": "営業・提案",
+      "category": ["営業・提案", "会議・コミュニケーション"],
       "level": "初級",
       "tags": ["ChatGPT", "提案書", "時間削減", "品質向上"],
       "thumbnail": "images/thumbnails/proposal-thumb.jpg",
@@ -184,7 +184,7 @@
     {
       "id": "8",
       "title": "GeminiでLP作成①",
-      "category": "営業・提案",
+      "category": ["営業・提案", "経営・データ分析", "会議・コミュニケーション"],
       "level": "中級",
       "tags": ["Gemini", "LP", "時間削減", "自動化"],
       "thumbnail": "images/thumbnails/lp-creation-thumb.jpg",
@@ -207,7 +207,7 @@
     {
       "id": "9",
       "title": "ChatGPTでイメージキャラクター作成①",
-      "category": "営業・提案",
+      "category": ["営業・提案", "会議・コミュニケーション"],
       "level": "初級",
       "tags": ["ChatGPT", "時間削減", "マーケティング"],
       "thumbnail": "images/thumbnails/character-thumb.jpg",
@@ -230,7 +230,7 @@
     {
       "id": "10",
       "title": "GPTs（カスタムGPT）を作成①",
-      "category": "営業・提案",
+      "category": ["営業・提案", "経営・データ分析", "会議・コミュニケーション"],
       "level": "中級",
       "tags": ["GPTs", "ChatGPT", "時間削減", "自動化", "カスタマイズ"],
       "thumbnail": "images/thumbnails/gpts-creation-thumb.jpg",
