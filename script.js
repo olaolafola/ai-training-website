@@ -459,13 +459,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     <strong>背景:</strong> ${backgroundText}
                 </p>
                 <button 
-                    class="text-xs text-blue-600 hover:text-blue-800 font-medium mt-1 flex items-center" 
+                    class="text-xs text-gray-400 hover:text-gray-600 font-normal mt-2 flex items-center opacity-70 hover:opacity-100 transition-opacity" 
                     onclick="toggleBackground()"
                     id="background-toggle-btn"
                 >
-                    <span id="toggle-text">もっと読む</span>
+                    <span id="toggle-text" class="underline decoration-dotted">背景を見る</span>
                     <svg class="w-3 h-3 ml-1 transform transition-transform" id="toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
             `;
@@ -488,12 +488,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (shortElement.classList.contains('hidden')) {
                 shortElement.classList.remove('hidden');
                 fullElement.classList.add('hidden');
-                toggleText.textContent = 'もっと読む';
+                toggleText.textContent = '背景を見る';
                 toggleArrow.classList.remove('rotate-180');
             } else {
                 shortElement.classList.add('hidden');
                 fullElement.classList.remove('hidden');
-                toggleText.textContent = '折りたたむ';
+                toggleText.textContent = '閉じる';
                 toggleArrow.classList.add('rotate-180');
             }
         }

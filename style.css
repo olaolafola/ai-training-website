@@ -367,20 +367,23 @@ nav.sticky {
     margin-left: 1rem;
 }
 
-/* モバイル対応 */
-@media (max-width: 768px) {
+/* タブレット・中画面対応 (569px-768px) - 縦レイアウト対応 */
+@media (max-width: 768px) and (min-width: 569px) {
     .category-tab {
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.2rem;
+        font-size: 0.95rem;
         white-space: nowrap;
         min-width: fit-content;
     }
     
     .case-card {
-        min-height: 320px;
+        min-height: 340px;
     }
     
     .time-info {
         margin-bottom: 1.25rem;
+        min-height: 90px;
+        padding: 0.75rem;
     }
     
     .time-info .before-time,
@@ -394,13 +397,20 @@ nav.sticky {
         margin: 0.5rem 0;
     }
     
-    .featured-case .flex-col {
-        width: 100%;
+    /* 注目事例の縦レイアウト */
+    .featured-case {
+        flex-direction: column !important;
     }
     
     .featured-case-left {
         width: 100% !important;
         margin-bottom: 1rem;
+        flex: none !important;
+    }
+    
+    .featured-case-right {
+        width: 100% !important;
+        flex: 1;
     }
     
     .category-level-container {
@@ -409,31 +419,37 @@ nav.sticky {
     }
     
     .category-level-container .text-sm {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     
     .level-badge {
         margin-left: 0;
         margin-top: 0.25rem;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
     
+    /* 2カラム表示 */
     #case-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        gap: 1.25rem;
     }
     
     .tag-filter, .level-filter {
-        margin-bottom: 0.3rem;
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-        margin-right: 0.3rem;
+        margin-bottom: 0.4rem;
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .main-filters {
-        flex-direction: column;
-        align-items: stretch;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
         gap: 0.5rem;
     }
     
@@ -449,18 +465,154 @@ nav.sticky {
     .other-filters {
         margin-bottom: 0.5rem;
         width: 100%;
-        gap: 0.3rem;
+        gap: 0.5rem;
     }
     
     .badge {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.6rem;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
+        margin-bottom: 0.4rem;
+        margin-right: 0.4rem;
+    }
+    
+    .case-card h3 {
+        font-size: 1.15rem;
+        line-height: 1.35;
+        margin-bottom: 0.75rem;
+    }
+    
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* モバイル対応 (481px-568px) - 縦レイアウト対応 */
+@media (max-width: 568px) and (min-width: 481px) {
+    .category-tab {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        min-width: fit-content;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .case-card {
+        min-height: 300px;
+    }
+    
+    .time-info {
+        margin-bottom: 1rem;
+        min-height: 85px;
+        padding: 0.65rem;
+    }
+    
+    .time-info .before-time,
+    .time-info .after-time {
+        font-size: 1rem;
+        margin: 0.35rem 0;
+    }
+    
+    .time-info .arrow {
+        font-size: 1.2rem;
+        margin: 0.4rem 0;
+    }
+    
+    /* 注目事例の縦レイアウト */
+    .featured-case {
+        flex-direction: column !important;
+    }
+    
+    .featured-case-left {
+        width: 100% !important;
+        margin-bottom: 1rem;
+        flex: none !important;
+    }
+    
+    .featured-case-right {
+        width: 100% !important;
+        flex: 1;
+    }
+    
+    /* 中間サイズでの背景ボタンを控えめに */
+    #background-toggle-btn {
+        font-size: 0.75rem !important;
+        color: #9ca3af !important;
+        opacity: 0.7 !important;
+        margin-top: 0.75rem !important;
+    }
+    
+    #background-toggle-btn:hover {
+        opacity: 0.9 !important;
+        color: #6b7280 !important;
+    }
+    
+    .category-level-container {
+        flex-wrap: wrap;
+        margin-bottom: 0.75rem;
+    }
+    
+    .category-level-container .text-sm {
+        font-size: 0.95rem;
+    }
+    
+    .level-badge {
+        margin-left: 0;
+        margin-top: 0.25rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 2カラム表示 */
+    #case-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .tag-filter, .level-filter {
+        margin-bottom: 0.4rem;
+        font-size: 0.9rem;
+        padding: 0.6rem 0.9rem;
+        margin-right: 0.4rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .main-filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .tag-filters-left {
+        margin-bottom: 0.5rem;
+    }
+    
+    .level-filters-right {
+        margin-left: 0;
+        justify-content: flex-start;
+    }
+    
+    .other-filters {
+        margin-bottom: 0.5rem;
+        width: 100%;
+        gap: 0.4rem;
+    }
+    
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
         margin-bottom: 0.3rem;
         margin-right: 0.3rem;
     }
     
     .case-card h3 {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         line-height: 1.3;
         margin-bottom: 0.75rem;
     }
@@ -471,83 +623,191 @@ nav.sticky {
     }
 }
 
-/* 小さな画面での調整 */
+/* 小画面スマホ対応 (最大480px) - 完全縦レイアウト */
 @media (max-width: 480px) {
     .category-tab {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        min-width: fit-content;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .case-card {
-        min-height: 280px;
+        min-height: 320px;
+        border-radius: 0.75rem;
     }
     
     .case-card .p-4 {
-        padding: 0.75rem;
+        padding: 1rem;
     }
     
     .time-info {
-        min-height: 80px;
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
+        min-height: 90px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
     }
     
     .time-info .before-time,
     .time-info .after-time {
-        font-size: 0.75rem;
-        margin: 0.15rem 0;
-        padding: 0.15rem;
+        font-size: 0.95rem;
+        margin: 0.3rem 0;
+        padding: 0.25rem;
     }
     
     .time-info .arrow {
-        font-size: 0.9rem;
-        margin: 0.2rem 0;
+        font-size: 1.1rem;
+        margin: 0.4rem 0;
+    }
+    
+    /* 注目事例の完全縦レイアウト */
+    .featured-case {
+        flex-direction: column !important;
+        border-radius: 0.75rem;
+        margin-bottom: 2rem;
+    }
+    
+    .featured-case-left {
+        width: 100% !important;
+        margin-bottom: 1rem;
+        flex: none !important;
+    }
+    
+    .featured-case-right {
+        width: 100% !important;
+        flex: 1;
+    }
+    
+    .featured-thumbnail video {
+        max-height: 220px;
+        border-radius: 0.5rem;
+    }
+    
+    /* スマホでの背景ボタンをより控えめに */
+    #background-toggle-btn {
+        font-size: 0.7rem !important;
+        color: #9ca3af !important;
+        opacity: 0.6 !important;
+        margin-top: 1rem !important;
+        align-self: flex-start;
+    }
+    
+    #background-toggle-btn:hover {
+        opacity: 0.8 !important;
+        color: #6b7280 !important;
+    }
+    
+    #background-toggle-btn span {
+        text-decoration: none !important;
+        font-weight: 300 !important;
+    }
+    
+    #background-toggle-btn svg {
+        width: 0.7rem !important;
+        height: 0.7rem !important;
+        opacity: 0.6 !important;
     }
     
     .tag-filter, .level-filter {
-        padding: 0.35rem 0.7rem;
-        font-size: 0.75rem;
-        margin-bottom: 0.25rem;
-        margin-right: 0.25rem;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+        margin-right: 0.4rem;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
     }
     
     .badge {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.5rem;
-        margin-bottom: 0.25rem;
-        margin-right: 0.25rem;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+        margin-bottom: 0.3rem;
+        margin-right: 0.3rem;
+        min-height: 36px;
+        display: inline-flex;
+        align-items: center;
     }
     
     .case-card h3 {
-        font-size: 0.9rem;
-        line-height: 1.25;
-        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.3;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
     }
     
     .container {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
     }
     
+    /* 1カラム表示（完全縦並び） */
     #case-container {
-        gap: 0.75rem;
+        gap: 1rem;
         grid-template-columns: 1fr;
     }
     
     main {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-    
-    .featured-thumbnail video {
-        max-height: 200px;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
     }
     
     .tag {
-        font-size: 0.65rem;
-        padding: 0.2rem 0.4rem;
+        font-size: 0.75rem;
+        padding: 0.3rem 0.5rem;
         margin-right: 0.3rem;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.3rem;
+        border-radius: 8px;
+    }
+    
+    /* フィルター部分の改善 - 横並び維持 */
+    .main-filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    
+    .other-filters {
+        margin-bottom: 0.75rem;
+        width: 100%;
+        gap: 0.4rem;
+    }
+    
+    /* ヘッダーの調整 */
+    header {
+        padding: 0.75rem 0;
+    }
+    
+    header .container a {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+    
+    /* レベルバッジの調整 */
+    .level-badge {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        padding: 0.2rem 0.4rem;
+        border-radius: 6px;
+    }
+    
+    /* カテゴリー・レベルコンテナの調整 */
+    .category-level-container {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .category-level-container .text-sm {
+        font-size: 0.9rem;
     }
 }
 
