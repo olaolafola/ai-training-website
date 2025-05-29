@@ -147,9 +147,9 @@ body {
 /* レベルバッジ */
 .level-badge {
     display: inline-block;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-left: 0.5rem;
+    margin-left: 1rem;
     line-height: 1;
 }
 
@@ -168,8 +168,9 @@ body {
     display: inline-block;
     background-color: #e5e7eb;
     color: #4b5563;
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 0.7rem;
     border-radius: 9999px;
     margin-right: 0.5rem;
     margin-bottom: 0.25rem;
@@ -294,11 +295,11 @@ body {
     background-color: #2563eb;
     color: white;
     border-radius: 9999px;
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    margin-bottom: 0.5rem;
-    margin-right: 0.5rem;
+    margin-bottom: 0.4rem;
+    margin-right: 0.4rem;
 }
 
 .detail-link {
@@ -315,7 +316,7 @@ body {
     display: none !important;
 }
 
-/* 時間情報の表示スタイル - 簡素版 */
+/* 時間情報の表示スタイル */
 .time-info {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -328,7 +329,7 @@ body {
 
 .time-info .before-time,
 .time-info .after-time {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     width: 100%;
     text-align: center;
     display: block;
@@ -346,7 +347,7 @@ body {
 }
 
 .time-info .arrow {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     color: #6b7280;
     margin: 0.75rem 0;
     font-weight: bold;
@@ -384,12 +385,12 @@ nav.sticky {
     
     .time-info .before-time,
     .time-info .after-time {
-        font-size: 1rem;
+        font-size: 1.1rem;
         margin: 0.4rem 0;
     }
     
     .time-info .arrow {
-        font-size: 1.25rem;
+        font-size: 1.4rem;
         margin: 0.5rem 0;
     }
     
@@ -452,8 +453,8 @@ nav.sticky {
     }
     
     .badge {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
         margin-bottom: 0.3rem;
         margin-right: 0.3rem;
     }
