@@ -150,6 +150,7 @@ body {
     border-radius: 9999px;
     font-size: 0.875rem;
     margin-right: 0.5rem;
+    margin-left: 0.75rem;
     margin-bottom: 0.25rem;
     background-color: #e5e7eb;
     color: #4b5563;
@@ -161,7 +162,7 @@ body {
 .level-filter:first-of-type::before {
     content: '|';
     position: absolute;
-    left: -0.75rem;
+    left: -1rem;
     top: 50%;
     transform: translateY(-50%);
     color: #9ca3af;
@@ -532,10 +533,14 @@ nav.sticky {
         justify-content: center;
     }
     
-    /* スマホでの縦線調整 */
+    /* スマホでの縦線調整 - スペース拡大 */
     .level-filter:first-of-type::before {
-        left: -0.6rem;
+        left: -0.8rem;
         font-size: 0.9rem;
+    }
+    
+    .level-filter {
+        margin-left: 0.6rem;
     }
     
     .main-filters {
@@ -673,10 +678,14 @@ nav.sticky {
         justify-content: center;
     }
     
-    /* 中間サイズでの縦線調整 */
+    /* 中間サイズでの縦線調整 - スペース拡大 */
     .level-filter:first-of-type::before {
-        left: -0.65rem;
+        left: -0.85rem;
         font-size: 0.95rem;
+    }
+    
+    .level-filter {
+        margin-left: 0.65rem;
     }
     
     .main-filters {
@@ -821,10 +830,14 @@ nav.sticky {
         border-radius: 12px;
     }
     
-    /* 最小スマホでの縦線調整 */
+    /* 最小スマホでの縦線調整 - スペース拡大 */
     .level-filter:first-of-type::before {
-        left: -0.5rem;
+        left: -0.7rem;
         font-size: 0.85rem;
+    }
+    
+    .level-filter {
+        margin-left: 0.5rem;
     }
     
     .badge {
