@@ -1,10 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Sticky navigationの位置を設定
     updateNavPosition();
-    
-    // リサイズ時にも更新
     window.addEventListener('resize', updateNavPosition);
-    // 事例データを読み込む
+    
     fetch('./cases.json')
         .then(response => {
             if (!response.ok) {
@@ -13,29 +10,19 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(data => {
-            console.log('読み込まれたデータ:', data); // データが正しく読み込まれるか確認
-            
-            // グローバル変数として保存
             window.allCasesData = data.cases;
             
-            // 注目事例をセットアップ（featuredプロパティがtrueのもの、または最初の事例）
             const featuredCase = data.cases.find(c => c.featured) || data.cases[0];
             setupFeaturedCase(featuredCase);
             
-            // 全ての事例カードを生成
             setupCaseCards(data.cases);
-            
-            // フィルター機能を初期化
             initializeFilters();
-            
-            // その他フィルターのトグル機能を初期化
             initializeOthersToggle();
         })
         .catch(error => {
             console.error('事例データの読み込みに失敗しました:', error);
         });
     
-    // 注目事例をセットアップする関数
     function setupFeaturedCase(caseData, scrollToView = false, isUserSelected = false) {
         const featuredCaseContainer = document.getElementById('featured-case-container');
         const featuredCaseTitle = document.getElementById('featured-case-title');
@@ -45,17 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // ユーザーが選択した場合は見出しを非表示
         if (isUserSelected && featuredCaseTitle) {
             featuredCaseTitle.style.visibility = 'hidden';
         } else if (!isUserSelected && featuredCaseTitle) {
             featuredCaseTitle.style.visibility = 'visible';
         }
         
-        // HTML生成（縦伸び問題を解決 - 完全版）
         const featuredHTML = `
             <div class="featured-case" style="display: flex; flex-direction: row; align-items: flex-start;">
-                <!-- 左側：動画エリア - 自然な高さを維持 -->
                 <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
                     <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
                         <div class="category-level-container">
@@ -68,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- 動画と再生状況バー -->
                         <div class="thumbnail-area featured-thumbnail mb-4">
                             <video id="featured-video" controls ${caseData.video.includes('dify') ? '' : 'muted'} class="w-full ${caseData.video.includes('dify') ? '' : 'no-audio'}" style="height: auto; max-height: none;">
                                 <source src="${caseData.video}" type="video/mp4">
@@ -98,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 
-                <!-- 右側：詳細内容 - 独立してスクロール可能 -->
                 <div class="featured-case-right" style="flex: 1; width: 55%;">
                     <div class="p-4 md:p-6">
                         <h3 class="font-bold mb-4">実施内容</h3>
@@ -112,34 +94,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         </ul>
                         
                         <div class="background-section" id="background-section">
-                            <!-- ここに動的に背景情報が生成されます -->
                         </div>
                     </div>
                 </div>
             </div>
         `;
         
-        // HTMLをコンテナに挿入
         featuredCaseContainer.innerHTML = featuredHTML;
-        
-        // 背景情報を高さに合わせて設定
         setupAdaptiveBackground(caseData.background);
         
-        // 動画の再生状況を追跡
         const video = document.getElementById('featured-video');
         const progressBar = document.querySelector('.video-progress-bar');
         
         if (video && progressBar) {
-            // Dify動画以外は音声を強制的に無効化
             if (caseData.video.includes('dify')) {
-                // Dify動画は音声あり
                 video.muted = false;
             } else {
-                // その他の動画は音声なし
                 video.muted = true;
                 video.volume = 0;
                 
-                // 音声ボタンのクリックを無効化
                 video.addEventListener('volumechange', function() {
                     if (!video.muted) {
                         video.muted = true;
@@ -154,73 +127,62 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // 関連事例を表示（ユーザー選択時のみ）
         if (isUserSelected) {
             showRelatedCases(caseData);
         } else {
-            // 初回表示時は関連事例を非表示
             const relatedSection = document.getElementById('related-cases-section');
             if (relatedSection) {
                 relatedSection.classList.add('hidden');
             }
         }
         
-        // 現在の注目事例を記録（フィルター時に参照するため）
         if (isUserSelected) {
             window.currentFeaturedCase = caseData;
         }
         
-        // スクロールが必要な場合は注目事例までスクロール（位置調整）
         if (scrollToView) {
             setTimeout(() => {
-                const headerHeight = 80; // ヘッダーの高さを考慮
+                const headerHeight = 80;
                 const targetPosition = featuredCaseContainer.offsetTop - headerHeight;
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
-            }, 100); // DOM更新後に実行
+            }, 100);
         }
     }
     
-    // 関連事例を表示する関数
     function showRelatedCases(currentCase) {
         const relatedSection = document.getElementById('related-cases-section');
         const relatedContainer = document.getElementById('related-cases-container');
         
         if (!relatedSection || !relatedContainer) return;
         
-        // 現在のフィルター設定を取得
         const selectedCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
         const activeTagFilter = document.querySelector('.tag-filter.active:not(.toggle-others)');
         const selectedTag = activeTagFilter ? activeTagFilter.getAttribute('data-tag') : 'all';
         const activeLevel = document.querySelector('.level-filter.active');
         const selectedLevel = activeLevel ? activeLevel.getAttribute('data-level') : null;
         
-        // 関連事例を算出（複合的な関連度算出）
         let relatedCases = window.allCasesData
-            .filter(caseData => caseData.id !== currentCase.id) // 現在の事例を除外
+            .filter(caseData => caseData.id !== currentCase.id)
             .map(caseData => {
                 let score = 0;
                 
-                // 同じカテゴリー +3点
                 if (currentCase.category === caseData.category) score += 3;
                 
-                // 共通タグ 1つにつき+1点
                 const commonTags = currentCase.tags.filter(tag => 
                     caseData.tags.includes(tag)
                 );
                 score += commonTags.length;
                 
-                // 同じ難易度 +1点
                 if (currentCase.level === caseData.level) score += 1;
                 
                 return { ...caseData, relatedScore: score };
             })
-            .filter(caseData => caseData.relatedScore > 0) // 関連度0は除外
-            .sort((a, b) => b.relatedScore - a.relatedScore); // 関連度順でソート
+            .filter(caseData => caseData.relatedScore > 0)
+            .sort((a, b) => b.relatedScore - a.relatedScore);
         
-        // フィルターを適用
         relatedCases = relatedCases.filter(caseData => {
             const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
@@ -228,11 +190,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return matchCategory && matchTag && matchLevel;
         });
         
-        // 上位3件まで
         relatedCases = relatedCases.slice(0, 3);
         
         if (relatedCases.length > 0) {
-            // 関連事例のHTMLを生成
             relatedContainer.innerHTML = relatedCases.map(caseData => `
                 <div class="case-card related-case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
@@ -246,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- 時間削減情報を表示 - 同じスタイルに統一 -->
                         <div class="time-info">
                             <div class="before-time">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
                             <div class="arrow">↓</div>
@@ -273,40 +232,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `).join('');
             
-            // 関連事例カードのクリックイベントを設定
             relatedContainer.querySelectorAll('.related-case-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const caseId = this.getAttribute('data-id');
                     const selectedCase = window.allCasesData.find(c => c.id === caseId);
                     
                     if (selectedCase) {
-                        // 選択された事例で注目事例エリアを更新し、適切な位置にスクロール
                         setupFeaturedCase(selectedCase, true, true);
                     }
                 });
             });
             
-            // 関連事例セクションを表示
             relatedSection.classList.remove('hidden');
         } else {
-            // 関連事例がない場合は非表示
             relatedSection.classList.add('hidden');
         }
     }
     
-    // 事例カードをセットアップする関数
     function setupCaseCards(casesData) {
         const caseContainer = document.getElementById('case-container');
         if (!caseContainer) {
             console.error('case-containerが見つかりません');
             return;
         }
-        console.log('事例データ数:', casesData.length); // データ数のチェック
         
-        // コンテナをクリア
         caseContainer.innerHTML = '';
         
-        // 各事例のHTMLを生成して追加
         casesData.forEach(caseData => {
             const caseCardHTML = `
                 <div class="case-card" data-id="${caseData.id}" data-category="${caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
@@ -321,7 +272,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                         
-                        <!-- 時間削減情報を表示 - 統一スタイル -->
                         <div class="time-info">
                             <div class="before-time">${caseData.beforeText}: <span class="font-bold">${caseData.beforeTime}</span></div>
                             <div class="arrow">↓</div>
@@ -351,21 +301,18 @@ document.addEventListener('DOMContentLoaded', function() {
             caseContainer.innerHTML += caseCardHTML;
         });
         
-        // カードのクリックイベントを設定
         document.querySelectorAll('.case-card').forEach(card => {
             card.addEventListener('click', function() {
                 const caseId = this.getAttribute('data-id');
                 const selectedCase = window.allCasesData.find(c => c.id === caseId);
                 
                 if (selectedCase) {
-                    // 選択された事例で注目事例エリアを更新し、適切な位置にスクロール
                     setupFeaturedCase(selectedCase, true, true);
                 }
             });
         });
     }
     
-    // その他フィルターのトグル機能を初期化
     function initializeOthersToggle() {
         const toggleButton = document.getElementById('toggle-others');
         const otherFilters = document.getElementById('other-filters');
@@ -374,111 +321,82 @@ document.addEventListener('DOMContentLoaded', function() {
         
         toggleButton.addEventListener('click', function() {
             if (otherFilters.classList.contains('hidden')) {
-                // 展開
                 otherFilters.classList.remove('hidden');
                 toggleButton.textContent = '×';
             } else {
-                // 折りたたみ
                 otherFilters.classList.add('hidden');
                 toggleButton.textContent = '…';
                 
-                // その他フィルターが選択されている場合は「すべて」に戻す
                 const activeOtherFilter = otherFilters.querySelector('.tag-filter.active');
                 if (activeOtherFilter) {
-                    // 全てのタグフィルターを非アクティブに
                     document.querySelectorAll('.tag-filter').forEach(f => f.classList.remove('active'));
-                    // 「すべて」をアクティブに
                     document.querySelector('.tag-filter[data-tag="all"]').classList.add('active');
-                    // フィルター適用
                     applyFilters();
                 }
             }
         });
     }
     
-    // フィルタリング機能を初期化する関数
     function initializeFilters() {
         const categoryTabs = document.querySelectorAll('.category-tab');
         const tagFilters = document.querySelectorAll('.tag-filter');
         const levelFilters = document.querySelectorAll('.level-filter');
         
-        // カテゴリータブのクリックイベント
         categoryTabs.forEach(tab => {
             tab.addEventListener('click', function() {
-                // アクティブなタブのスタイルを変更
                 categoryTabs.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                
-                // フィルター適用
                 applyFilters();
             });
         });
         
-        // タグフィルターのクリックイベント
         tagFilters.forEach(filter => {
             filter.addEventListener('click', function() {
-                // トグルボタンは除外
                 if (this.classList.contains('toggle-others')) return;
                 
-                // アクティブなフィルターのスタイルを変更
                 tagFilters.forEach(f => {
                     if (!f.classList.contains('toggle-others')) {
                         f.classList.remove('active');
                     }
                 });
                 this.classList.add('active');
-                
-                // フィルター適用
                 applyFilters();
             });
         });
         
-        // レベルフィルターのクリックイベント
         levelFilters.forEach(filter => {
             filter.addEventListener('click', function() {
-                // すでにアクティブなら非アクティブにする（トグル動作）
                 if (this.classList.contains('active')) {
                     this.classList.remove('active');
                 } else {
-                    // それ以外なら他のレベルフィルターを非アクティブにして、これをアクティブに
                     levelFilters.forEach(f => f.classList.remove('active'));
                     this.classList.add('active');
                 }
-                
-                // フィルター適用
                 applyFilters();
             });
         });
     }
     
-    // フィルターを適用する関数
     function applyFilters() {
-        // 現在選択されているカテゴリー、タグ、レベルを取得
         const selectedCategory = document.querySelector('.category-tab.active').getAttribute('data-category');
         const activeTagFilter = document.querySelector('.tag-filter.active:not(.toggle-others)');
         const selectedTag = activeTagFilter ? activeTagFilter.getAttribute('data-tag') : 'all';
         const activeLevel = document.querySelector('.level-filter.active');
         const selectedLevel = activeLevel ? activeLevel.getAttribute('data-level') : null;
         
-        console.log('フィルター適用:', selectedCategory, selectedTag, selectedLevel);
-        
-        // フィルターが「すべて」以外の場合は注目事例セクションを非表示
         const featuredCaseContainer = document.getElementById('featured-case-container');
         const featuredCaseTitle = document.getElementById('featured-case-title');
         
         const isFiltered = selectedCategory !== 'all' || selectedTag !== 'all' || selectedLevel !== null;
         
         if (isFiltered) {
-            // フィルター選択時は注目事例セクションを非表示
             if (featuredCaseContainer) featuredCaseContainer.style.display = 'none';
             if (featuredCaseTitle) featuredCaseTitle.style.display = 'none';
         } else {
-            // 「すべて」の場合は注目事例セクションを表示
             if (featuredCaseContainer) featuredCaseContainer.style.display = 'block';
             if (featuredCaseTitle) featuredCaseTitle.style.display = 'block';
         }
         
-        // オリジナルデータから該当するデータだけをフィルタリング
         const filteredData = window.allCasesData.filter(caseData => {
             const matchCategory = selectedCategory === 'all' || caseData.category === selectedCategory;
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
@@ -486,13 +404,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return matchCategory && matchTag && matchLevel;
         });
         
-        console.log('フィルター後のデータ数:', filteredData.length);
-        
-        // フィルター結果を表示
         if (filteredData.length > 0) {
             setupCaseCards(filteredData);
         } else {
-            // 結果がない場合はメッセージを表示
             const caseContainer = document.getElementById('case-container');
             if (caseContainer) {
                 caseContainer.innerHTML = `
@@ -504,15 +418,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // フィルター適用後のスクロール処理
-        // 「すべて」以外のフィルターが選択された場合のみ実行
         if (isFiltered) {
             setTimeout(() => {
                 scrollToResults();
-            }, 100); // DOM更新後に実行
+            }, 100);
         }
         
-        // 関連事例も現在のフィルターに従って更新（フィルター選択時は非表示）
         const relatedSection = document.getElementById('related-cases-section');
         if (isFiltered) {
             if (relatedSection) relatedSection.classList.add('hidden');
@@ -521,7 +432,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Sticky navigationの位置を更新する関数
     function updateNavPosition() {
         const header = document.querySelector('header');
         const nav = document.querySelector('nav');
@@ -532,18 +442,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 背景情報を左側の高さに合わせて表示する関数（スマート版）
     function setupAdaptiveBackground(backgroundText) {
         const backgroundSection = document.getElementById('background-section');
         if (!backgroundSection || !backgroundText) return;
         
-        // 最初は短縮版で表示（120文字）
         const maxChars = 120;
         const isLong = backgroundText.length > maxChars;
         const shortText = isLong ? backgroundText.substring(0, maxChars) + '...' : backgroundText;
         
         if (isLong) {
-            // 長い場合はボタン付きで表示
             backgroundSection.innerHTML = `
                 <p class="text-sm text-gray-700 leading-relaxed mb-2" id="background-short">
                     <strong>背景:</strong> ${shortText}
@@ -563,7 +470,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </button>
             `;
         } else {
-            // 短い場合はそのまま表示
             backgroundSection.innerHTML = `
                 <p class="text-sm text-gray-700 leading-relaxed">
                     <strong>背景:</strong> ${backgroundText}
@@ -572,7 +478,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // 背景情報の展開/折りたたみ関数（グローバル関数）
     window.toggleBackground = function() {
         const shortElement = document.getElementById('background-short');
         const fullElement = document.getElementById('background-full');
@@ -581,13 +486,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (shortElement && fullElement && toggleText && toggleArrow) {
             if (shortElement.classList.contains('hidden')) {
-                // 短縮版を表示
                 shortElement.classList.remove('hidden');
                 fullElement.classList.add('hidden');
                 toggleText.textContent = 'もっと読む';
                 toggleArrow.classList.remove('rotate-180');
             } else {
-                // 全文を表示
                 shortElement.classList.add('hidden');
                 fullElement.classList.remove('hidden');
                 toggleText.textContent = '折りたたむ';
@@ -596,23 +499,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // フィルター選択後のスクロール関数
     function scrollToResults() {
-        // ユーザーの現在位置を確認
-        const caseListTitle = document.querySelector('main h2'); // "すべての事例一覧"
+        const caseListTitle = document.querySelector('main h2');
         if (!caseListTitle) return;
         
         const currentScrollY = window.scrollY;
         const titlePosition = caseListTitle.offsetTop;
         
-        // 事例一覧タイトルより下にいる場合のみスクロール
         if (currentScrollY > titlePosition - 100) {
             const header = document.querySelector('header');
             const nav = document.querySelector('nav');
             
             const headerHeight = header ? header.offsetHeight : 0;
             const navHeight = nav ? nav.offsetHeight : 0;
-            const totalOffset = headerHeight + navHeight + 20; // 20pxのマージン
+            const totalOffset = headerHeight + navHeight + 20;
             
             const targetPosition = titlePosition - totalOffset;
             
