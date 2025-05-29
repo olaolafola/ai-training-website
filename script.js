@@ -397,7 +397,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // フィルタリング後の注目事例チェック
-        const filteredFeaturedCase = filteredData.find(caseData => caseData.featured);
+        let filteredFeaturedCase = filteredData.find(caseData => caseData.featured);
+        
+        // 本来の注目事例がフィルタ条件に合致しない場合、動的に選択
+        if (!filteredFeaturedCase && filteredData.length > 0) {
+            // 時間削減率が最も高い事例を注目事例として選択
+            filteredFeaturedCase = [...filteredData].sort((a, b) => {
+                const reductionA = parseInt(a.reduction.replace('%', ''));
+                const reductionB = parseInt(b.reduction.replace('%', ''));
+                return reductionB - reductionA;
+            })[0];
+        }
         
         if (isFiltered && filteredFeaturedCase) {
             // フィルタ条件に合致する注目事例がある場合は表示
@@ -424,7 +434,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let listData = [...filteredData];
         if (isFiltered && filteredFeaturedCase) {
             // 上部に表示する注目事例は一覧から除外
-            listData = listData.filter(caseData => !caseData.featured);
+            listData = listData.filter(caseData => caseData.id !== filteredFeaturedCase.id);
         }
         
         const sortedFilteredData = [...listData].sort((a, b) => {
