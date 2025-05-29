@@ -404,8 +404,28 @@ document.addEventListener('DOMContentLoaded', function() {
             return matchCategory && matchTag && matchLevel;
         });
         
-        if (filteredData.length > 0) {
-            setupCaseCards(filteredData);
+        // フィルタリング後のソート処理
+        const sortedFilteredData = [...filteredData].sort((a, b) => {
+            // 1. 注目事例を最優先
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            
+            // 2. 時間削減率でソート（高い順）
+            const reductionA = parseInt(a.reduction.replace('%', ''));
+            const reductionB = parseInt(b.reduction.replace('%', ''));
+            if (reductionA !== reductionB) {
+                return reductionB - reductionA;
+            }
+            
+            // 3. レベルでソート（初級→中級→上級）
+            const levelOrder = {'初級': 1, '中級': 2, '上級': 3};
+            const levelA = levelOrder[a.level] || 0;
+            const levelB = levelOrder[b.level] || 0;
+            return levelA - levelB;
+        });
+        
+        if (sortedFilteredData.length > 0) {
+            setupCaseCards(sortedFilteredData);
         } else {
             const caseContainer = document.getElementById('case-container');
             if (caseContainer) {
