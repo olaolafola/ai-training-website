@@ -420,7 +420,7 @@ nav.sticky {
     
     #case-container {
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
     }
     
@@ -531,6 +531,7 @@ nav.sticky {
     
     #case-container {
         gap: 0.75rem;
+        grid-template-columns: 1fr;
     }
     
     main {
