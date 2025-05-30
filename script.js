@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // カテゴリー短縮マッピング
+    function shortenCategory(category) {
+        const categoryMap = {
+            '営業・提案': '営業',
+            '経営・データ分析': '経営',
+            '会議・コミュニケーション': '会議',
+            '人事・研修': '人事'
+        };
+        return categoryMap[category] || category;
+    }
+    
+    function formatCategories(categories) {
+        const categoryArray = Array.isArray(categories) ? categories : [categories];
+        return categoryArray.map(cat => shortenCategory(cat)).join(' / ');
+    }
     updateNavPosition();
     window.addEventListener('resize', updateNavPosition);
     
@@ -43,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
                     <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
                         <div class="category-level-container">
-                            <div class="text-sm text-blue-700">${Array.isArray(caseData.category) ? caseData.category.join(' / ') : caseData.category}</div>
+                            <div class="text-sm text-blue-700">${formatCategories(caseData.category)}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
                         <h2 class="text-2xl font-bold mb-4">${caseData.title}</h2>
@@ -202,8 +217,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="case-card related-case-card" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
                         <div class="category-level-container">
-                            <div class="text-sm text-blue-700">${Array.isArray(caseData.category) ? caseData.category.join(' / ') : caseData.category}</div>
-                            <div class="level-badge level-${caseData.level}">${caseData.level}</div>
+                            <div class="text-sm text-blue-700">${formatCategories(caseData.category)}</div>
+                            <div style="display: flex; align-items: center;">
+                                <div class="level-badge level-${caseData.level}">${caseData.level}</div>
+                                <div class="related-label">関連</div>
+                            </div>
                         </div>
                         <h3 class="text-lg font-bold">${caseData.title}</h3>
                         
@@ -268,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="case-card" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
                         <div class="category-level-container">
-                            <div class="text-sm text-blue-700">${Array.isArray(caseData.category) ? caseData.category.join(' / ') : caseData.category}</div>
+                            <div class="text-sm text-blue-700">${formatCategories(caseData.category)}</div>
                             <div class="level-badge level-${caseData.level}">${caseData.level}</div>
                         </div>
                         <h3 class="text-lg font-bold">${caseData.title}</h3>
