@@ -233,15 +233,19 @@ body {
 
 /* インラインリンクのスタイル */
 .inline-link {
-    color: #2563eb;
-    text-decoration: underline;
+    color: #2563eb !important;
+    text-decoration: underline !important;
     font-weight: 500;
     transition: color 0.2s ease;
 }
 
 .inline-link:hover {
-    color: #1d4ed8;
-    text-decoration: none;
+    color: #1d4ed8 !important;
+    text-decoration: none !important;
+}
+
+.inline-link:visited {
+    color: #2563eb !important;
 }
 
 /* タグ */

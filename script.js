@@ -17,8 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // {リンクテキスト:URL}形式を青いリンクに変換する関数
     function convertLinksInText(text) {
-        // {URL}形式の場合はURLをそのまま表示
-        return text.replace(/\{([^:}]+)\}/g, '<a href="$1" target="_blank" class="inline-link">$1</a>')
+        // {テキスト:URL}形式の場合はテキストを表示
+        return text.replace(/\{([^:]+):([^}]+)\}/g, '<a href="$2" target="_blank" class="inline-link">$1</a>')
+                   // {URL}形式の場合はURLをそのまま表示
+                   .replace(/\{([^:}]+)\}/g, '<a href="$1" target="_blank" class="inline-link">$1</a>')
                    .replace(/\n/g, '<br>');
     }
     updateNavPosition();
@@ -106,9 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="featured-case-right" style="flex: 1; width: 55%;">
                     <div class="p-4 md:p-6">
                         <h3 class="font-bold mb-4">実施内容</h3>
-                        <p class="text-gray-700 mb-6">
-                            ${convertLinksInText(caseData.implementation)}
-                        </p>
+                        <div class="text-gray-700 mb-6" style="white-space: pre-line;">
+                        </div>
                         
                         <h3 class="font-bold mb-2">導入効果</h3>
                         <ul class="list-disc pl-5 mb-4">
@@ -123,6 +124,13 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         featuredCaseContainer.innerHTML = featuredHTML;
+        
+        // 実施内容のLHTMLを動的に挿入
+        const implementationDiv = featuredCaseContainer.querySelector('.text-gray-700');
+        if (implementationDiv) {
+            implementationDiv.innerHTML = convertLinksInText(caseData.implementation);
+        }
+        
         setupAdaptiveBackground(caseData.background);
         
         const video = document.getElementById('featured-video');
