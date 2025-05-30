@@ -14,6 +14,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const categoryArray = Array.isArray(categories) ? categories : [categories];
         return categoryArray.map(cat => shortenCategory(cat)).join(' / ');
     }
+    
+    // {リンクテキスト:URL}形式を青いリンクに変換する関数
+    function convertLinksInText(text) {
+        return text.replace(/\{([^:]+):([^}]+)\}/g, '<a href="$2" target="_blank" class="inline-link">$1</a>');
+    }
     updateNavPosition();
     window.addEventListener('resize', updateNavPosition);
     
@@ -100,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="p-4 md:p-6">
                         <h3 class="font-bold mb-4">実施内容</h3>
                         <p class="text-gray-700 mb-6">
-                            ${caseData.implementation}
+                            ${convertLinksInText(caseData.implementation)}
                         </p>
                         
                         <h3 class="font-bold mb-2">導入効果</h3>
