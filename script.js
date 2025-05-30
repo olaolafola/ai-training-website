@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // {リンクテキスト:URL}形式を青いリンクに変換する関数
     function convertLinksInText(text) {
-        return text.replace(/\{([^:]+):([^}]+)\}/g, '<a href="$2" target="_blank" class="inline-link">$1</a>');
+        // {URL}形式の場合はURLをそのまま表示
+        return text.replace(/\{([^:}]+)\}/g, '<a href="$1" target="_blank" class="inline-link">$1</a>')
+                   .replace(/\n/g, '<br>');
     }
     updateNavPosition();
     window.addEventListener('resize', updateNavPosition);
