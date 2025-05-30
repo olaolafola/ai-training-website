@@ -248,6 +248,14 @@ body {
     color: #2563eb !important;
 }
 
+/* URL表示部分のスタイル */
+.url-display {
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: normal;
+    margin-left: 0.25rem;
+}
+
 /* タグ */
 .tag {
     display: inline-block;

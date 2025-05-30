@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // {リンクテキスト:URL}形式を青いリンクに変換する関数
     function convertLinksInText(text) {
-        // {テキスト:URL}形式の場合はテキストを表示
-        return text.replace(/\{([^:]+):([^}]+)\}/g, '<a href="$2" target="_blank" class="inline-link">$1</a>')
+        // {テキスト:URL}形式の場合はテキストをリンクにし、URLを小さく表示
+        return text.replace(/\{([^:]+):([^}]+)\}/g, '<a href="$2" target="_blank" class="inline-link">$1</a> <span class="url-display">($2)</span>')
                    // {URL}形式の場合はURLをそのまま表示
                    .replace(/\{([^:}]+)\}/g, '<a href="$1" target="_blank" class="inline-link">$1</a>')
                    .replace(/\n/g, '<br>');
