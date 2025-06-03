@@ -265,7 +265,7 @@
       "afterTime": "3分",
       "reduction": "93%",
       "yearlyReduction": "年間200時間削減",
-      "implementation": "やり方は{こちら:https://rural-hose-ecc.notion.site/Claude-Notion-MCP-1bac31d073f380bca1c4c471995940fe}\n\nClaude with Computer UseのMCP機能を活用して、Notionデータベースに直接アクセス・操作する方法を実装。自然言語でのデータ入力、検索、更新が可能になり、プロジェクト管理、顧客情報管理、タスク管理などの複雑な業務を自動化できます。",
+      "implementation": "やり方は{こちら:https://www.notion.so/Notion-MCP-207c31d073f381ac8969cef561d8087c}\n\nClaude with Computer UseのMCP機能を活用して、Notionデータベースに直接アクセス・操作する方法を実装。自然言語でのデータ入力、検索、更新が可能になり、プロジェクト管理、顧客情報管理、タスク管理などの複雑な業務を自動化できます。",
       "effects": [
         "データ入力作業が手動45分から自動3分に短縮",
         "複雑なNotionデータベース操作の簡素化",
@@ -289,7 +289,7 @@
       "afterTime": "3分",
       "reduction": "90%",
       "yearlyReduction": "年間120時間削減",
-      "implementation": "Google Apps Scriptを使用して、ニュースAPIから最新情報を自動収集し、Googleスプレッドシートに整理して出力するシステムを構築。特定のキーワードやカテゴリに絞ったニュースを定期的に収集し、業界動向や競合情報の把握が効率化されました。",
+      "implementation": "やり方は{こちら:https://www.notion.so/AI-207c31d073f38010bcb3cef6b038e994}\n\nGoogle Apps Scriptを使用して、ニュースAPIから最新情報を自動収集し、Googleスプレッドシートに整理して出力するシステムを構築。特定のキーワードやカテゴリに絞ったニュースを定期的に収集し、業界動向や競合情報の把握が効率化されました。",
       "effects": [
         "ニュースチェック時間が30分から3分に短縮",
         "複数のニュースソースを一元管理",
