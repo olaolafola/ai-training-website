@@ -278,7 +278,7 @@
     {
       "id": "13",
       "title": "GASで最新のニュースの取得",
-      "category": ["経営・データ分析", "会議・コミュニケーション"],
+      "category": ["営業・提案", "経営・データ分析", "会議・コミュニケーション", "人事・研修"],
       "level": "初級",
       "tags": ["GAS", "Google Apps Script", "ニュース収集", "自動化", "情報収集"],
       "thumbnail": "images/thumbnails/gas-news-thumb.jpg",
