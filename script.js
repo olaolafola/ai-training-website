@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             window.allCasesData = data.cases;
             
             const featuredCase = data.cases.find(c => c.featured) || data.cases[0];
+            console.log('Featured case found:', featuredCase.title); // デバッグログ
             setupFeaturedCase(featuredCase);
             
             setupCaseCards(data.cases);
@@ -50,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupFeaturedCase(caseData, scrollToView = false, isUserSelected = false) {
         const featuredCaseContainer = document.getElementById('featured-case-container');
         const featuredCaseTitle = document.getElementById('featured-case-title');
+        
+        console.log('Setting up featured case:', caseData.title); // デバッグログ
         
         if (!featuredCaseContainer) {
             console.error('featured-case-containerが見つかりません');
@@ -508,30 +511,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }
         }
-        
-        // 事例一覧のタイトルを更新
-        const caseListTitle = document.querySelector('main h2');
-        if (caseListTitle) {
-            if (isFiltered) {
-                let filterTitle = 'フィルタ結果';
-                
-                if (selectedCategory !== 'all') {
-                    filterTitle = selectedCategory + 'の事例';
-                }
-                
-                if (selectedTag !== 'all') {
-                    filterTitle += ' (' + selectedTag + ')';
-                }
-                
-                if (selectedLevel) {
-                    filterTitle += ' [' + selectedLevel + ']';
-                }
-                
-                caseListTitle.textContent = filterTitle;
-            } else {
-                caseListTitle.textContent = 'すべての事例一覧';
-            }
-        }
+
         
         if (isFiltered) {
             setTimeout(() => {
