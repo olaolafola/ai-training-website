@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (featuredCaseContainer) featuredCaseContainer.style.display = 'block';
             if (featuredCaseTitle) {
                 featuredCaseTitle.style.display = 'block';
-                featuredCaseTitle.textContent = 'フィルタ結果の注目事例';
+                featuredCaseTitle.textContent = '注目事例';
             }
             setupFeaturedCase(filteredFeaturedCase, false, false);
         } else if (isFiltered) {
