@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/case(\\d+)",
+      "destination": "/index.html?case=$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/$1"
+    }
+  ]
+}

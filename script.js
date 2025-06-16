@@ -38,6 +38,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Popstate handling for path-based routing
+    window.addEventListener('popstate', function() {
+        if (window.allCasesData) {
+            const path = window.location.pathname;
+            const caseMatch = path.match(/\/case(\d+)$/);
+            if (caseMatch) {
+                const caseId = caseMatch[1];
+                const selectedCase = window.allCasesData.find(c => c.id === caseId);
+                if (selectedCase) {
+                    setupFeaturedCase(selectedCase, true, true);
+                }
+            }
+        }
+    });
+    
     fetch('./cases.json')
         .then(response => {
             if (!response.ok) {
@@ -48,7 +63,36 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             window.allCasesData = data.cases;
             
-            // URL fragment handling
+            // URL query parameter handling (e.g., ?case=1)
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseParam = urlParams.get('case');
+            if (caseParam) {
+                const selectedCase = data.cases.find(c => c.id === caseParam);
+                if (selectedCase) {
+                    setupFeaturedCase(selectedCase, true, true);
+                    setupCaseCards(data.cases);
+                    initializeFilters();
+                    initializeOthersToggle();
+                    return;
+                }
+            }
+            
+            // URL path-based routing (e.g., /case1, /case14)
+            const path = window.location.pathname;
+            const caseMatch = path.match(/\/case(\d+)$/);
+            if (caseMatch) {
+                const caseId = caseMatch[1];
+                const selectedCase = data.cases.find(c => c.id === caseId);
+                if (selectedCase) {
+                    setupFeaturedCase(selectedCase, true, true);
+                    setupCaseCards(data.cases);
+                    initializeFilters();
+                    initializeOthersToggle();
+                    return;
+                }
+            }
+            
+            // URL fragment handling (e.g., #case1, #case14)
             const fragment = window.location.hash;
             if (fragment && fragment.startsWith('#case')) {
                 const caseId = fragment.replace('#case', '');
