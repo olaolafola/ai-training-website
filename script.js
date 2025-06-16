@@ -26,6 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
     updateNavPosition();
     window.addEventListener('resize', updateNavPosition);
     
+    // Hash change handling for anchor links
+    window.addEventListener('hashchange', function() {
+        const fragment = window.location.hash;
+        if (fragment && fragment.startsWith('#case') && window.allCasesData) {
+            const caseId = fragment.replace('#case', '');
+            const selectedCase = window.allCasesData.find(c => c.id === caseId);
+            if (selectedCase) {
+                setupFeaturedCase(selectedCase, true, true);
+            }
+        }
+    });
+    
     fetch('./cases.json')
         .then(response => {
             if (!response.ok) {
@@ -35,6 +47,20 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(data => {
             window.allCasesData = data.cases;
+            
+            // URL fragment handling
+            const fragment = window.location.hash;
+            if (fragment && fragment.startsWith('#case')) {
+                const caseId = fragment.replace('#case', '');
+                const selectedCase = data.cases.find(c => c.id === caseId);
+                if (selectedCase) {
+                    setupFeaturedCase(selectedCase, true, true);
+                    setupCaseCards(data.cases);
+                    initializeFilters();
+                    initializeOthersToggle();
+                    return;
+                }
+            }
             
             const featuredCase = data.cases.find(c => c.featured) || data.cases[0];
             console.log('Featured case found:', featuredCase.title); // デバッグログ
