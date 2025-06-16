@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const featuredHTML = `
-            <div class="featured-case" style="display: flex; flex-direction: row; align-items: flex-start;">
+            <div class="featured-case" id="case${caseData.id}" style="display: flex; flex-direction: row; align-items: flex-start;">
                 <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
                     <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
                         <div class="category-level-container">
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (relatedCases.length > 0) {
             relatedContainer.innerHTML = relatedCases.map(caseData => `
-                <div class="case-card related-case-card" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
+                <div class="case-card related-case-card" id="case${caseData.id}" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${formatCategories(caseData.category)}</div>
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         casesData.forEach(caseData => {
             const caseCardHTML = `
-                <div class="case-card" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
+                <div class="case-card" id="case${caseData.id}" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
                         <div class="category-level-container">
                             <div class="text-sm text-blue-700">${formatCategories(caseData.category)}</div>
