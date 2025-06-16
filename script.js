@@ -107,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const featuredCase = data.cases.find(c => c.featured) || data.cases[0];
-            console.log('Featured case found:', featuredCase.title); // デバッグログ
             setupFeaturedCase(featuredCase);
             
             setupCaseCards(data.cases);
@@ -121,8 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupFeaturedCase(caseData, scrollToView = false, isUserSelected = false) {
         const featuredCaseContainer = document.getElementById('featured-case-container');
         const featuredCaseTitle = document.getElementById('featured-case-title');
-        
-        console.log('Setting up featured case:', caseData.title); // デバッグログ
         
         if (!featuredCaseContainer) {
             console.error('featured-case-containerが見つかりません');
@@ -349,6 +346,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const selectedCase = window.allCasesData.find(c => c.id === caseId);
                     
                     if (selectedCase) {
+                        // URLを更新
+                        const newUrl = `/case${caseId}`;
+                        window.history.pushState({ caseId: caseId }, '', newUrl);
+                        
                         setupFeaturedCase(selectedCase, true, true);
                     }
                 });
@@ -418,6 +419,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const selectedCase = window.allCasesData.find(c => c.id === caseId);
                 
                 if (selectedCase) {
+                    // URLを更新
+                    const newUrl = `/case${caseId}`;
+                    window.history.pushState({ caseId: caseId }, '', newUrl);
+                    
                     setupFeaturedCase(selectedCase, true, true);
                 }
             });
