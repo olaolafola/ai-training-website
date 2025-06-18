@@ -11,7 +11,7 @@
   ],
   "headers": [
     {
-      "source": "/videos/(.*)",
+      "source": "/videos/:file*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -24,7 +24,25 @@
       ]
     },
     {
-      "source": "/.*\\.(css|js|json)$",
+      "source": "/:file*.css",
+      "headers": [
+        {
+          "key": "Cache-Control", 
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/:file*.js",
+      "headers": [
+        {
+          "key": "Cache-Control", 
+          "value": "public, max-age=86400"
+        }
+      ]
+    },
+    {
+      "source": "/:file*.json",
       "headers": [
         {
           "key": "Cache-Control", 
