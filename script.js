@@ -228,6 +228,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
+            // 再生開始時は0秒に戻す
+            video.addEventListener('play', function() {
+                if (video.currentTime === 2 && !video.hasStartedPlaying) {
+                    video.currentTime = 0;
+                    video.hasStartedPlaying = true;
+                }
+            });
+            
             video.addEventListener('timeupdate', function() {
                 const percentage = (video.currentTime / video.duration) * 100;
                 progressBar.style.width = percentage + '%';
