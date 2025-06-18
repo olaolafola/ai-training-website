@@ -221,6 +221,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
+            // サムネイル用に少し進める
+            video.addEventListener('loadedmetadata', function() {
+                if (video.duration > 3) {
+                    video.currentTime = 2; // 2秒地点をサムネイルに
+                }
+            });
+            
             video.addEventListener('timeupdate', function() {
                 const percentage = (video.currentTime / video.duration) * 100;
                 progressBar.style.width = percentage + '%';
