@@ -1,18 +1,8 @@
 {
   "cases": [
     {
-      "id": "0",
-      "featured": true,
-      "title": "このサイトの使い方",
-      "category": ["会議・コミュニケーション"],
-      "level": "初級",
-      "tags": ["ガイド", "使い方"],
-      "thumbnail": "images/thumbnails/usage-guide-thumb.jpg",
-      "video": "videos/事例集サイト使い方.mp4"
-    },
-    {
       "id": "1",
-      "featured": false,
+      "featured": true,
       "title": "Gensparkで営業資料を5分で作成",
       "category": ["営業・提案", "経営・データ分析"],
       "level": "初級",
