@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedLevel = activeLevel ? activeLevel.getAttribute('data-level') : null;
         
         let relatedCases = window.allCasesData
-            .filter(caseData => caseData.id !== currentCase.id)
+            .filter(caseData => caseData.id !== currentCase.id && caseData.id !== "0")
             .map(caseData => {
                 let score = 0;
                 
@@ -409,6 +409,11 @@ document.addEventListener('DOMContentLoaded', function() {
         caseContainer.innerHTML = '';
         
         casesData.forEach(caseData => {
+            // ID0（使い方ガイド）は一覧に含めない
+            if (caseData.id === "0") {
+                return;
+            }
+            
             const caseCardHTML = `
                 <div class="case-card" id="case${caseData.id}" data-id="${caseData.id}" data-category="${Array.isArray(caseData.category) ? caseData.category.join(',') : caseData.category}" data-tags="${caseData.tags.join(',')}" data-level="${caseData.level}">
                     <div class="p-4">
@@ -544,6 +549,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const isFiltered = selectedCategory !== 'all' || selectedTag !== 'all' || selectedLevel !== null;
         
         const filteredData = window.allCasesData.filter(caseData => {
+            // ID0（使い方ガイド）は除外
+            if (caseData.id === "0") {
+                return false;
+            }
+            
             const caseCategories = Array.isArray(caseData.category) ? caseData.category : [caseData.category];
             const matchCategory = selectedCategory === 'all' || caseCategories.includes(selectedCategory);
             const matchTag = selectedTag === 'all' || caseData.tags.includes(selectedTag);
