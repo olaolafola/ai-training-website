@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // ID0（使い方ガイド）の場合はシンプルなレイアウト
         if (caseData.id === "0") {
             const featuredHTML = `
-                <div class="usage-guide" id="case${caseData.id}" style="max-width: 800px; margin: 0 auto;">
+                <div class="usage-guide" id="case${caseData.id}">
                     <div class="usage-video">
                         <video id="featured-video" controls preload="metadata" class="w-full" style="height: auto; border-radius: 8px;">
                             <source src="${caseData.video}" type="video/mp4">

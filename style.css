@@ -1009,6 +1009,8 @@ video.no-audio::-moz-media-controls-mute-button {
     border: 1px solid rgba(226, 232, 240, 0.5);
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: none;
 }
 
 .usage-guide:hover {
