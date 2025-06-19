@@ -130,6 +130,12 @@ document.addEventListener('DOMContentLoaded', function() {
             featuredCaseTitle.style.visibility = 'hidden';
         } else if (!isUserSelected && featuredCaseTitle) {
             featuredCaseTitle.style.visibility = 'visible';
+            // ID0の場合は「はじめに」、それ以外は「注目事例」
+            if (caseData.id === "0") {
+                featuredCaseTitle.textContent = 'はじめに';
+            } else {
+                featuredCaseTitle.textContent = '注目事例';
+            }
         }
         
         const featuredHTML = `
