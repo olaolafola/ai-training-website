@@ -12,7 +12,7 @@
     },
     {
       "id": "1",
-      "featured": true,
+      "featured": false,
       "title": "Gensparkで営業資料を5分で作成",
       "category": ["営業・提案", "経営・データ分析"],
       "level": "初級",
