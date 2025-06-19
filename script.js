@@ -141,23 +141,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // ID0（使い方ガイド）の場合はシンプルなレイアウト
         if (caseData.id === "0") {
             const featuredHTML = `
-                <div class="usage-guide" id="case${caseData.id}" style="display: flex; flex-direction: row; align-items: flex-start; max-width: 800px; margin: 0 auto;">
-                    <div class="usage-video" style="flex: 0 0 60%; width: 60%; margin-right: 2rem;">
+                <div class="usage-guide" id="case${caseData.id}" style="max-width: 800px; margin: 0 auto;">
+                    <div class="usage-video">
                         <video id="featured-video" controls preload="metadata" class="w-full" style="height: auto; border-radius: 8px;">
                             <source src="${caseData.video}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         <div class="video-progress mt-2 bg-gray-200 rounded-full h-1.5">
                             <div class="video-progress-bar bg-blue-500 h-1.5 rounded-full w-0"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="usage-info" style="flex: 1;">
-                        <h2 class="text-2xl font-bold mb-4">${caseData.title}</h2>
-                        <p class="text-gray-700 mb-4">カテゴリフィルタ、タグ検索、事例の見方を1分で説明します。</p>
-                        
-                        <div class="flex flex-wrap">
-                            ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                         </div>
                     </div>
                 </div>
