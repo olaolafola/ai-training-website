@@ -995,3 +995,100 @@ video.no-audio::-moz-media-controls-volume-slider,
 video.no-audio::-moz-media-controls-mute-button {
     display: none !important;
 }
+
+/* ID0 使い方ガイド専用スタイル */
+.usage-guide {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 4rem;
+    box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(226, 232, 240, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.usage-guide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #06b6d4, #10b981);
+    background-size: 200% 100%;
+    animation: gradientSlide 3s ease-in-out infinite;
+}
+
+@keyframes gradientSlide {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.usage-guide:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(59, 130, 246, 0.1);
+}
+
+.usage-video {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.usage-video:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+}
+
+.usage-guide video {
+    transition: all 0.3s ease;
+}
+
+.usage-guide .video-progress {
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 9999px;
+    height: 6px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.usage-guide .video-progress-bar {
+    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.1s ease;
+    position: relative;
+}
+
+.usage-guide .video-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+    animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .usage-guide {
+        padding: 1.5rem;
+        margin-bottom: 3rem;
+        border-radius: 12px;
+    }
+}
