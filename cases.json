@@ -1,8 +1,30 @@
 {
   "cases": [
     {
-      "id": "1",
+      "id": "0",
       "featured": true,
+      "title": "このサイトの使い方",
+      "category": ["会議・コミュニケーション"],
+      "level": "初級",
+      "tags": ["ガイド", "使い方"],
+      "thumbnail": "images/thumbnails/usage-guide-thumb.jpg",
+      "video": "videos/事例集サイト使い方.mp4",
+      "beforeText": "",
+      "beforeTime": "",
+      "afterText": "",
+      "afterTime": "",
+      "reduction": "",
+      "implementation": "サイトの基本的な使い方を1分で説明。カテゴリフィルタ、タグ検索、事例の見方まで簡潔にガイドします。",
+      "effects": [
+        "サイト操作方法が即座に理解可能",
+        "目的の事例を効率的に検索",
+        "フィルタ機能を活用した絞り込み"
+      ],
+      "background": "初回訪問者にとってサイトの使い方説明が必要でした。"
+    },
+    {
+      "id": "1",
+      "featured": false,
       "title": "Gensparkで営業資料を5分で作成",
       "category": ["営業・提案", "経営・データ分析"],
       "level": "初級",
