@@ -118,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
     function setupFeaturedCase(caseData, scrollToView = false, isUserSelected = false) {
-        console.log('setupFeaturedCase called with case ID:', caseData.id);
         const featuredCaseContainer = document.getElementById('featured-case-container');
         const featuredCaseTitle = document.getElementById('featured-case-title');
         
