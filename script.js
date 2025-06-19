@@ -177,6 +177,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             return; // 通常の事例レイアウトはスキップ
         }
+        
+        // 通常の事例のレイアウト
+        const featuredHTML = `
             <div class="featured-case" id="case${caseData.id}" style="display: flex; flex-direction: row; align-items: flex-start;">
                 <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
                     <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
