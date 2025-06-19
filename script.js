@@ -138,7 +138,45 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        const featuredHTML = `
+        // ID0（使い方ガイド）の場合はシンプルなレイアウト
+        if (caseData.id === "0") {
+            const featuredHTML = `
+                <div class="usage-guide" id="case${caseData.id}" style="display: flex; flex-direction: row; align-items: flex-start; max-width: 800px; margin: 0 auto;">
+                    <div class="usage-video" style="flex: 0 0 60%; width: 60%; margin-right: 2rem;">
+                        <video id="featured-video" controls preload="metadata" class="w-full" style="height: auto; border-radius: 8px;">
+                            <source src="${caseData.video}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-progress mt-2 bg-gray-200 rounded-full h-1.5">
+                            <div class="video-progress-bar bg-blue-500 h-1.5 rounded-full w-0"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="usage-info" style="flex: 1;">
+                        <h2 class="text-2xl font-bold mb-4">${caseData.title}</h2>
+                        <p class="text-gray-700 mb-4">カテゴリフィルタ、タグ検索、事例の見方を1分で説明します。</p>
+                        
+                        <div class="flex flex-wrap">
+                            ${caseData.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            featuredCaseContainer.innerHTML = featuredHTML;
+            
+            const video = document.getElementById('featured-video');
+            const progressBar = document.querySelector('.video-progress-bar');
+            
+            if (video && progressBar) {
+                video.addEventListener('timeupdate', function() {
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = percentage + '%';
+                });
+            }
+            
+            return; // 通常の事例レイアウトはスキップ
+        }
             <div class="featured-case" id="case${caseData.id}" style="display: flex; flex-direction: row; align-items: flex-start;">
                 <div class="featured-case-left" style="flex: 0 0 45%; width: 45%; background-color: #f0f7ff;">
                     <div class="p-4 md:p-6" style="background-color: #f0f7ff;">
