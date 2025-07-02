@@ -577,6 +577,9 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (selectedCategory === '人事・研修') {
             // Difyを使いチャットボットを作成① (ID: 4)
             filteredFeaturedCase = filteredData.find(caseData => caseData.id === "4");
+        } else if (selectedCategory === 'all') {
+            // すべての事例の場合は「このサイトの使い方」(ID: 0)を表示
+            filteredFeaturedCase = window.allCasesData.find(caseData => caseData.id === "0");
         } else {
             // その他の場合は通常の注目事例ロジック
             filteredFeaturedCase = filteredData.find(caseData => caseData.featured);
