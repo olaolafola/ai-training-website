@@ -562,9 +562,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // フィルタリング後の注目事例チェック
-        let filteredFeaturedCase = filteredData.find(caseData => caseData.featured);
+        let filteredFeaturedCase = null;
         
-        // 本来の注目事例がフィルタ条件に合致しない場合、動的に選択
+        // カテゴリー別の特定注目事例を選択
+        if (selectedCategory === '営業・提案') {
+            // Gensparkで営業資料を5分で作成 (ID: 1)
+            filteredFeaturedCase = filteredData.find(caseData => caseData.id === "1");
+        } else if (selectedCategory === '経営・データ分析') {
+            // ChatGPTによる顧客データ分析 (ID: 3)
+            filteredFeaturedCase = filteredData.find(caseData => caseData.id === "3");
+        } else if (selectedCategory === '会議・コミュニケーション') {
+            // ChatGPT o3で手相診断 (ID: 6)
+            filteredFeaturedCase = filteredData.find(caseData => caseData.id === "6");
+        } else if (selectedCategory === '人事・研修') {
+            // Difyを使いチャットボットを作成① (ID: 4)
+            filteredFeaturedCase = filteredData.find(caseData => caseData.id === "4");
+        } else {
+            // その他の場合は通常の注目事例ロジック
+            filteredFeaturedCase = filteredData.find(caseData => caseData.featured);
+        }
+        
+        // 指定された注目事例がフィルタ条件に合致しない場合、動的に選択
         if (!filteredFeaturedCase && filteredData.length > 0) {
             // 時間削減率が最も高い事例を注目事例として選択
             filteredFeaturedCase = [...filteredData].sort((a, b) => {
