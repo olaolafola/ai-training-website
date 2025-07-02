@@ -653,6 +653,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // 事例一覧タイトルの更新
+        const caseListTitle = document.querySelector('main h2');
+        if (caseListTitle) {
+            if (selectedCategory === 'all') {
+                caseListTitle.textContent = 'すべての事例一覧';
+            } else {
+                caseListTitle.textContent = selectedCategory + 'の事例一覧';
+            }
+        }
+
         
         if (isFiltered) {
             setTimeout(() => {
