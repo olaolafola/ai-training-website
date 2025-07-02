@@ -130,12 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
             featuredCaseTitle.style.visibility = 'hidden';
         } else if (!isUserSelected && featuredCaseTitle) {
             featuredCaseTitle.style.visibility = 'visible';
-            // ID0の場合は「はじめに」、それ以外は「注目事例」
-            if (caseData.id === "0") {
-                featuredCaseTitle.textContent = 'はじめに';
-            } else {
-                featuredCaseTitle.textContent = '注目事例';
-            }
+            // 常に「注目事例」として表示
+            featuredCaseTitle.textContent = '注目事例';
         }
         
         // ID0（使い方ガイド）の場合はシンプルなレイアウト
@@ -656,8 +652,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // 事例一覧タイトルの更新
-        const caseListTitle = document.querySelector('main h2');
+        // 事例一覧タイトルの更新（一時無効化）
+        /*
+        const caseListTitle = document.getElementById('case-list-title');
         if (caseListTitle) {
             if (selectedCategory === 'all') {
                 caseListTitle.textContent = 'すべての事例一覧';
@@ -665,6 +662,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 caseListTitle.textContent = selectedCategory + 'の事例一覧';
             }
         }
+        */
 
         
         if (isFiltered) {
