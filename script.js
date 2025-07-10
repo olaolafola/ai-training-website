@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video id="featured-video" controls preload="metadata" ${(caseData.video.includes('dify') || caseData.video.includes('Genspark')) ? '' : 'muted'} class="w-full ${(caseData.video.includes('dify') || caseData.video.includes('Genspark')) ? '' : 'no-audio'}" style="height: auto; max-height: none;">
+                            <video id="featured-video" controls preload="metadata" ${(caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork')) ? '' : 'muted'} class="w-full ${(caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork')) ? '' : 'no-audio'}" style="height: auto; max-height: none;">
                                 <source src="${caseData.video}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.querySelector('.video-progress-bar');
         
         if (video && progressBar) {
-            if (caseData.video.includes('dify') || caseData.video.includes('Genspark')) {
+            if (caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork')) {
                 video.muted = false;
             } else {
                 video.muted = true;
