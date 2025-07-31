@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                         
                         <div class="thumbnail-area featured-thumbnail mb-4">
-                            <video id="featured-video" controls preload="metadata" ${(caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析')) ? '' : 'muted'} class="w-full ${(caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析')) ? '' : 'no-audio'}" style="height: auto; max-height: none;">
+                            <video id="featured-video" controls preload="metadata" ${(caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析') || caseData.video.includes('Gemini')) ? '' : 'muted'} class="w-full ${(caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析') || caseData.video.includes('Gemini')) ? '' : 'no-audio'}" style="height: auto; max-height: none;">
                                 <source src="${caseData.video}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.querySelector('.video-progress-bar');
         
         if (video && progressBar) {
-            if (caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析')) {
+            if (caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析') || caseData.video.includes('Gemini')) {
                 video.muted = false;
             } else {
                 video.muted = true;
