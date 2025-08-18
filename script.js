@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.querySelector('.video-progress-bar');
         
         if (video && progressBar) {
-            if (caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析') || caseData.video.includes('Gemini') || caseData.video.includes('手相')) {
+            if (caseData.video.includes('dify') || caseData.video.includes('Genspark') || caseData.video.includes('skywork') || caseData.video.includes('Excel') || caseData.video.includes('GPTs') || caseData.video.includes('メール文章作成') || caseData.video.includes('顧客分析') || caseData.video.includes('Gemini') || caseData.video.includes('手相') || caseData.video.includes('NotebookLM')) {
                 video.muted = false;
             } else {
                 video.muted = true;
