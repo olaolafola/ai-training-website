@@ -582,6 +582,30 @@
         "編集スキル不要で誰でも高品質動画作成"
       ],
       "background": "従来の動画作成は、シナリオ作成から始まり、素材の準備、編集作業、エフェクトの追加など、多くの工程を経て手作業で時間をかけて作成する必要がありました。特に動画編集スキルを持たない担当者にとっては、プロフェッショナルな品質の動画を作成することは困難でした。NoLangを活用することで、これらの課題を一気に解決し、テキスト入力だけで高品質な動画を短時間で作成できるようになりました。"
+    },
+    {
+      "id": "26",
+      "title": "AI BGM作成ツールで音楽制作",
+      "category": ["会議・コミュニケーション"],
+      "level": "初級",
+      "tags": ["AI BGM", "音楽制作", "時間削減", "自動化", "Google AI Studio"],
+      "thumbnail": "images/thumbnails/bgm-creation-thumb.jpg",
+      "video": "videos/BGM作成.mp4",
+      "beforeText": "BGM制作依頼",
+      "beforeTime": "3時間",
+      "afterText": "AI自動生成",
+      "afterTime": "10分",
+      "reduction": "97%",
+      "yearlyReduction": "年間100時間削減",
+      "implementation": "使用ツールは{こちら:https://aistudio.google.com/app/apps/bundled/promptdj-midi?showPreview=true&utm_medium=referral&utm_campaign=gdm&utm_content=&showAssistant=true}\n\nGoogle AI Studioを活用して、子どもや音楽経験のない人でも簡単にBGMを作成できるツールを紹介。自分の好みに合わせたオリジナルBGMを遊びながら短時間で制作可能です。プレゼンテーション、動画制作、イベントなど様々なシーンで活用できます。",
+      "effects": [
+        "BGM制作時間が3時間から10分に短縮",
+        "音楽知識不要で誰でも制作可能",
+        "自分好みのオリジナルBGM作成",
+        "プレゼンや動画制作の品質向上",
+        "制作コストの大幅削減"
+      ],
+      "background": "従来のBGM制作は、音楽制作ソフトの知識や楽器演奏スキルが必要で、多くの時間と専門知識を要していました。プレゼンテーションや動画制作でBGMが必要な場合、外注するかフリー音源を探すしかなく、理想的な雰囲気やタイミングに合うBGMを見つけることは困難でした。特に子どもや音楽経験のない人にとっては、オリジナルBGM制作は不可能に近い作業でした。Google AI Studioのツールを活用することで、これらの課題を一気に解決し、誰でも簡単に高品質なBGMを制作できるようになりました。"
     }
   ]
 }
